@@ -10,5 +10,5 @@ a takers/givers app inspired by Tinder's concept
 
 "takers" or "givers" analise and swipe right if they see fit to communicate about donation, otherwise swipe left
 
-each donation is worth some amount of Karma points, betermined by "taker"
+each donation is worth some amount of Karma points, betermined by "taker". 
 "givers" have leaderboards, to drive better engagement to participate in charity
