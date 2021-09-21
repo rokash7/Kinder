@@ -4,27 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kinder"
-        mc:Ignorable="d"
+        mc:Ignorable="d" FontSize="16"
         Title="Registration" Height="600" Width="800">
     <Grid>
 
-        <Rectangle Height="450" Margin="210,0,210,0" Fill="#FAEACB" VerticalAlignment="Center" Width="380"/>
-        <Rectangle Height="60" Margin="210,67,210,0" Fill="Gray" VerticalAlignment="Top" Width="380"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock HorizontalAlignment="Center" Height="40" Text="Register" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="30" Margin="0,75,0,0"/>
-        <TextBlock HorizontalAlignment="Center" Height="20" Text="Username:" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="15" Margin="0,132,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" FontSize="15" Margin="250,202,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Text="Surname:" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" FontSize="15" Margin="403,202,0,0"/>
-        <TextBlock HorizontalAlignment="Center" Height="20" Text="Email:" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="15" Margin="0,272,0,0"/>
-        <TextBlock HorizontalAlignment="Center" Height="20" Text="Phone number:" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="15" Margin="0,342,0,0"/>
-        <TextBlock HorizontalAlignment="Center" Height="20" Text="Password:" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="15" Margin="0,412,0,0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
-        <TextBox HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="40" FontSize="30" Margin="0,367,0,0"/>
-        <TextBox HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Height="40" FontSize="30" Margin="250,227,0,0"/>
-        <TextBox HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Height="40" FontSize="30" Margin="403,227,0,0"/>
-        <TextBox HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="40" FontSize="30" Margin="0,297,0,0"/>
-        <TextBox HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="40" FontSize="30" Margin="0,157,0,0"/>
-        <PasswordBox HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Height="40" FontSize="30" Margin="0,437,0,0"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="12" Fill="#FAEACB" Width="380"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="60" Fill="Gray" Width="380"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="50" Text="Sign Up" TextAlignment="Center" FontSize="32"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Text="Username:" Width="300" Margin="0, 5"/>
+        <TextBox x:Name="UsernameText" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Height="20" Text="Name:" HorizontalAlignment="Right" Width="150" Margin="0, 5"/>
+        <TextBox x:Name="NameText" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Width="148" Height="40" Margin="0, 0, 2, 0"/>
+        <TextBlock Grid.Column="2" Grid.Row="4" Height="20" Text="Surname:" HorizontalAlignment="Left" Width="150" Margin="2, 5, 0, 5"/>
+        <TextBox x:Name="SurnameText" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Width="148" Height="40" Margin="2, 0, 0, 0"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Height="20" Text="Email:" Width="300" Margin="0, 5"/>
+        <TextBox x:Name="EmailText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Height="20" Text="Phone number:" Width="300" Margin="0, 5"/>
+        <TextBox x:Name="PhoneNumberText" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <TextBlock Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" Height="20" Text="Password:" Width="300" Margin="0, 5"/>
+        <PasswordBox x:Name="PasswordText" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <Button x:Name="SignUpButton" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2" Content="Sign Up" Width="150" Height="50" FontWeight="Bold" FontSize="24"/>
 
     </Grid>
 </Window>
