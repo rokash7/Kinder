@@ -31,7 +31,6 @@ namespace Kinder.Items
        
     }
 
-
     class Item
     {
 
@@ -108,9 +107,7 @@ namespace Kinder.Items
                     height = value;
             }
         }
-        private double karmaPrice;
-
-        
+        private double karmaPrice;        
 
         private double KarmaPrice
         {
