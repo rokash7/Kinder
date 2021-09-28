@@ -10,7 +10,6 @@ public class User
     public int Password { get; set; }
     public int KarmaPoints { get; set; }
 
-
     public User() {}
 
 }
