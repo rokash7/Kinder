@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace leaderboardUI
+namespace Kinder
 {
     public partial class LeaderboardWindow : Window
     {
@@ -76,11 +76,12 @@ namespace leaderboardUI
             {
                 Username = username;
                 KarmaPoints = karmaPoints;
-                RegistrationDateString = getDateStringFormat(registrationDate);
+                RegistrationDateString = GetDateStringFormat(registrationDate);
             }
 
-            private string getDateStringFormat(DateTime Date)
+            private string GetDateStringFormat(DateTime Date)
             {
+                //yyyy mm dd, lokales
                 return Date.ToString("MM-dd-yyyy");
             }
 
