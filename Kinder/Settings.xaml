@@ -1,0 +1,62 @@
+﻿<Window x:Class="Kinder.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kinder"
+        mc:Ignorable="d" FontSize="16"
+        Title="Settings" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="10" Fill="#FAEACB"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Height="60" Fill="Gray"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Height="50" Text="Settings" TextAlignment="Center" FontSize="32"/>
+        
+        <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" Text="Account settings:" FontSize="24" Margin="10"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Email:" TextAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+        <TextBox x:Name="NewEmail" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Width="400" Height="50" Margin="0, 2, 0, 2"/>
+        <Button x:Name="ChangeEmail" Grid.Column="4" Grid.Row="3" Content="Change Email" Width="150" Height="50"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Phone Number:" TextAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+        <TextBox x:Name="NewPhoneNumber" Grid.Column="2" Grid.Row="4" Width="200" Height="50" Margin="0, 2, 0, 2"/>
+        <Button x:Name="ChangePhoneNumber" Grid.Column="4" Grid.Row="4" Content="Change Phone Nr." Width="150" Height="50"/>
+        <TextBlock Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Text="Password:" TextAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+        <TextBlock Grid.Column="2" Grid.Row="5" Text="New Password:"/>
+        <TextBlock Grid.Column="3" Grid.Row="5" Text="Current Password:" Margin="2, 0, 0, 0"/>
+        <PasswordBox x:Name="NewPassword" Grid.Column="2" Grid.Row="6" Width="198" Height="50" Margin="0, 2, 2, 2"/>
+        <PasswordBox x:Name="CurrentPassword" Grid.Column="3" Grid.Row="6" Width="198" Height="50" Margin="2, 2, 0, 2"/>
+        <Button x:Name="ChangePassword" Grid.Column="4" Grid.Row="6" Content="Change Password" Width="150" Height="50"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4" Text="Location Settings:" FontSize="24" Margin="10"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="Country:" TextAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+        <ComboBox x:Name="SelectedCountry" Grid.Column="2" Grid.Row="8" Margin="0, 2, 0, 2"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Text="City:" TextAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+        <ComboBox x:Name="SelectedCity" Grid.Column="2" Grid.Row="9" Margin="0, 2, 0, 2"/>
+
+        <Button x:Name="Back" Grid.Column="1" Grid.Row="10" Content="Back" Width="100" Height="50" FontWeight="Bold" FontSize="24" Margin="10"/>
+    </Grid>
+</Window>

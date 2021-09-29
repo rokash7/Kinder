@@ -10,25 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Kinder
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ChatWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChatWindow : Window
     {
-        public MainWindow()
+        public ChatWindow()
         {
             InitializeComponent();
         }
 
-        private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ChatWindow chatWindow = new ChatWindow();
-            chatWindow.Show();
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

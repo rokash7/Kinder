@@ -13,5 +13,5 @@ public class User
     public int PlaceGive { get; set; }
     public int PlaceTake { get; set; }
 
-
+    public User() {}
 }
