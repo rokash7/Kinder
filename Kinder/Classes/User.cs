@@ -14,6 +14,4 @@ public class User
     public int PlaceTake { get; set; }
 
 
-    public User() {}
-
 }
