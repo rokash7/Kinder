@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Account
+namespace Kinder
 {
     /// <summary>
     /// Interaction logic for AccountPage.xaml
