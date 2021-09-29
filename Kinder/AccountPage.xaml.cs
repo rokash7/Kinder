@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Account
+namespace Kinder
 {
     /// <summary>
     /// Interaction logic for AccountPage.xaml
@@ -33,12 +33,12 @@ namespace Account
 
         private void Give_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Giving awae");
+            MessageBox.Show("Giving away");
         }
 
         private void Request_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Give plz");
+            MessageBox.Show("Give");
         }
 
         private void Leaderboard_Click(object sender, RoutedEventArgs e)
