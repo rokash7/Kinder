@@ -9,7 +9,9 @@ public class User
     public int Id { get; }
     public int Password { get; set; }
     public int KarmaPoints { get; set; }
+    
+    public int PlaceGive { get; set; }
+    public int PlaceTake { get; set; }
 
     public User() {}
-
 }
