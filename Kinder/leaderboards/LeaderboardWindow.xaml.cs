@@ -18,7 +18,7 @@ namespace leaderboardUI
     public partial class LeaderboardWindow : Window
     {
         //testing data
-        private List<UserLeaderboard> UserList = new List<UserLeaderboard>
+        private readonly List<UserLeaderboard> UserList = new()
         {
             new UserLeaderboard("username1", 100, new DateTime(2020, 12, 16)),
             new UserLeaderboard("username2", 105, new DateTime(2021, 06, 16)),
@@ -76,12 +76,12 @@ namespace leaderboardUI
             {
                 Username = username;
                 KarmaPoints = karmaPoints;
-                RegistrationDateString = getDateStringFormat(registrationDate);
+                RegistrationDateString = GetDateStringFormat(registrationDate);
             }
 
-            private string getDateStringFormat(DateTime Date)
+            private string GetDateStringFormat(DateTime Date)
             {
-                return Date.ToString("MM-dd-yyyy");
+                return Date.ToString("yyyy-MM-dd");
             }
 
         }

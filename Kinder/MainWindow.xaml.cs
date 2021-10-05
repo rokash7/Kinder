@@ -27,7 +27,7 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
         {
-            ChatWindow chatWindow = new ChatWindow();
+            ChatWindow chatWindow = new();
             chatWindow.Show();
         }
     }
