@@ -29,6 +29,12 @@ namespace Kinder
         {
             ChatWindow chatWindow = new();
             chatWindow.Show();
+
+            //LeaderboardWindow page = new LeaderboardWindow();
+            //page.Show();
+            //ChatWindow chatWindow = new ChatWindow();
+            //chatWindow.Show();
+
         }
     }
 }

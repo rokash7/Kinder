@@ -33,12 +33,12 @@ namespace Kinder
 
         private void Give_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Giving awae");
+            MessageBox.Show("Giving away");
         }
 
         private void Request_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Give plz");
+            MessageBox.Show("Give");
         }
 
         private void Leaderboard_Click(object sender, RoutedEventArgs e)

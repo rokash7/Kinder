@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace leaderboardUI
+namespace Kinder
 {
     public partial class LeaderboardWindow : Window
     {
