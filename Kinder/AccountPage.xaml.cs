@@ -28,7 +28,8 @@ namespace Kinder
 
         private void Settings_Click(object sender, RoutedEventArgs e) ///To do
         {
-            MessageBox.Show("Opened settings");
+            var settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
         }
 
         private void Give_Click(object sender, RoutedEventArgs e)
@@ -43,12 +44,15 @@ namespace Kinder
 
         private void Leaderboard_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Showing leaderboards");
+            var leaderboardWindow = new LeaderboardWindow();
+            leaderboardWindow.ShowDialog();
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Logging out");
+            var logInPage = new MainWindow();
+            logInPage.Show();
+            this.Close();
         }
     }
 }

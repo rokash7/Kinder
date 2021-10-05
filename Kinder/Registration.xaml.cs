@@ -17,11 +17,17 @@ namespace Kinder
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class RegistrationWindow : Window
     {
-        public Window1()
+        public RegistrationWindow()
         {
             InitializeComponent();
+        }
+
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TO DO
+
         }
     }
 }

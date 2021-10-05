@@ -1,0 +1,2 @@
+dude1,password1,dude1@gmail.com,+12345,dudee,dud
+dude2,password2,dude2@gmail.com,+54321,dud,dudee
