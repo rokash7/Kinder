@@ -27,7 +27,7 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
         {
-            LeaderboardWindow page = new LeaderboardWindow();
+            ChatWindow page = new ChatWindow();
             page.Show();
             //ChatWindow chatWindow = new ChatWindow();
             //chatWindow.Show();

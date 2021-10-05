@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Kinder.MessageCore
 {
@@ -11,7 +12,7 @@ namespace Kinder.MessageCore
         private Action<object> execute;
         private Func<object, bool> canExecute;
 
-        public event EventHandler CanExectueChanged
+        public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }

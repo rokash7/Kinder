@@ -63,9 +63,7 @@
             </Grid>
         </Border>-->
 
-        <Grid Background="
-#e8d3ac
-"
+        <Grid Background="#e8d3ac"
               Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -117,7 +115,8 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            <Border BorderBrush="#5d5e5c">
+            <Border BorderBrush="#e8d3ac"
+                    BorderThickness="0,0,0,4">
                 <Grid HorizontalAlignment="Stretch"
                       Margin="8">
 
@@ -129,6 +128,44 @@
                 </Grid>
             </Border>
 
+            <ListView ItemsSource="{Binding SelectedContact.Messages}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ItemContainerStyle="{StaticResource ChatItem}"
+                      Margin="8,0,0,0"
+                      Grid.Row="1"/>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Row="1"
+                         Height="50"
+                         Text="Message @Username"
+                         Style="{StaticResource MessageBox}"
+                         Grid.ColumnSpan="2"/>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Grid.Column="1"
+                            Margin="0,0,16,0">
+
+                    <Image Source="./Icons/plus.png"
+                           Width="20" Height="20"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           Margin="5,5,5,0"/>
+
+                    <Image Source="./Icons/send.png"
+                           Width="20" Height="20"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           Margin="5,5,16,0"/>
+
+                </StackPanel>
+
+            </Grid>
+            
         </Grid>
 
     </Grid>
