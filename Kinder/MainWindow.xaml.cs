@@ -23,7 +23,6 @@ namespace Kinder
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
