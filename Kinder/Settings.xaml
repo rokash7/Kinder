@@ -57,6 +57,6 @@
         <TextBlock Grid.Column="1" Grid.Row="9" Text="City:" TextAlignment="Center" VerticalAlignment="Center" Margin="10"/>
         <ComboBox x:Name="SelectedCity" Grid.Column="2" Grid.Row="9" Margin="0, 2, 0, 2"/>
 
-        <Button x:Name="Back" Grid.Column="1" Grid.Row="10" Content="Back" Width="100" Height="50" FontWeight="Bold" FontSize="24" Margin="10" Click="Back_Click"/>
+        <!--<Button x:Name="Back" Grid.Column="1" Grid.Row="10" Content="Back" Width="100" Height="50" FontWeight="Bold" FontSize="24" Margin="10" Click="Back_Click"/>-->
     </Grid>
 </Window>

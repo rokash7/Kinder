@@ -9,7 +9,6 @@ public class User
     public int Id { get; set; }
     public string Password { get; set; }
     public int KarmaPoints { get; set; }
-    
     public int PlaceGive { get; set; }
     public int PlaceTake { get; set; }
 
@@ -17,7 +16,7 @@ public class User
     
     public static Boolean checkLogin(string Username, string Password) ///TO DO WITH FILES
     {
-
+        
         if (Username == "admin" && Password == "admin") 
         {
             return true;
@@ -47,9 +46,5 @@ public class User
         {
             return false;
         } 
-
     }
-
-
-
 }

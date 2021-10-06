@@ -23,7 +23,6 @@ namespace Kinder
         public AccountPage()
         {
             InitializeComponent();
-            ///DataContext = Classes.User.GetUser(); ///For testing purposes
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e) ///To do

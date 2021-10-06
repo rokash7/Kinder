@@ -27,7 +27,6 @@ namespace Kinder
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             // TO DO
-
         }
     }
 }
