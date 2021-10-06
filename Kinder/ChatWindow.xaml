@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kinder" xmlns:viewmodel="clr-namespace:Kinder.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="ChatWindow" Height="600" Width="800">
+        Title="ChatWindow" Height="600" Width="800" Background="#FAEACB">
 
     <Window.DataContext>
         <viewmodel:MainViewModel/>
@@ -63,7 +63,7 @@
             </Grid>
         </Border>-->
 
-        <Grid Background="#FAEACB"
+        <Grid Background="#e8d3ac"
               Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -78,6 +78,7 @@
                    Margin="11,0,0,0"/>
 
             <ListView ItemsSource="{Binding Contacts}"
+                      SelectedItem="{Binding SelectedContact}"
                       Background="Transparent"
                       BorderThickness="0"
                       Grid.Row="1"
@@ -85,7 +86,7 @@
 
             <StackPanel Grid.Row="2"
                         Orientation="Horizontal"
-                        Background="#D1C3B7">
+                        Background="#c9b083">
 
                 <Border CornerRadius="25"
                         Width="30" Height="30"
@@ -106,6 +107,66 @@
 
             </StackPanel>
 
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="#e8d3ac"
+                    BorderThickness="0,0,0,4">
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="8">
+
+                    <Label Content="@Username"
+                           FontWeight="Bold"
+                           Margin="5,0,5,0"
+                           VerticalAlignment="Center"/>
+
+                </Grid>
+            </Border>
+
+            <ListView ItemsSource="{Binding SelectedContact.Messages}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      ItemContainerStyle="{StaticResource ChatItem}"
+                      Margin="8,0,0,0"
+                      Grid.Row="1"/>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Row="1"
+                         Height="50"
+                         Text="Message @Username"
+                         Style="{StaticResource MessageBox}"
+                         Grid.ColumnSpan="2"/>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Grid.Column="1"
+                            Margin="0,0,16,0">
+
+                    <Image Source="./Icons/plus.png"
+                           Width="20" Height="20"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           Margin="5,5,5,0"/>
+
+                    <Image Source="./Icons/send.png"
+                           Width="20" Height="20"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           Margin="5,5,16,0"/>
+
+                </StackPanel>
+
+            </Grid>
+            
         </Grid>
 
     </Grid>
