@@ -18,7 +18,7 @@ namespace Kinder
     public partial class LeaderboardWindow : Window
     {
         //testing data
-        private List<UserLeaderboard> UserList = new List<UserLeaderboard>
+        private readonly List<UserLeaderboard> UserList = new()
         {
             new UserLeaderboard("username1", 100, new DateTime(2020, 12, 16)),
             new UserLeaderboard("username2", 105, new DateTime(2021, 06, 16)),
@@ -81,8 +81,7 @@ namespace Kinder
 
             private string GetDateStringFormat(DateTime Date)
             {
-                //yyyy mm dd, lokales
-                return Date.ToString("MM-dd-yyyy");
+                return Date.ToString("yyyy-MM-dd");
             }
 
         }

@@ -47,6 +47,10 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
         {
+            //LeaderboardWindow page = new LeaderboardWindow();
+            //page.Show();
+            //ChatWindow chatWindow = new ChatWindow();
+            //chatWindow.Show();
             Swiping page = new Swiping();
             page.Show();
         }
