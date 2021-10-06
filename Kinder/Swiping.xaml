@@ -1,0 +1,43 @@
+﻿<Window x:Class="Kinder.Swiping"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kinder"
+        mc:Ignorable="d" FontSize="16"
+        Title="Settings" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Fill="#FAEACB"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Height="60" Fill="Gray"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Height="50" Text="Swiping" TextAlignment="Center" FontSize="32"/>
+
+        <Image x:Name="DonatorView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Text="Sample text for donation candidate description." TextAlignment="Center"/>
+        <Button x:Name="NextButton" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Content="Next" Width="200" Height="50" Margin="5"/>
+        <Button x:Name="DonateButton" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Content="Donate" Width="200" Height="50" Margin="5" Click="DonateButton_Click"/>
+        <Button x:Name="AccountPageButton" Grid.Column="1" Grid.Row="5" Content="Account" Width="150" Height="50" Margin="5" Click="AccountPageButton_Click"/>
+        <Button x:Name="LeaderboardsPageButton" Grid.Column="2" Grid.Row="5" Content="Leaderboards" Width="150" Height="50" Margin="5" Click="LeaderboardsPageButton_Click"/>
+        <Button x:Name="CommunicationPageButton" Grid.Column="3" Grid.Row="5" Content="Chats" Width="150" Height="50" Margin="5" Click="CommunicationPageButton_Click"/>
+        <Button x:Name="SettingsPageButton" Grid.Column="4" Grid.Row="5" Content="Settings" Width="150" Height="50" Margin="5" Click="SettingsPageButton_Click"/>
+    </Grid>
+</Window>
