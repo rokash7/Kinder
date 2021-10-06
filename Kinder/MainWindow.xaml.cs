@@ -25,12 +25,28 @@ namespace Kinder
             InitializeComponent();
         }
 
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            var regPage = new RegistrationWindow();
+            regPage.ShowDialog();
+        }
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            if (User.checkLogin(Username.Text, Password.Password))
+            {
+                var mainPage = new AccountPage();
+                mainPage.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Incorrect password or username, try again");
+            }
+        }
+
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
         {
-            LeaderboardWindow page = new LeaderboardWindow();
-            page.Show();
-            //ChatWindow chatWindow = new ChatWindow();
-            //chatWindow.Show();
         }
     }
 }
