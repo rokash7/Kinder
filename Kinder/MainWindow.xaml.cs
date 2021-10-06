@@ -34,15 +34,21 @@ namespace Kinder
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if(User.checkLogin(Username.Text, Password.Password))
+            if (User.checkLogin(Username.Text, Password.Password))
             {
                 var mainPage = new AccountPage();
                 mainPage.Show();
                 this.Close();
-            } else
+            }
+            else
             {
                 MessageBox.Show("Incorrect password or username, try again");
             }
+        }
+
+        private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
