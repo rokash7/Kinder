@@ -27,16 +27,13 @@
                                    FontWeight="SemiBold"
                                    FontSize="8"
                                    VerticalAlignment="Center"/>
+                                
                             </StackPanel>
-
                             <Label Content="{Binding Message}"
                                    Foreground="White"
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Center"/>
-
                         </StackPanel>
-
-
 
                     </StackPanel>
                 </ControlTemplate>

@@ -29,7 +29,6 @@ namespace Kinder.MVVM.ViewModel
             }
         }
 
-
         private String _message;
 
         public String Message
@@ -41,7 +40,6 @@ namespace Kinder.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
 
         public MainViewModel()
         {
