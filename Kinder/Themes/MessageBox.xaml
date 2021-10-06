@@ -46,16 +46,11 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-                                
                             </TextBlock>
-                            
                         </Grid>
-                        
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
     </Style>
-    
 </ResourceDictionary>
