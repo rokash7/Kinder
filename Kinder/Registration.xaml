@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kinder.Window1"
+﻿<Window x:Class="Kinder.RegistrationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -37,18 +37,18 @@
 
         <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="50" Text="Sign Up" TextAlignment="Center" FontSize="32"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="20" Text="Username:" Width="300" Margin="0, 5"/>
-        <TextBox x:Name="UsernameText" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <TextBox x:Name="Username" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="300" Height="40"/>
         <TextBlock Grid.Column="1" Grid.Row="4" Height="20" Text="Name:" HorizontalAlignment="Right" Width="150" Margin="0, 5"/>
-        <TextBox x:Name="NameText" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Width="148" Height="40" Margin="0, 0, 2, 0"/>
+        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" Width="148" Height="40" Margin="0, 0, 2, 0"/>
         <TextBlock Grid.Column="2" Grid.Row="4" Height="20" Text="Surname:" HorizontalAlignment="Left" Width="150" Margin="2, 5, 0, 5"/>
-        <TextBox x:Name="SurnameText" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Width="148" Height="40" Margin="2, 0, 0, 0"/>
+        <TextBox x:Name="Surname" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Width="148" Height="40" Margin="2, 0, 0, 0"/>
         <TextBlock Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Height="20" Text="Email:" Width="300" Margin="0, 5"/>
-        <TextBox x:Name="EmailText" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <TextBox x:Name="Email" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Width="300" Height="40"/>
         <TextBlock Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Height="20" Text="Phone number:" Width="300" Margin="0, 5"/>
-        <TextBox x:Name="PhoneNumberText" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <TextBox x:Name="PhoneNumber" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Width="300" Height="40"/>
         <TextBlock Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" Height="20" Text="Password:" Width="300" Margin="0, 5"/>
-        <PasswordBox x:Name="PasswordText" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Width="300" Height="40"/>
-        <Button x:Name="SignUpButton" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2" Content="Sign Up" Width="150" Height="50" FontWeight="Bold" FontSize="24"/>
+        <PasswordBox x:Name="Password" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Width="300" Height="40"/>
+        <Button x:Name="SignUpButton" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2" Content="Sign Up" Width="150" Height="50" FontWeight="Bold" FontSize="24" Click="SignUpButton_Click"/>
 
     </Grid>
 </Window>
