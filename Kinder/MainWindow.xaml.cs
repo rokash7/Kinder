@@ -47,7 +47,6 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

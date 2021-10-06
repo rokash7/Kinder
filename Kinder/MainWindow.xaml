@@ -50,6 +50,6 @@
         <Button Content="Log In" Grid.Column="3" Grid.Row="8" Background="#D1C3B7" FontSize="24" Margin="20, 5, 20,5" Click="LogIn_Click"/>
 
         <Button Content="Sign Up" Grid.Column="3" Grid.Row="11" Background="#D1C3B7" FontSize="22" Margin="20, 5, 20,5" Click="SignUp_Click"/>
-
+        <Button Content="TestButton" Grid.Column="3" Grid.Row="13" Background="#D1C3B7" FontSize="22" Margin="20, 5, 20,5" Click="ButtonMessageTest_Click"/>
     </Grid>
 </Window>
