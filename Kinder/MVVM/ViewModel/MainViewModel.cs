@@ -17,7 +17,18 @@ namespace Kinder.MVVM.ViewModel
         /* Commands */
         public RelayCommand SendCommand { get; set; }
 
-        public ContactModel SelectedContact { get; set; }
+        private ContactModel _selectedContact;
+
+        public ContactModel SelectedContact
+        {
+            get { return _selectedContact; }
+            set
+            {
+                _selectedContact = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private String _message;
 
@@ -37,7 +48,17 @@ namespace Kinder.MVVM.ViewModel
             Messages = new ObservableCollection<MessageModel>();
             Contacts = new ObservableCollection<ContactModel>();
 
+            SendCommand = new RelayCommand(o =>
+            {
+                Messages.Add(new MessageModel
+                {
+                    Message = Message,
+                    FirstMessage = false
+                });
 
+                Message = "";
+
+            });
 
             //adding test messages
             Messages.Add(new MessageModel
