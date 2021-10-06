@@ -47,6 +47,8 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
         {
+            Swiping page = new Swiping();
+            page.Show();
         }
     }
 }
