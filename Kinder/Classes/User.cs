@@ -1,7 +1,10 @@
+using Kinder.Classes;
 using System;
+using System.Collections.Generic;
+
 public class User
 {
-    public string Name { get; set;}
+    public string Name { get; set; }
     public string Surname { get; set; }
     public string Username { get; set; }
     public string Email { get; set; }
@@ -12,39 +15,57 @@ public class User
     public int PlaceGive { get; set; }
     public int PlaceTake { get; set; }
 
-    public User() {}
-    
-    public static Boolean checkLogin(string Username, string Password) ///TO DO WITH FILES
+    public User() { }
+
+    static List<User> users = FileManager.getUsers();
+    public static Boolean CheckLogin(string Username, string Password)
     {
-        
-        if (Username == "admin" && Password == "admin") 
+        users = FileManager.getUsers();
+        foreach (User user in users)
         {
-            return true;
-        } else
-        {
-            return false;
+            if (Username == user.Username && Password == user.Password)
+            {
+                return true;
+            }
         }
+        return false;
     }
 
-    public static Boolean checkEmailAndPhoneNumber(string Email, string PhoneNumber) ///TO DO WITH FILES
+    public static Boolean CheckIfUserAlreadyExists(string Email, string PhoneNumber)
     {
-        if (Email == "dude@gmail.com" && PhoneNumber == "+12345")
+        users = FileManager.getUsers();
+        foreach (User user in users)
         {
-            return true;
+            if (Email == user.Email || PhoneNumber == user.PhoneNumber)
+            {
+                return false;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return true;
+
     }
-    public static Boolean checkUsername(string Username) ///TO DO WITH FILES
+
+    public static Boolean CheckIfUsernameIsTaken(string Username)
     {
-        if (Username == "admin")
+        users = FileManager.getUsers();
+        foreach (User user in users)
         {
-            return true;
-        } else
-        {
-            return false;
-        } 
+            if (Username == user.Username)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
+
+    public static int getUserNumber()
+    {
+        users = FileManager.getUsers();
+        return users.Count;
+    }
+
+
+
+
 }

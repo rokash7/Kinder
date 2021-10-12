@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kinder.Classes;
 
 namespace Kinder
 {
@@ -26,7 +32,25 @@ namespace Kinder
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            // TO DO
+            if (User.CheckIfUserAlreadyExists(Email.Text, PhoneNumber.Text))
+            {
+                if (User.CheckIfUsernameIsTaken(Username.Text))
+                {
+                    FileManager.addNewUser(Username.Text, Password.Password, Email.Text, PhoneNumber.Text, Name.Text, Surname.Text, User.getUserNumber());
+                    MessageBox.Show("User created successfully! Now  try to log in");
+                    MainWindow loginPage = new MainWindow();
+                    this.Close();
+                    loginPage.Show();
+                }
+                else
+                {
+                    MessageBox.Show("This username is taken!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("User with same email or phone number already exists!\nIf You Already have an accoutn try logging in!");
+            }
         }
     }
 }
