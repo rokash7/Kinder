@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kinder"
         mc:Ignorable="d"
-        Title="Items" Height="450" Width="400">
-    <Grid Height="483" VerticalAlignment="Top">
+        Title="Items" Height="600" Width="500">
+    <Grid Height="700" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="239*"/>
             <ColumnDefinition Width="161*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="ItemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="335" Height="300" Grid.ColumnSpan="2">
+        <DataGrid x:Name="ItemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="450" Height="300" Grid.ColumnSpan="2">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -24,13 +24,27 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="item id" Binding="{Binding ID}" Width="50"></DataGridTextColumn>
-                <DataGridTextColumn Header="Points" Binding="{Binding KarmaPoints}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date of buying" Binding="{Binding dateStr}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Condition" Binding="{Binding Condition}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Category" Binding="{Binding Cathegory}" Width="100"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="size" Binding="{Binding SizeStr}" Width="50"></DataGridTextColumn> -->
+                <DataGridTextColumn Header="Points" Binding="{Binding KarmaPrice}" Width="50"></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>
 
-        <Button x:Name="AddButton" Click="AddSearchButton_Click" Margin="38,335,151,104" Content="add"/>
-        <Button x:Name="DeleteButton" Click="DeleteButton_Click" Margin="106,335,77,104" Content="delete"/>
-        <Button x:Name="EditButton" Click="EditButton_Click" Margin="183,335,0,104" Content="edit"/>
+        <Button x:Name="AddButton" Click="AddButton_Click" Margin="38,335,181,323" Content="add"/>
+        <Button x:Name="DeleteButton" Click="DeleteButton_Click" Margin="123,335,96,323" Content="delete"/>
+        <Button x:Name="EditButton" Click="EditButton_Click" Margin="208,335,201,323" Content="edit" Grid.ColumnSpan="2"/>
+        <Label Content="Date of purchase" HorizontalAlignment="Left" Margin="38,410,0,0" VerticalAlignment="Top"/>
+        <Label Content="Condition" HorizontalAlignment="Left" Margin="38,436,0,0" VerticalAlignment="Top"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="38,461,0,0" VerticalAlignment="Top"/>
+        <!--<Label Content="Dimensions" HorizontalAlignment="Left" Margin="38,487,0,0" VerticalAlignment="Top"/> -->
+        <Label Content="Karma points" HorizontalAlignment="Left" Margin="38,487,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ConditionComboBox" HorizontalAlignment="Left" Margin="106,441,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{local:EnumBindingSourceExtension local:ConditionEnum}"/>
+        <ComboBox x:Name="CathegoryComboBox" HorizontalAlignment="Left" Margin="106,468,0,0" VerticalAlignment="Top" Width="120 " ItemsSource="{local:EnumBindingSourceExtension local:CathegoryEnum}"/>
+        <TextBox x:Name="DimsTextBox" HorizontalAlignment="Left" Margin="118,495,0,0" Text="1,2,3" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="PointsTextBox" HorizontalAlignment="Left" Margin="123,495,0,0" Text="157" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="DateTextBox" HorizontalAlignment="Left" Margin="143,418,0,0" Text="2020-01-05" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

@@ -20,29 +20,6 @@ namespace Kinder.Classes
     {
         double CalcArea();
     }
-    
-    public interface ICondition
-    {
-        public enum options
-        {
-            Mint,
-            Near_mint,
-            Very_good,
-            Good,
-            Fair
-        }
-    }
-
-    public interface ICathegory
-    {
-        public enum options
-        {
-            Furniture,
-            Transport,
-            Technology,
-            Education
-        }
-    }
 
     public struct Dimensions
     {
@@ -56,16 +33,21 @@ namespace Kinder.Classes
             this.length = length;
             this.width = width;
         }
+
+        public string ToString()
+        {
+            return length.ToString() + ',' + height.ToString() + ',' + width.ToString();
+        }
     }
 
-    public class Item : ICondition, ICathegory
+    public class Item : IComparable<Item>, IEquatable<Item>
     {
         public Item()
         {
            
         }
 
-        public Item(int ID, DateTime dateOfPurchase, ICondition.options Condition, ICathegory.options Cathegory, int userID, Dimensions size, int karmaPrice)
+        public Item(int ID, DateTime dateOfPurchase, ConditionEnum Condition, CathegoryEnum Cathegory, int userID, Dimensions size, int karmaPrice)
         {
             this.ID = ID;
             this.dateOfPurchase = dateOfPurchase;
@@ -74,6 +56,32 @@ namespace Kinder.Classes
             this.userID = userID;
             this.size = size;
             this.karmaPrice = karmaPrice;
+        }
+
+        public int CompareTo(Item other)
+        {
+            return other.ID.CompareTo(this.ID); // default: high to low
+        }
+
+        public override string ToString()
+        {
+            string str = "";
+
+            str += ID.ToString() + ';';
+            str += dateOfPurchase.ToString("yyyy-MM-dd") + ';';
+            str += Condition.ToString() + ';';
+            str += Cathegory.ToString() + ';';
+            str += userID.ToString() + ';';
+            str += size.height.ToString() + ',' + size.length.ToString() + ',' + size.width.ToString() + ';';
+            str += karmaPrice.ToString();
+
+            return str;
+        }
+
+        public bool Equals(Item other)
+        {
+            if (other == null) return false;
+            return (this.ID.Equals(other.ID));
         }
 
         public int ID { get; set; }
@@ -93,19 +101,12 @@ namespace Kinder.Classes
                     dateOfPurchase = value;
             }
         }
+        public string dateStr { get; set; }
 
-
-        public ICondition.options Condition { get; set; }
-        public ICathegory.options Cathegory{ get; set; }
+        public ConditionEnum Condition { get; set; }
+        public CathegoryEnum Cathegory { get; set; }
 
         public int userID;
-        public int UserID
-        {
-            get
-            {
-                return userID;
-            }
-        }
 
         public Dimensions size;
         public Dimensions Size
@@ -122,6 +123,7 @@ namespace Kinder.Classes
                     size = value;
             }
         }
+        public string SizeStr { get; set; }
 
         public int karmaPrice;
         public int KarmaPrice

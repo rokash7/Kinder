@@ -57,5 +57,11 @@ namespace Kinder
             Settings SettingsPageWindow = new Settings();
             SettingsPageWindow.Show();
         }
+
+        private void ItemsPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            ItemsListing itemsListing = new();
+            itemsListing.Show();
+        }
     }
 }
