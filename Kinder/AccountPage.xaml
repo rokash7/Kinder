@@ -54,7 +54,7 @@
         <Image Grid.Column="2" Grid.Row="3" Margin="10" Source="https://www.seekpng.com/png/full/138-1387631_login-comments-windows-10-person-icon.png"/>
         <Button x:Name="Leaderboard" Content="Leaderboard" Background="White" FontSize="28"  Grid.Column="2" Grid.Row="7" Click="Leaderboard_Click"/>
         <Button x:Name="Settings" Content="Settings" Background="White" FontSize="28"  Grid.Column="2" Grid.Row="9" Click="Settings_Click"/>
-        <Button x:Name="LogOut" Content="Log out" Background="White" FontSize="28"  Grid.Column="2" Grid.Row="11" Click="LogOut_Click"/>
+        <Button x:Name="Back" Content="Back" Background="White" FontSize="28"  Grid.Column="2" Grid.Row="11" Click="Back_Click"/>
         <Button x:Name="Give" Content="Give away" Background="White" FontSize="28"  Grid.Column="4" Grid.Row="11" Click="Give_Click"/>
         <Button x:Name="Request" Content="Create request" Background="White" FontSize="28" Grid.Column="6" Grid.Row="11" Click="Request_Click"/>
 

@@ -29,8 +29,8 @@
 
         </DataGrid>
 
-        <Button x:Name="AddButton" Click="AddSearchButton_Click" Margin="38,335,151,104" Content="add"/>
-        <Button x:Name="DeleteButton" Click="DeleteButton_Click" Margin="106,335,77,104" Content="delete"/>
-        <Button x:Name="EditButton" Click="EditButton_Click" Margin="183,335,0,104" Content="edit"/>
+        <Button x:Name="AddButton" Margin="38,335,151,104" Content="add"/>
+        <Button x:Name="DeleteButton" Margin="106,335,77,104" Content="delete"/>
+        <Button x:Name="EditButton" Margin="183,335,0,104" Content="edit"/>
     </Grid>
 </Window>

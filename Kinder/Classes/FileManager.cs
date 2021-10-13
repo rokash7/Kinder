@@ -4,23 +4,26 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Kinder.Classes
 {
     class FileManager
     {
-        static string UsersFile = "Users.txt";
+        static string path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
+        static string FileLocation = System.IO.Path.Combine(path, "Data_files\\Users.txt");
 
-        public static List<User> getUsers()                 ///NOT TESTED/IMPLEMENTED ANYWHERE YET !!!!!
+        public static List<User> getUsers()
         {
             List<User> users = new List<User>();
-            using (StreamReader reader = new StreamReader(UsersFile))
+            users.Clear();
+            using (StreamReader reader = new StreamReader(FileLocation))
             {
-                string line;
                 string[] userData;
-                while ((line = reader.ReadLine()) != null)
+                while (!reader.EndOfStream)
                 {
                     userData = reader.ReadLine().Split(' ');
+                    ///MessageBox.Show(userData[0]);
                     User user = new User();
                     user.Id = Int32.Parse(userData[0]);
                     user.Username = userData[1];
@@ -33,12 +36,19 @@ namespace Kinder.Classes
                     users.Add(user);
                 }
             }
+
             return users;
         }
-
-        public void saveUser()
+        public static void addNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int id)
         {
-            //TODO
+            using (StreamWriter sw = new StreamWriter(FileLocation, true))
+            {
+                sw.Write(id);
+                sw.Write(' ');
+                sw.WriteLine(Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0);
+
+
+            }
         }
     }
 }
