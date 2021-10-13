@@ -23,5 +23,10 @@ namespace Kinder
         {
             InitializeComponent();
         }
+
+        private void ChangeEmail_Click(object sender, RoutedEventArgs e)
+        {
+            User.ChangeUserEmail(NewEmail.Text);
+        }
     }
 }
