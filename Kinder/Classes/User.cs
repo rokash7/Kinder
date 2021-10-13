@@ -19,11 +19,10 @@ public class User
 
     public User() { }
 
-    static List<User> users = FileManager.getUsers();
+    static List<User> users;
     public static Boolean CheckLogin(string Username, string Password)
     {
-        users = FileManager.getUsers();
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (Username == user.Username && Password == user.Password)
             {
@@ -36,8 +35,7 @@ public class User
 
     public static Boolean CheckIfUserAlreadyExists(string Email, string PhoneNumber)
     {
-        users = FileManager.getUsers();
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (Email == user.Email || PhoneNumber == user.PhoneNumber)
             {
@@ -51,26 +49,24 @@ public class User
     public static Boolean CheckIfUsernameIsTaken(string Username)
     {
         users = FileManager.getUsers();
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (Username == user.Username)
             {
                 return false;
             }
         }
-
         return true;
     }
 
-    public static int getUserNumber()
+    public static int getUserCount()
     {
-        users = FileManager.getUsers();
-        return users.Count;
+        return FileManager.getUsers().Count;
     }
 
     public static void ChangeUserEmail(string Text)
     {
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (user.Id == CurrentUserID)
             {
@@ -82,7 +78,7 @@ public class User
 
     public static void ChangeUserPhoneNumber(string Text)
     {
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (user.Id == CurrentUserID)
             {
@@ -94,7 +90,7 @@ public class User
 
     public static Boolean CheckPassword(string Password)
     {
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (user.Id == CurrentUserID)
             {
@@ -109,7 +105,7 @@ public class User
 
     public static void ChangeUserPassword(string Text)
     {
-        foreach (User user in users)
+        foreach (User user in FileManager.getUsers())
         {
             if (user.Id == CurrentUserID)
             {
@@ -118,8 +114,4 @@ public class User
             }
         }
     }
-
-
-
-
 }

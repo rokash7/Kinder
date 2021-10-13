@@ -36,18 +36,13 @@ namespace Kinder.Classes
                     users.Add(user);
                 }
             }
-
             return users;
         }
         public static void addNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int id)
         {
             using (StreamWriter sw = new StreamWriter(FileLocation, true))
             {
-                sw.Write(id);
-                sw.Write(' ');
-                sw.WriteLine(Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0);
-
-
+                sw.WriteLine(id.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0);
             }
         }
         public static void ChangeUserField(string Username, string Password, string Email, String PhoneNumber, string Name, string Surname, int id, int KarmaPoints)
