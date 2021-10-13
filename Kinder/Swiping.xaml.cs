@@ -37,25 +37,32 @@ namespace Kinder
         private void AccountPageButton_Click(object sender, RoutedEventArgs e)
         {
             AccountPage AccountPageWindow = new AccountPage();
-            AccountPageWindow.Show();
+            AccountPageWindow.ShowDialog();
         }
 
         private void LeaderboardsPageButton_Click(object sender, RoutedEventArgs e)
         {
             LeaderboardWindow LeaderboardPageWindow = new LeaderboardWindow();
-            LeaderboardPageWindow.Show();
+            LeaderboardPageWindow.ShowDialog();
         }
 
         private void CommunicationPageButton_Click(object sender, RoutedEventArgs e)
         {
             ChatWindow CommunicationPageWindow = new ChatWindow();
-            CommunicationPageWindow.Show();
+            CommunicationPageWindow.ShowDialog();
         }
 
         private void SettingsPageButton_Click(object sender, RoutedEventArgs e)
         {
             Settings SettingsPageWindow = new Settings();
-            SettingsPageWindow.Show();
+            SettingsPageWindow.ShowDialog();
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var logInPage = new MainWindow();
+            logInPage.Show();
+            this.Close();
         }
 
         private void ItemsPageButton_Click(object sender, RoutedEventArgs e)

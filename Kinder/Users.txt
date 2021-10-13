@@ -1,3 +1,0 @@
-0 admin admin admin@gmail.com +admin admin admin 420
-1 dude1 password1 dude1@gmail.com +12345 dudee dud 0
-2 dude2 password2 dude2@gmail.com +54321 dud dudee 10

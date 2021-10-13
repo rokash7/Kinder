@@ -47,10 +47,8 @@ namespace Kinder
             leaderboardWindow.ShowDialog();
         }
 
-        private void LogOut_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            var logInPage = new MainWindow();
-            logInPage.Show();
             this.Close();
         }
     }

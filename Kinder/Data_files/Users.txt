@@ -1,0 +1,16 @@
+0 admin admin admin@gmail.com +admin admin admin 420
+1 dude1 password1 dude1@gmail.com +12345 dudee dud 0
+2 dude2 password2 dude2@gmail.com +54321 dud dudee 10
+3 aNewTestDude 12345 dude12345@gmail.com +dudeNum Dude Dudee 0
+4 aNewTestDude2 514987 ddd@gmail.com +123456789 Dudd ddd 0
+5 theNewDude dude5 dude@gmail.com +9876456352 du de 0
+6 dud .5684684 ddddd@gmail.com +684643 d d 0
+7 dthaegha a54rg6r asdhg@gmail.com +684634 awga awsga 0
+8 awrhaqrhq 11111 111@gmail.com +6854634 wrgaqerhg aerg 0
+9 dtrhaerheaaerh abc wegwe@gmail.com +6946343 aerheh thaerh 0
+10 ertwtykwthj bruh 54we@gmail.com +684684 aeh aerhg 0
+11 agawerg aweg asrvb@gmail.com +684684631 sregawg asergaw 0
+12 newTestDude 654e68gweg dude420@gmail.com +684361316 ddduuuuddddeeee ddduuuuddddeeeee 0
+13 eqrgqwgw a56s8rg4aw aserg@gmail.com +684653541 sa asg 0
+14 asarga se5rg4aw eraew@gmail.com +58694564 aeswrhaewr awrgwe 0
+15 lksweflaw s5e4wae 5a4rg@gmail.com +68464 regaw aergae 0

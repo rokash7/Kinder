@@ -32,7 +32,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-
+      
         <Button x:Name="AddButton" Click="AddButton_Click" Margin="38,335,181,323" Content="add"/>
         <Button x:Name="DeleteButton" Click="DeleteButton_Click" Margin="123,335,96,323" Content="delete"/>
         <Button x:Name="EditButton" Click="EditButton_Click" Margin="208,335,201,323" Content="edit" Grid.ColumnSpan="2"/>

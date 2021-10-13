@@ -32,14 +32,10 @@
                                        Foreground="Gray"
                                        FontSize="10"/>
                             </StackPanel>
-                            
                         </StackPanel>
-
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
     </Style>
-    
 </ResourceDictionary>
