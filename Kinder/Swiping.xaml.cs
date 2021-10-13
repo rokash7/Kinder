@@ -57,5 +57,12 @@ namespace Kinder
             Settings SettingsPageWindow = new Settings();
             SettingsPageWindow.ShowDialog();
         }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var logInPage = new MainWindow();
+            logInPage.Show();
+            this.Close();
+        }
     }
 }
