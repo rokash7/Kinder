@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kinder"
         mc:Ignorable="d" FontSize="16"
-        Title="Settings" Height="600" Width="800">
+        Title="Swiping" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -30,6 +30,7 @@
         <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Height="60" Fill="Gray"/>
 
         <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Height="50" Text="Swiping" TextAlignment="Center" FontSize="32"/>
+        <Button x:Name="LogOutButton" Grid.Column="1" Grid.Row="1" Content="Log Out" Width="150" Height="50" Margin="5" Click="LogOutButton_Click"/>
 
         <Image x:Name="DonatorView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Text="Sample text for donation candidate description." TextAlignment="Center"/>
