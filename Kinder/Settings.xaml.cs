@@ -26,7 +26,48 @@ namespace Kinder
 
         private void ChangeEmail_Click(object sender, RoutedEventArgs e)
         {
-            User.ChangeUserEmail(NewEmail.Text);
+            if (!string.IsNullOrWhiteSpace(NewEmail.Text))
+            {
+                User.ChangeUserEmail(NewEmail.Text);
+                MessageBox.Show("Email changed to " + NewEmail.Text + ".");
+            }
+            else
+            {
+                MessageBox.Show("Invalid Email.");
+            }
+        }
+
+        private void ChangePhoneNumber_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(NewPhoneNumber.Text))
+            {
+                User.ChangeUserPhoneNumber(NewPhoneNumber.Text);
+                MessageBox.Show("Phone Number changed to " + NewPhoneNumber.Text + ".");
+            }
+            else
+            {
+                MessageBox.Show("Invalid Phone Number.");
+            }
+        }
+
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(NewPassword.Password))
+            {
+                if (User.CheckPassword(CurrentPassword.Password))
+                {
+                    User.ChangeUserPassword(NewPassword.Password);
+                    MessageBox.Show("Password changed.");
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect password!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Password.");
+            }
         }
     }
 }

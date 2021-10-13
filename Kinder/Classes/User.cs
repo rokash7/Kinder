@@ -80,6 +80,45 @@ public class User
         }
     }
 
+    public static void ChangeUserPhoneNumber(string Text)
+    {
+        foreach (User user in users)
+        {
+            if (user.Id == CurrentUserID)
+            {
+                user.PhoneNumber = Text;
+                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID);
+            }
+        }
+    }
+
+    public static Boolean CheckPassword(string Password)
+    {
+        foreach (User user in users)
+        {
+            if (user.Id == CurrentUserID)
+            {
+                if (user.Password == Password)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void ChangeUserPassword(string Text)
+    {
+        foreach (User user in users)
+        {
+            if (user.Id == CurrentUserID)
+            {
+                user.Password = Text;
+                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID);
+            }
+        }
+    }
+
 
 
 
