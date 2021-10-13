@@ -47,7 +47,7 @@ namespace Kinder
             }
         }
 
-        private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)
+        private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)          ///Testing button
         {
             //LeaderboardWindow page = new LeaderboardWindow();
             //page.Show();

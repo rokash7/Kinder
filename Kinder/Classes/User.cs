@@ -43,7 +43,6 @@ public class User
             }
         }
         return true;
-
     }
 
     public static Boolean CheckIfUsernameIsTaken(string Username)

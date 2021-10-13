@@ -65,7 +65,6 @@ namespace Kinder
             {
                 MessageBox.Show("Invalid email or phone number");
             }
-            
         }
     }
 }
