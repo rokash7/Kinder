@@ -50,10 +50,10 @@ namespace Kinder.Classes
 
             }
         }
-        public static void ChangeUserField(string Username, string Password, string Email, String PhoneNumber, string Name, string Surname, int id)
+        public static void ChangeUserField(string Username, string Password, string Email, String PhoneNumber, string Name, string Surname, int id, int KarmaPoints)
         {
             string[] UsersText = File.ReadAllLines(FileLocation);
-            UsersText[id] = id.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0;
+            UsersText[id] = id.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + KarmaPoints.ToString();
             File.WriteAllLines(FileLocation, UsersText);
         }
     }

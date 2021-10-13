@@ -75,7 +75,7 @@ public class User
             if (user.Id == CurrentUserID)
             {
                 user.Email = Text;
-                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID);
+                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
             }
         }
     }
@@ -87,7 +87,7 @@ public class User
             if (user.Id == CurrentUserID)
             {
                 user.PhoneNumber = Text;
-                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID);
+                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
             }
         }
     }
@@ -114,7 +114,7 @@ public class User
             if (user.Id == CurrentUserID)
             {
                 user.Password = Text;
-                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID);
+                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
             }
         }
     }
