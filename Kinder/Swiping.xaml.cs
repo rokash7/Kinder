@@ -64,5 +64,11 @@ namespace Kinder
             logInPage.Show();
             this.Close();
         }
+
+        private void ItemsPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            ItemsListing itemsListing = new();
+            itemsListing.Show();
+        }
     }
 }
