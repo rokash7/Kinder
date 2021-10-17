@@ -26,7 +26,7 @@
                 <DataGridTextColumn Header="id" Binding="{Binding ID}" Width="25"></DataGridTextColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date of buying" Binding="{Binding dateStr}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date of buying" Binding="{Binding DateStr}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="Condition" Binding="{Binding Condition}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="Category" Binding="{Binding Cathegory}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="size" Binding="{Binding SizeStr}" Width="50"></DataGridTextColumn>

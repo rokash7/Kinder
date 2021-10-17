@@ -29,7 +29,7 @@ namespace Kinder
         }
 
         private List<Item> ItemsList = new();
-        private int CurrentUserID = 1; //TODO: current user session
+        private int CurrentUserID = User.CurrentUserID; //TODO: current user session
         private string FileLocation = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
 
         private void ReadDataFromFile()
@@ -67,7 +67,7 @@ namespace Kinder
             result.ID = int.Parse(data[0]);
 
             result.dateOfPurchase = DateTime.Parse(data[1]);
-            result.dateStr = data[1];
+            result.DateStr = data[1];
 
             result.Condition = (ConditionEnum) Enum.Parse(typeof(ConditionEnum), data[2]);
             result.Cathegory = (CathegoryEnum) Enum.Parse(typeof(CathegoryEnum), data[3]);
@@ -108,7 +108,7 @@ namespace Kinder
             NewItem.ID = nextID;
 
             NewItem.DateOfPurchase = DateTime.Parse(DateTextBox.Text);
-            NewItem.dateStr = DateTextBox.Text;
+            NewItem.DateStr = DateTextBox.Text;
 
             String condStr= ConditionComboBox.SelectedItem.ToString();
             Enum.TryParse(condStr, out ConditionEnum condition);
@@ -124,7 +124,12 @@ namespace Kinder
             NewItem.Size = new Dimensions(Length: int.Parse(DimsTextBoxL.Text), Height: int.Parse(DimsTextBoxH.Text), Width: int.Parse(DimsTextBoxW.Text));
             NewItem.SizeStr = NewItem.Size.ToString();
             
-            NewItem.KarmaPrice = int.Parse(PointsTextBox.Text);
+            //widening convertion:
+            NewItem.KarmaPrice = byte.Parse(PointsTextBox.Text);
+
+            /* such convertion allows us to keep points distribution in check. 
+             * Users can't get more that 255 points per item.
+             * with int they could get way way more */
 
             //optional arguments implementation:
             if(NameTextBox.Text.Length > 0)
@@ -173,7 +178,7 @@ namespace Kinder
             if (DateTextBox.Text.Length > 0)
             {
                 classObj.DateOfPurchase = DateTime.Parse(DateTextBox.Text);
-                classObj.dateStr = DateTextBox.Text;
+                classObj.DateStr = DateTextBox.Text;
             }
 
             if(ConditionComboBox.SelectedItem != null)

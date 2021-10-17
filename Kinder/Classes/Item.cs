@@ -50,7 +50,7 @@ namespace Kinder.Classes
         public Item(int ID, DateTime DateOfPurchase, ConditionEnum Condition, CathegoryEnum Cathegory, int UserID, Dimensions size, int KarmaPrice)
         {
             this.ID = ID;
-            this.dateOfPurchase = dateOfPurchase;
+            this.dateOfPurchase = DateOfPurchase;
             this.Condition = Condition;
             this.Cathegory = Cathegory;
             this.UserID = UserID;
@@ -103,12 +103,12 @@ namespace Kinder.Classes
                     dateOfPurchase = value;
             }
         }
-        public string dateStr { get; set; }
+        public string DateStr { get; set; }
 
         public ConditionEnum Condition { get; set; }
         public CathegoryEnum Cathegory { get; set; }
 
-        public int UserID;
+        public int UserID { get; set; }
 
         public Dimensions size;
         public Dimensions Size
