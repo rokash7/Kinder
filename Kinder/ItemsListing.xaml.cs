@@ -29,9 +29,10 @@ namespace Kinder
         }
 
         private List<Item> ItemsList = new();
-        private int CurrentUserID = 1; //TODO: current user session
+        private int CurrentUserID = User.CurrentUserID;
         private string FileLocation = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
 
+        //reading file
         private void ReadDataFromFile()
         {
             ItemsList.Clear();
@@ -67,7 +68,7 @@ namespace Kinder
             result.ID = int.Parse(data[0]);
 
             result.dateOfPurchase = DateTime.Parse(data[1]);
-            result.dateStr = data[1];
+            result.DateStr = data[1];
 
             result.Condition = (ConditionEnum) Enum.Parse(typeof(ConditionEnum), data[2]);
             result.Cathegory = (CathegoryEnum) Enum.Parse(typeof(CathegoryEnum), data[3]);
@@ -108,7 +109,7 @@ namespace Kinder
             NewItem.ID = nextID;
 
             NewItem.DateOfPurchase = DateTime.Parse(DateTextBox.Text);
-            NewItem.dateStr = DateTextBox.Text;
+            NewItem.DateStr = DateTextBox.Text;
 
             String condStr= ConditionComboBox.SelectedItem.ToString();
             Enum.TryParse(condStr, out ConditionEnum condition);
@@ -120,11 +121,32 @@ namespace Kinder
 
             NewItem.UserID = CurrentUserID;
 
+            //narrowing convertion:
+            long length_long, width_long, height_long;
+
+            length_long = long.Parse(DimsTextBoxL.Text);
+            width_long = long.Parse(DimsTextBoxW.Text);
+            height_long = long.Parse(DimsTextBoxH.Text);
+
+            int length_int, width_int, height_int;
+
+            checked
+            {
+                length_int = (int)length_long;
+                width_int = (int)width_long;
+                height_int = (int)height_long;
+            }
+
             //named argument:
-            NewItem.Size = new Dimensions(Length: int.Parse(DimsTextBoxL.Text), Height: int.Parse(DimsTextBoxH.Text), Width: int.Parse(DimsTextBoxW.Text));
+            NewItem.Size = new Dimensions(Length: length_int, Height: height_int, Width: width_int);
             NewItem.SizeStr = NewItem.Size.ToString();
             
-            NewItem.KarmaPrice = int.Parse(PointsTextBox.Text);
+            //widening convertion:
+            NewItem.KarmaPrice = byte.Parse(PointsTextBox.Text);
+
+            /* such convertion allows us to keep points distribution in check. 
+             * Users can't get more that 255 points per item.
+             * with int they could get way way more */
 
             //optional arguments implementation:
             if(NameTextBox.Text.Length > 0)
@@ -173,7 +195,7 @@ namespace Kinder
             if (DateTextBox.Text.Length > 0)
             {
                 classObj.DateOfPurchase = DateTime.Parse(DateTextBox.Text);
-                classObj.dateStr = DateTextBox.Text;
+                classObj.DateStr = DateTextBox.Text;
             }
 
             if(ConditionComboBox.SelectedItem != null)
@@ -211,7 +233,7 @@ namespace Kinder
 
             if (PointsTextBox.Text.Length > 0)
             {
-                classObj.KarmaPrice = int.Parse(PointsTextBox.Text);
+                classObj.KarmaPrice = byte.Parse(PointsTextBox.Text);
             }
 
             if (NameTextBox.Text.Length > 0)
