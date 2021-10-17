@@ -2,6 +2,8 @@ using Kinder.Classes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 public class User
 {
@@ -10,7 +12,7 @@ public class User
     public string Username { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public int Id { get; set; }
+    public int ID { get; set; }
     public string Password { get; set; }
     public int KarmaPoints { get; set; }
     public int PlaceGive { get; set; }
@@ -18,44 +20,41 @@ public class User
     public static int CurrentUserID { get; set; }
 
     public User() { }
-
-    static List<User> users;
     public static Boolean CheckLogin(string Username, string Password)
     {
         foreach (User user in FileManager.getUsers())
         {
             if (Username == user.Username && Password == user.Password)
             {
-                CurrentUserID = user.Id;
+                CurrentUserID = user.ID;
                 return true;
             }
         }
         return false;
     }
 
-    public static Boolean CheckIfUserAlreadyExists(string Email, string PhoneNumber)
+    public static Boolean CheckIfUserAlreadyExists(string Text)
     {
         foreach (User user in FileManager.getUsers())
         {
-            if (Email == user.Email || PhoneNumber == user.PhoneNumber)
+            if (Text == user.Email || Text == user.PhoneNumber)
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static Boolean CheckIfUsernameIsTaken(string Username)
     {
-        users = FileManager.getUsers();
         foreach (User user in FileManager.getUsers())
         {
             if (Username == user.Username)
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static int getUserCount()
@@ -67,7 +66,7 @@ public class User
     {
         foreach (User user in FileManager.getUsers())
         {
-            if (user.Id == CurrentUserID)
+            if (user.ID == CurrentUserID)
             {
                 user.Email = Text;
                 FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
@@ -79,7 +78,7 @@ public class User
     {
         foreach (User user in FileManager.getUsers())
         {
-            if (user.Id == CurrentUserID)
+            if (user.ID == CurrentUserID)
             {
                 user.PhoneNumber = Text;
                 FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
@@ -91,7 +90,7 @@ public class User
     {
         foreach (User user in FileManager.getUsers())
         {
-            if (user.Id == CurrentUserID)
+            if (user.ID == CurrentUserID)
             {
                 if (user.Password == Password)
                 {
@@ -106,7 +105,7 @@ public class User
     {
         foreach (User user in FileManager.getUsers())
         {
-            if (user.Id == CurrentUserID)
+            if (user.ID == CurrentUserID)
             {
                 user.Password = Text;
                 FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
