@@ -26,4 +26,3 @@
 6;2012-01-05;Good;Transport;2;0,0,0;20;name;desc
 5;2020-01-05;Fair;Transport;1;7,5,6;157;name;desc
 4;2020-01-05;Mint;Furniture;0;2,3,1;157;name;desc
-24;2021-01-05;Fair;Education;0;1,2,3;157;Name;A fascinating description...

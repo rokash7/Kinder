@@ -29,9 +29,10 @@ namespace Kinder
         }
 
         private List<Item> ItemsList = new();
-        private int CurrentUserID = User.CurrentUserID; //TODO: current user session
+        private int CurrentUserID = User.CurrentUserID;
         private string FileLocation = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
 
+        //reading file
         private void ReadDataFromFile()
         {
             ItemsList.Clear();
@@ -120,8 +121,24 @@ namespace Kinder
 
             NewItem.UserID = CurrentUserID;
 
+            //narrowing convertion:
+            long length_long, width_long, height_long;
+
+            length_long = long.Parse(DimsTextBoxL.Text);
+            width_long = long.Parse(DimsTextBoxW.Text);
+            height_long = long.Parse(DimsTextBoxH.Text);
+
+            int length_int, width_int, height_int;
+
+            checked
+            {
+                length_int = (int)length_long;
+                width_int = (int)width_long;
+                height_int = (int)height_long;
+            }
+
             //named argument:
-            NewItem.Size = new Dimensions(Length: int.Parse(DimsTextBoxL.Text), Height: int.Parse(DimsTextBoxH.Text), Width: int.Parse(DimsTextBoxW.Text));
+            NewItem.Size = new Dimensions(Length: length_int, Height: height_int, Width: width_int);
             NewItem.SizeStr = NewItem.Size.ToString();
             
             //widening convertion:
@@ -216,7 +233,7 @@ namespace Kinder
 
             if (PointsTextBox.Text.Length > 0)
             {
-                classObj.KarmaPrice = int.Parse(PointsTextBox.Text);
+                classObj.KarmaPrice = byte.Parse(PointsTextBox.Text);
             }
 
             if (NameTextBox.Text.Length > 0)

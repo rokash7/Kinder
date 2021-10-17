@@ -34,7 +34,7 @@ namespace Kinder.Classes
             this.Width = Width;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return Length.ToString() + ',' + Height.ToString() + ',' + Width.ToString();
         }
