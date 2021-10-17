@@ -33,9 +33,9 @@
         <Button x:Name="LogOutButton" Grid.Column="1" Grid.Row="1" Content="Log Out" Width="150" Height="50" Margin="5" Click="LogOutButton_Click"/>
 
         <Image x:Name="DonatorView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Text="Sample text for donation candidate description." TextAlignment="Center"/>
+        <TextBlock x:Name="TextBox_String" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Text="Item properties" TextAlignment="Left" Margin="5,122,5,51"/>
         <Button x:Name="NextButton" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Content="Next" Width="200" Height="50" Margin="5"/>
-        <Button x:Name="DonateButton" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Content="Donate" Width="200" Height="50" Margin="5" Click="DonateButton_Click"/>
+        <Button x:Name="LikeItemButton" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Content="Like it" Width="200" Height="50" Margin="5" Click="LikeItemButton_Click"/>
         <Button x:Name="AccountPageButton" Grid.Column="1" Grid.Row="5" Content="Account" Width="150" Height="50" Margin="5" Click="AccountPageButton_Click"/>
         <Button x:Name="LeaderboardsPageButton" Grid.Column="2" Grid.Row="5" Content="Leaderboards" Width="150" Height="50" Margin="5" Click="LeaderboardsPageButton_Click"/>
         <Button x:Name="ItemsPageButton" Grid.Column="1" Grid.Row="3" Content="Items" Width="150" Height="50" Margin="5" Click="ItemsPageButton_Click"/>
