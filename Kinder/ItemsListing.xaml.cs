@@ -52,7 +52,7 @@ namespace Kinder
             ItemsList.Sort();
             ItemsTable.Items.Clear();
 
-            foreach(Item item in ItemsList.Where(p => p.userID == CurrentUserID))
+            foreach(Item item in ItemsList.Where(p => p.UserID == CurrentUserID))
             {
                 ItemsTable.Items.Add(item);
             }
@@ -71,14 +71,18 @@ namespace Kinder
 
             result.Condition = (ConditionEnum) Enum.Parse(typeof(ConditionEnum), data[2]);
             result.Cathegory = (CathegoryEnum) Enum.Parse(typeof(CathegoryEnum), data[3]);
-            result.userID = int.Parse(data[4]);
+            result.UserID = int.Parse(data[4]);
 
             string[] dimsParsed = data[5].Split(',');
-            int l= int.Parse(dimsParsed[0]) , w= int.Parse(dimsParsed[1]), h= int.Parse(dimsParsed[2]);
-            result.size = new Dimensions(l, h, w);
+
+            //named argument usage:
+            result.size = new Dimensions(Length: int.Parse(dimsParsed[0]), Height: int.Parse(dimsParsed[1]), Width: int.Parse(dimsParsed[2]));
             result.SizeStr = result.size.ToString();
 
             result.karmaPrice = int.Parse(data[6]);
+
+            result.SetName(data[7]);
+            result.SetDescription(data[8]);
 
             return result;
         }
@@ -114,13 +118,32 @@ namespace Kinder
             Enum.TryParse(catStr, out CathegoryEnum cathegory);
             NewItem.Cathegory = cathegory;
 
-            NewItem.userID = CurrentUserID;
+            NewItem.UserID = CurrentUserID;
 
-            String[] dims = DimsTextBox.Text.Split(',');
-            NewItem.Size = new Dimensions(int.Parse(dims[0]), int.Parse(dims[1]), int.Parse(dims[2]));
+            //named argument:
+            NewItem.Size = new Dimensions(Length: int.Parse(DimsTextBoxL.Text), Height: int.Parse(DimsTextBoxH.Text), Width: int.Parse(DimsTextBoxW.Text));
             NewItem.SizeStr = NewItem.Size.ToString();
             
             NewItem.KarmaPrice = int.Parse(PointsTextBox.Text);
+
+            //optional arguments implementation:
+            if(NameTextBox.Text.Length > 0)
+            {
+                NewItem.SetName(NameTextBox.Text);
+            }
+            else
+            {
+                NewItem.SetName();
+            }
+
+            if (DescTextBox.Text.Length > 0)
+            {
+                NewItem.SetDescription(DescTextBox.Text);
+            }
+            else
+            {
+                NewItem.SetDescription();
+            }
 
             StreamWriter write = File.AppendText(FileLocation);
             write.WriteLine(NewItem.ToString());
@@ -168,10 +191,21 @@ namespace Kinder
                 classObj.Cathegory = cathegory;
             }
 
-            if(DimsTextBox.Text.Length > 0)
+            if(DimsTextBoxL.Text.Length > 0)
             {
-                String[] dims = DimsTextBox.Text.Split(',');
-                classObj.Size = new Dimensions(int.Parse(dims[0]), int.Parse(dims[1]), int.Parse(dims[2]));
+                classObj.size.Length = int.Parse(DimsTextBoxL.Text);
+                classObj.SizeStr = classObj.Size.ToString();
+            }
+
+            if (DimsTextBoxH.Text.Length > 0)
+            {
+                classObj.size.Height = int.Parse(DimsTextBoxH.Text);
+                classObj.SizeStr = classObj.Size.ToString();
+            }
+
+            if (DimsTextBoxW.Text.Length > 0)
+            {
+                classObj.size.Width = int.Parse(DimsTextBoxW.Text);
                 classObj.SizeStr = classObj.Size.ToString();
             }
 
@@ -180,14 +214,22 @@ namespace Kinder
                 classObj.KarmaPrice = int.Parse(PointsTextBox.Text);
             }
 
+            if (NameTextBox.Text.Length > 0)
+            {
+                classObj.Name = NameTextBox.Text;
+            }
+
+            if (DescTextBox.Text.Length > 0)
+            {
+                classObj.Description = DescTextBox.Text;
+            }
+
             StreamWriter write = File.AppendText(FileLocation);
             write.WriteLine(classObj.ToString());
             write.Close();
 
             ReadDataFromFile();
             DisplayData();
-
-            //TODO: bug with dimensions, they are getting mixed up somehow
         }
     }
 }

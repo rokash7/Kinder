@@ -23,20 +23,20 @@ namespace Kinder.Classes
 
     public struct Dimensions
     {
-        public double length;
-        public double height;
-        public double width;
+        public int Length;
+        public int Height;
+        public int Width;
 
-        public Dimensions(double length, double height, double width)
+        public Dimensions(int Length, int Height, int Width)
         {
-            this.height = height;
-            this.length = length;
-            this.width = width;
+            this.Length = Length;
+            this.Height = Height;
+            this.Width = Width;
         }
 
         public string ToString()
         {
-            return length.ToString() + ',' + height.ToString() + ',' + width.ToString();
+            return Length.ToString() + ',' + Height.ToString() + ',' + Width.ToString();
         }
     }
 
@@ -47,15 +47,15 @@ namespace Kinder.Classes
            
         }
 
-        public Item(int ID, DateTime dateOfPurchase, ConditionEnum Condition, CathegoryEnum Cathegory, int userID, Dimensions size, int karmaPrice)
+        public Item(int ID, DateTime DateOfPurchase, ConditionEnum Condition, CathegoryEnum Cathegory, int UserID, Dimensions size, int KarmaPrice)
         {
             this.ID = ID;
             this.dateOfPurchase = dateOfPurchase;
             this.Condition = Condition;
             this.Cathegory = Cathegory;
-            this.userID = userID;
+            this.UserID = UserID;
             this.size = size;
-            this.karmaPrice = karmaPrice;
+            this.karmaPrice = KarmaPrice;
         }
 
         public int CompareTo(Item other)
@@ -71,9 +71,11 @@ namespace Kinder.Classes
             str += dateOfPurchase.ToString("yyyy-MM-dd") + ';';
             str += Condition.ToString() + ';';
             str += Cathegory.ToString() + ';';
-            str += userID.ToString() + ';';
-            str += size.height.ToString() + ',' + size.length.ToString() + ',' + size.width.ToString() + ';';
-            str += karmaPrice.ToString();
+            str += UserID.ToString() + ';';
+            str += size.ToString() + ';';
+            str += karmaPrice.ToString() + ';';
+            str += Name.ToString() + ';';
+            str += Description.ToString();
 
             return str;
         }
@@ -106,7 +108,7 @@ namespace Kinder.Classes
         public ConditionEnum Condition { get; set; }
         public CathegoryEnum Cathegory { get; set; }
 
-        public int userID;
+        public int UserID;
 
         public Dimensions size;
         public Dimensions Size
@@ -117,13 +119,20 @@ namespace Kinder.Classes
             }
             set
             {
-                if (value.height < 0 || value.width < 0 || value.length < 0)
+                if (value.Height < 0 || value.Width < 0 || value.Length < 0)
                     throw new ArgumentOutOfRangeException("The values of the item cannot be negative");
                 else
                     size = value;
             }
         }
         public string SizeStr { get; set; }
+
+        //optional arguments:
+        public string Name { get; set; }
+        public void SetName(string NameArg = "Unnamed item") => Name = NameArg;
+
+        public string Description { get; set; }
+        public void SetDescription(string DescArg = "Undescribed item") => Description = DescArg;
 
         public int karmaPrice;
         public int KarmaPrice
