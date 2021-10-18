@@ -36,27 +36,27 @@ namespace Kinder
         private void LoadItems()
         {
             //loading all items:
-            StreamReader file1 = new(FileLocation_items);
-            Item temp = new();
+            StreamReader FileAllItems = new(FileLocation_items);
+            Item Temp = new();
 
-            string line;
-            while((line = file1.ReadLine()) != null)
+            string Line;
+            while((Line = FileAllItems.ReadLine()) != null)
             {
                 //extention method usage
-                ItemList.Add(temp.ParseData(line));
+                ItemList.Add(Temp.ParseData(Line));
             }
 
-            file1.Close();
+            FileAllItems.Close();
 
             //linq query to filter
             ItemList = ItemList.Where(p => p.UserID != User.CurrentUserID).ToList();
 
             //loading already liked items
-            StreamReader file2 = new(FileLocation_liked);
+            StreamReader FileLikedItems = new(FileLocation_liked);
 
-            while((line = file2.ReadLine()) != null)
+            while((Line = FileLikedItems.ReadLine()) != null)
             {
-                int[] tempArr = temp.ParsedLiked(line);
+                int[] tempArr = Temp.ParsedLiked(Line);
                 List<int> tempList = new();
  
                 for (int i = 1; i < tempArr.Length; i++)
@@ -67,7 +67,7 @@ namespace Kinder
                 LikedItems.Add(new LikedItemsClass(tempArr[0], tempList));
             }
 
-            file2.Close();
+            FileLikedItems.Close();
 
             //filtering already liked items
             List<LikedItemsClass> ToDelete = new();
@@ -95,22 +95,21 @@ namespace Kinder
         private void LikeItemButton_Click(object sender, RoutedEventArgs e)
         {
             //save current item
-            int viewedItemID = ItemList.First().ID;
-            int viewedUserID = ItemList.First().UserID;
-            LikedItemsClass temp = new();
+            int ViewedItemID = ItemList.First().ID;
+            LikedItemsClass Temp = new();
 
             //update current liked item
             foreach (LikedItemsClass liked in LikedItems)
             {
                 if (liked.UserID == User.CurrentUserID)
                 {
-                    liked.ItemsIDs.Add(viewedItemID);
-                    temp = liked;
+                    liked.ItemsIDs.Add(ViewedItemID);
+                    Temp = liked;
                 }
             }
 
             LikedItems = LikedItems.Where(p => p.UserID != User.CurrentUserID).ToList();
-            LikedItems.Add(temp);
+            LikedItems.Add(Temp);
 
             //rewrite current liked items list to file
             StreamWriter file = new(FileLocation_liked);
@@ -163,6 +162,12 @@ namespace Kinder
             ItemsListing itemsListing = new();
             itemsListing.Show();
         }
+
+        private void LikedItemsPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            LikedItems likedItems = new();
+            likedItems.Show();
+        }
     }
 
     internal class LikedItemsClass
@@ -183,16 +188,16 @@ namespace Kinder
 
         public override string ToString()
         {
-            string result = "";
+            string Result = "";
 
-            result += UserID;
+            Result += UserID;
 
             foreach(int i in ItemsIDs)
             {
-                result += ';' + i.ToString();
+                Result += ';' + i.ToString();
             }
 
-            return result;
+            return Result;
         }
     }
 }
