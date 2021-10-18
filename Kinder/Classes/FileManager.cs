@@ -38,7 +38,7 @@ namespace Kinder.Classes
             return users;
         }
         
-        public static void addNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int ID)
+        public static void AddNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int ID)
         {
             using (StreamWriter sw = new StreamWriter(FileLocation, true))
             {

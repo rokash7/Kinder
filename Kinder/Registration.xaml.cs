@@ -25,7 +25,7 @@ namespace Kinder
             InitializeComponent();
         }
 
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)               ///NEED ADVICE! TO DO - Maybe put all those blocks somewhere else, or try to do a multifunctial one 
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)               ///Still need work, but basic functionality exists
         {
             int count = 0;
             if(RegValidation.CheckTextBoxInput(Username.Text))
@@ -92,7 +92,7 @@ namespace Kinder
                 count++;
             }
 
-            if (RegValidation.CheckTextBoxInput(PhoneNumber.Text))          /// TO DO WITH ALL PHONE NUMBS. CURRENTLY ONLY LTU WORKS...
+            if (RegValidation.CheckTextBoxInput(PhoneNumber.Text))          ///PhoneNumber
             {
                 ErrorPhoneNumber.Text = "Enter PhoneNumber!";
                 ErrorPhoneNumber.Visibility = Visibility.Visible;
@@ -134,7 +134,7 @@ namespace Kinder
 
             if(count == 5)                          ////Simple thing that says if all boxes are filled correctly
             {
-                FileManager.addNewUser(Username.Text, Password.Password, Email.Text, PhoneNumber.Text, Name.Text, Surname.Text, User.getUserCount());
+                FileManager.AddNewUser(Username.Text, Password.Password, Email.Text, PhoneNumber.Text, Name.Text, Surname.Text, User.getUserCount());
                 MessageBox.Show("User created successfully! Now  try to log in");
                 MainWindow loginPage = new MainWindow();
                 this.Close();
