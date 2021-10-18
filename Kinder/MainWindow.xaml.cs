@@ -43,6 +43,8 @@ namespace Kinder
             }
             else
             {
+                Username.BorderBrush = Brushes.Red;
+                Password.BorderBrush = Brushes.Red;
                 MessageBox.Show("Incorrect password or username, try again");
             }
         }

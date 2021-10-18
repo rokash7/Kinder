@@ -57,9 +57,37 @@ public class User
         return false;
     }
 
+    public static Boolean CheckPassword(string Password)
+    {
+        foreach (User user in FileManager.getUsers())
+        {
+            if (user.ID == CurrentUserID)
+            {
+                if (user.Password == Password)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static int getUserCount()
     {
         return FileManager.getUsers().Count;
+    }
+
+    public static User getCurrentUser()
+    {
+        User CurrentUser = new User(); 
+        foreach(User user in FileManager.getUsers())
+        {
+            if(user.ID == CurrentUserID)
+            {
+                CurrentUser = user;
+            }
+        }
+        return CurrentUser;
     }
 
     public static void ChangeUserEmail(string Text)
@@ -84,21 +112,6 @@ public class User
                 FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints);
             }
         }
-    }
-
-    public static Boolean CheckPassword(string Password)
-    {
-        foreach (User user in FileManager.getUsers())
-        {
-            if (user.ID == CurrentUserID)
-            {
-                if (user.Password == Password)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public static void ChangeUserPassword(string Text)
