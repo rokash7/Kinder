@@ -23,9 +23,10 @@ namespace Kinder
         public AccountPage()
         {
             InitializeComponent();
+            DataContext = User.getCurrentUser();
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e) ///To do
+        private void Settings_Click(object sender, RoutedEventArgs e)
         {
             var settingsWindow = new Settings();
             settingsWindow.ShowDialog();
