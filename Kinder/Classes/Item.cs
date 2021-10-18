@@ -88,6 +88,8 @@ namespace Kinder.Classes
 
         public int ID { get; set; }
 
+        public int LikedBy { get; set; }
+
         public DateTime dateOfPurchase;
         public DateTime DateOfPurchase
         {
