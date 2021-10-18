@@ -30,28 +30,31 @@ namespace Kinder
         {
             InitializeComponent();
             LoadItems();
+            RenderItem();
         }
 
         private void LoadItems()
         {
             //loading all items:
-            StreamReader file = new(FileLocation_items);
+            StreamReader file1 = new(FileLocation_items);
             Item temp = new();
 
             string line;
-            while((line = file.ReadLine()) != null)
+            while((line = file1.ReadLine()) != null)
             {
                 //extention method usage
                 ItemList.Add(temp.ParseData(line));
             }
 
+            file1.Close();
+
             //linq query to filter
-            ItemList = (List<Item>)ItemList.Where(p => p.UserID == User.CurrentUserID);
+            ItemList = ItemList.Where(p => p.UserID != User.CurrentUserID).ToList();
 
             //loading already liked items
-            file = new StreamReader(FileLocation_liked);
+            StreamReader file2 = new(FileLocation_liked);
 
-            while((line = file.ReadLine()) != null)
+            while((line = file2.ReadLine()) != null)
             {
                 int[] tempArr = temp.ParsedLiked(line);
                 List<int> tempList = new();
@@ -60,34 +63,46 @@ namespace Kinder
                 {
                     tempList.Add(i);
                 }
+                MessageBox.Show(tempArr[2].ToString());
 
                 LikedItems.Add(new LikedItemsClass(tempArr[0], tempList));
             }
 
+            file2.Close();
+
+            //TODO: bug here, filtartion from already liked doesn't work
             //trying to implement groupJoin (linq method)
-            var joinedGroup = LikedItems.GroupJoin(   //outter data
-                ItemList,     //inner data
-                liked => liked.UserID,  //outter key selector
-                ite => ite.UserID,    //inner key selector
-                (liked, ite) => new { liked, ite }  //result selector
+            var joinedGroup = ItemList.GroupJoin(   //outter data
+                LikedItems,     //inner data
+                ite => ite.UserID,  //outter key selector
+                like => like.UserID,    //inner key selector
+                (ite, like) => new { ite, like }  //result selector
                 );
 
             //filtering already liked items
-            foreach (var likedItem in joinedGroup)
+            foreach (var item in joinedGroup)
             {
-                foreach(var item in likedItem.ite)
+                foreach(var likedItem in item.like)
                 {
-                    if (likedItem.liked.ItemsIDs.Contains(item.ID))
+                    if (likedItem.ItemsIDs.Contains(item.ite.ID))
                     {
-                        ItemList.RemoveAt(ItemList.IndexOf(item));
+                        ItemList.RemoveAt(ItemList.IndexOf(item.ite));
                     }
                 }
             }
         }
 
+        private void RenderItem()
+        {
+            TextBox_String.Text = ItemList.First().ToString().Replace(';', '\n');
+            ItemList.RemoveAt(0);
+
+            MessageBox.Show(ItemList.Count.ToString());
+        } 
+
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-
+            RenderItem();
         }
 
         private void LikeItemButton_Click(object sender, RoutedEventArgs e)

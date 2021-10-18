@@ -39,13 +39,13 @@ namespace Kinder.Classes
 
         public static int[] ParsedLiked(this Item item, string line)
         {
-            string[] strings = line.Split(';');
-            int[] result = new int[strings.Length];
+            string[] parts = line.Split(';');
+            int[] result = new int[parts.Length];
 
             int i = 0;
-            foreach(string string1 in strings)
+            foreach(string part in parts)
             {
-                result[i] = int.Parse(string1);
+                result[i] = int.Parse(part);
                 i++;
             }
 
