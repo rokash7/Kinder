@@ -115,7 +115,7 @@ namespace Kinder
             var FilteredLikedList = LikedItemListSelected.Where
                                         (p => p.UserID == User.CurrentUserID);
 
-            //gathering data
+            //gathering data in linq GroupJoin method
             var Joined = FilteredLikedList.GroupJoin(UserList, //inner sequence
                 ite => ite.LikedBy, //outter key
                 usr => usr.ID,  //inner key
