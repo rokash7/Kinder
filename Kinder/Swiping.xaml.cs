@@ -61,43 +61,41 @@ namespace Kinder
  
                 for (int i = 1; i < tempArr.Length; i++)
                 {
-                    tempList.Add(i);
+                    tempList.Add(tempArr[i]);
                 }
-                MessageBox.Show(tempArr[2].ToString());
 
                 LikedItems.Add(new LikedItemsClass(tempArr[0], tempList));
             }
 
             file2.Close();
 
-            //TODO: bug here, filtartion from already liked doesn't work
-            //trying to implement groupJoin (linq method)
-            var joinedGroup = ItemList.GroupJoin(   //outter data
-                LikedItems,     //inner data
-                ite => ite.UserID,  //outter key selector
-                like => like.UserID,    //inner key selector
-                (ite, like) => new { ite, like }  //result selector
-                );
+            StreamWriter bob = new(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "output.txt"));
 
             //filtering already liked items
-            foreach (var item in joinedGroup)
+
+            List<LikedItemsClass> ToDelete = new();
+            ToDelete = LikedItems.Where(p => p.UserID == User.CurrentUserID).ToList();
+            
+            foreach(LikedItemsClass likedItem in ToDelete)
             {
-                foreach(var likedItem in item.like)
-                {
-                    if (likedItem.ItemsIDs.Contains(item.ite.ID))
-                    {
-                        ItemList.RemoveAt(ItemList.IndexOf(item.ite));
-                    }
-                }
+                ItemList = ItemList.Where(p => likedItem.ItemsIDs.Contains(p.ID)==false).ToList();
             }
+
+            foreach(Item a in ItemList)
+            {
+                bob.WriteLine(a.ID.ToString());
+            }
+
+            bob.Close();
         }
 
         private void RenderItem()
         {
+            MessageBox.Show("count of items loaded:"+ItemList.Count.ToString());
             TextBox_String.Text = ItemList.First().ToString().Replace(';', '\n');
             ItemList.RemoveAt(0);
 
-            MessageBox.Show(ItemList.Count.ToString());
+            
         } 
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
