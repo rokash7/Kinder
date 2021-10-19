@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kinder.Classes;
 
 namespace Kinder
 {
@@ -26,7 +27,7 @@ namespace Kinder
 
         private void ChangeEmail_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(NewEmail.Text))
+            if (RegValidation.CheckIfEmailValid(NewEmail.Text))
             {
                 User.ChangeUserEmail(NewEmail.Text);
                 MessageBox.Show("Email changed to " + NewEmail.Text + ".");
@@ -39,7 +40,7 @@ namespace Kinder
 
         private void ChangePhoneNumber_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(NewPhoneNumber.Text))
+            if (RegValidation.CheckIfPhoneNumberValid(NewPhoneNumber.Text))
             {
                 User.ChangeUserPhoneNumber(NewPhoneNumber.Text);
                 MessageBox.Show("Phone Number changed to " + NewPhoneNumber.Text + ".");
