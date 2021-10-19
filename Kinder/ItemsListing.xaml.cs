@@ -74,6 +74,7 @@ namespace Kinder
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            //Icomparable:
             ItemsList.Sort();
             Item NewItem = new();
 
@@ -152,6 +153,7 @@ namespace Kinder
         {
             Item classObj = ItemsTable.SelectedItem as Item;
 
+            //IEquatable use:
             ItemsList.RemoveAt(ItemsList.IndexOf(classObj));
 
             ReWriteFile();
@@ -178,7 +180,6 @@ namespace Kinder
                 classObj.Condition = condition; 
             }
             
-
             if(CathegoryComboBox.SelectedItem != null)
             {
                 String catStr = CathegoryComboBox.SelectedItem.ToString();
@@ -188,20 +189,23 @@ namespace Kinder
 
             if(DimsTextBoxL.Text.Length > 0)
             {
-                classObj.size.Length = int.Parse(DimsTextBoxL.Text);
-                classObj.SizeStr = classObj.Size.ToString();
+                string[] str = classObj.SizeStr.Split(',');
+                str[0] = DimsTextBoxL.Text;
+                classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2]; 
             }
 
             if (DimsTextBoxH.Text.Length > 0)
             {
-                classObj.size.Height = int.Parse(DimsTextBoxH.Text);
-                classObj.SizeStr = classObj.Size.ToString();
+                string[] str = classObj.SizeStr.Split(',');
+                str[1] = DimsTextBoxH.Text;
+                classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
             }
 
             if (DimsTextBoxW.Text.Length > 0)
             {
-                classObj.size.Width = int.Parse(DimsTextBoxW.Text);
-                classObj.SizeStr = classObj.Size.ToString();
+                string[] str = classObj.SizeStr.Split(',');
+                str[2] = DimsTextBoxW.Text;
+                classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
             }
 
             if (PointsTextBox.Text.Length > 0)
@@ -220,7 +224,7 @@ namespace Kinder
             }
 
             StreamWriter write = File.AppendText(FileLocation);
-            write.WriteLine(classObj.ToString());
+            write.WriteLine(classObj.ToString(classObj.SizeStr));
             write.Close();
 
             ReadDataFromFile();
