@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kinder.Classes
 {
-    static class ParsingOperation
+
+    //extention method
+    public static class ParsingOperation
     {
         public static Item ParseData(this Item item, string line)
         {

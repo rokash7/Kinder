@@ -51,8 +51,8 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)          ///Testing button
         {
-            Swiping sw = new();
-            sw.Show();
+            LikedItems a = new();
+            a.Show();
             //LeaderboardWindow page = new LeaderboardWindow();
             //page.Show();
             //ChatWindow chatWindow = new ChatWindow();
