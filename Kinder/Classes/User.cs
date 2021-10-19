@@ -1,7 +1,6 @@
 using Kinder.Classes;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 
@@ -18,8 +17,12 @@ public class User
     public int PlaceGive { get; set; }
     public int PlaceTake { get; set; }
     public string RegDate { get; set; }
-    public static int CurrentUserID { get; set; }
-
+    private static int _currentUserID;
+    public static int CurrentUserID
+    {
+        get { return _currentUserID; }
+        set { _currentUserID = value; }
+    }
     public User() { }
     public static Boolean CheckLogin(string Username, string Password)
     {
@@ -98,7 +101,7 @@ public class User
             if (user.ID == CurrentUserID)
             {
                 user.Email = Text;
-                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints, user.RegDate);
+                FileManager.ChangeUserField(user);
             }
         }
     }
@@ -110,7 +113,7 @@ public class User
             if (user.ID == CurrentUserID)
             {
                 user.PhoneNumber = Text;
-                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints, user.RegDate);
+                FileManager.ChangeUserField(user);
             }
         }
     }
@@ -122,7 +125,7 @@ public class User
             if (user.ID == CurrentUserID)
             {
                 user.Password = Text;
-                FileManager.ChangeUserField(user.Username, user.Password, user.Email, user.PhoneNumber, user.Name, user.Surname, CurrentUserID, user.KarmaPoints, user.RegDate);
+                FileManager.ChangeUserField(user);
             }
         }
     }
