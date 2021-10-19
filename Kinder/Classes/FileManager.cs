@@ -39,7 +39,22 @@ namespace Kinder.Classes
             }
             return users;
         }
-        
+
+        //indexed property:
+        private User[] Users = getUsers().ToArray();
+
+        public User this[int index] 
+        {
+            get
+            {
+                return Users[index];
+            }
+            set
+            {
+                Users[index] = value;
+            }
+        }
+
         public static void AddNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int ID, string RegDate)
         {
             using (StreamWriter sw = new StreamWriter(FileLocation, true))

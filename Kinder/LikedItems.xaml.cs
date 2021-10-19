@@ -28,7 +28,7 @@ namespace Kinder
         private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         //collection lists:
-        private List<User> UserList = FileManager.getUsers();
+        private List<User> UserList = new();
         private List<Item> AllItemList = new();
         private List<LikedItemsClass> LikedItemList = new();
         private List<DataStore<int, string, string, string, string>> Data = new();
@@ -36,7 +36,6 @@ namespace Kinder
         public LikedItems()
         {
             InitializeComponent();
-
             LoadData();
             ProcessingLists();
             UploadData();
@@ -72,26 +71,35 @@ namespace Kinder
                     LikedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
                 }
             }
+
+            //loading list of users
+            FileManager Temp2 = new();
+
+            for(int i = 0; i < User.getUserCount(); i++)
+            {
+                //indexed property use:
+                UserList.Add(Temp2[i]);
+            }
         }
 
         private void ProcessingLists()
         {
-
             //generating list of Item class for liked items
             List<Item> LikedItemListSelected = new();
 
             File.WriteAllText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Save.txt"), String.Empty);
 
+            //iterating collections:
             foreach (LikedItemsClass liked in LikedItemList)
             {
                 foreach(int id in liked.ItemsIDs)
                 {
-                    for(int i = 0; i < AllItemList.Count; i++)
+                    foreach(Item item in AllItemList)
                     {
-                        if (AllItemList[i].ID == id)
+                        if (item.ID == id)
                         {
                             //AllItemList[i].LikedBy = liked.UserID;
-                            Item Temp = AllItemList[i];
+                            Item Temp = item;
                             Temp.LikedBy = liked.UserID;
 
                             using (StreamWriter w = File.AppendText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Save.txt")))

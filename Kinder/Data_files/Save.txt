@@ -4,6 +4,6 @@
 1;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item;1
 1;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item;3
 5;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item;3
-4;2020-01-05;Near_mint;Furniture;1;1,2,1;157;Unnamed item;Undescribed item;3
+4;2020-01-05;Near_mint;Furniture;1;4,5,1;157;4;Undescribed item;3
 6;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item;2
-7;1991-01-05;Fair;Transport;1;150,100,11;157;Audi a2;A fascinating description...;2
+7;1991-01-05;Fair;Transport;1;1,2,1;157;Audi a2;A fascinating description...;2

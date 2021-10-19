@@ -37,7 +37,7 @@ namespace Kinder
         {
             leaderboard.Items.Clear();
 
-            //LINQ was used here
+            //LINQ query to filter
             List<UserLeaderboard> NewUserList = UserList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
 
             ShowData(NewUserList);
@@ -51,6 +51,7 @@ namespace Kinder
 
         private void ShowData(List<UserLeaderboard> tempUserList)
         {
+            //linq query to sort data
             tempUserList.Sort((x, y) => y.KarmaPoints.CompareTo(x.KarmaPoints));
 
             int i = 0;
