@@ -27,7 +27,7 @@ namespace Kinder
         private string FileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
         private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
-        //lists:
+        //collection lists:
         private List<User> UserList = FileManager.getUsers();
         private List<Item> AllItemList = new();
         private List<LikedItemsClass> LikedItemList = new();
@@ -176,7 +176,7 @@ namespace Kinder
 
             result.ID = int.Parse(data[0]);
 
-            result.dateOfPurchase = DateTime.Parse(data[1]);
+            result.DateOfPurchase = DateTime.Parse(data[1]);
             result.DateStr = data[1];
 
             result.Condition = (ConditionEnum)Enum.Parse(typeof(ConditionEnum), data[2]);
@@ -186,10 +186,10 @@ namespace Kinder
             string[] dimsParsed = data[5].Split(',');
 
             //named argument usage:
-            result.size = new Dimensions(Length: int.Parse(dimsParsed[0]), Height: int.Parse(dimsParsed[1]), Width: int.Parse(dimsParsed[2]));
-            result.SizeStr = result.size.ToString();
+            result.Size = new Dimensions(Length: int.Parse(dimsParsed[0]), Height: int.Parse(dimsParsed[1]), Width: int.Parse(dimsParsed[2]));
+            result.SizeStr = result.Size.ToString();
 
-            result.karmaPrice = int.Parse(data[6]);
+            result.KarmaPrice = int.Parse(data[6]);
 
             result.SetName(data[7]);
             result.SetDescription(data[8]);

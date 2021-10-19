@@ -40,6 +40,7 @@ namespace Kinder.Classes
         }
     }
 
+    //.NET interface usage:
     public class Item : IComparable<Item>, IEquatable<Item>
     {
         public Item()
@@ -80,6 +81,23 @@ namespace Kinder.Classes
             return str;
         }
 
+        public string ToString(string arg)
+        {
+            string str = "";
+
+            str += ID.ToString() + ';';
+            str += dateOfPurchase.ToString("yyyy-MM-dd") + ';';
+            str += Condition.ToString() + ';';
+            str += Cathegory.ToString() + ';';
+            str += UserID.ToString() + ';';
+            str += arg + ';';
+            str += karmaPrice.ToString() + ';';
+            str += Name.ToString() + ';';
+            str += Description.ToString();
+
+            return str;
+        }
+
         public bool Equals(Item other)
         {
             if (other == null) return false;
@@ -90,7 +108,7 @@ namespace Kinder.Classes
 
         public int LikedBy { get; set; }
 
-        public DateTime dateOfPurchase;
+        private DateTime dateOfPurchase;
         public DateTime DateOfPurchase
         {
             get
@@ -107,12 +125,14 @@ namespace Kinder.Classes
         }
         public string DateStr { get; set; }
 
+        //auto-implemented property:
         public ConditionEnum Condition { get; set; }
         public CathegoryEnum Cathegory { get; set; }
 
         public int UserID { get; set; }
 
-        public Dimensions size;
+        //indexed property:
+        private Dimensions size;
         public Dimensions Size
         {
             get
@@ -136,7 +156,7 @@ namespace Kinder.Classes
         public string Description { get; set; }
         public void SetDescription(string DescArg = "Undescribed item") => Description = DescArg;
 
-        public int karmaPrice;
+        private int karmaPrice;
         public int KarmaPrice
         {
             get
