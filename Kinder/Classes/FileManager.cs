@@ -51,7 +51,7 @@ namespace Kinder.Classes
         public static void ChangeUserField(User user)
         {
             string[] UsersText = File.ReadAllLines(FileLocation);
-            UsersText[user.ID] = user.ID.ToString() + ' ' + user.Username + ' ' + user.Password + ' ' + user.Email + ' ' + user.PhoneNumber + ' ' + user.Name + ' ' + user.Surname + ' ' + user.KarmaPoints.ToString();
+            UsersText[user.ID] = user.ID.ToString() + ' ' + user.Username + ' ' + user.Password + ' ' + user.Email + ' ' + user.PhoneNumber + ' ' + user.Name + ' ' + user.Surname + ' ' + user.KarmaPoints.ToString() + ' ' + user.RegDate;
             File.WriteAllLines(FileLocation, UsersText);
         }
     

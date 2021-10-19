@@ -17,8 +17,12 @@ public class User
     public int PlaceGive { get; set; }
     public int PlaceTake { get; set; }
     public string RegDate { get; set; }
-    public static int CurrentUserID { get; set; }
-
+    private static int _currentUserID;
+    public static int CurrentUserID
+    {
+        get { return _currentUserID; }
+        set { _currentUserID = value; }
+    }
     public User() { }
     public static Boolean CheckLogin(string Username, string Password)
     {
