@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kinder.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,19 +19,19 @@ namespace Kinder
     public partial class LeaderboardWindow : Window
     {
         //testing data
-        private readonly List<UserLeaderboard> UserList = new()
+        private List<UserLeaderboard> UserList = new();
+        
+        private void UpdateUserList()
         {
-            new UserLeaderboard("username1", 100, new DateTime(2020, 12, 16)),
-            new UserLeaderboard("username2", 105, new DateTime(2021, 06, 16)),
-            new UserLeaderboard("username3", 245, new DateTime(2021, 08, 16)),
-            new UserLeaderboard("username4", 737, new DateTime(2021, 11, 16)),
-            new UserLeaderboard("username5", 727, new DateTime(2021, 12, 16)),
-            new UserLeaderboard("username6", 1787, new DateTime(2021, 12, 16)),
-            new UserLeaderboard("username7", 15, new DateTime(2021, 12, 16)),
-            new UserLeaderboard("username8", 105, new DateTime(2021, 12, 16)),
-            new UserLeaderboard("username9", 1781, new DateTime(2021, 12, 16)),
-            new UserLeaderboard("username10", 332, new DateTime(2021, 12, 16))
-        };
+            if (UserList != null)
+            {
+                UserList.Clear();
+            }
+            foreach(User user in FileManager.getUsers())
+            {
+                UserList.Add(new UserLeaderboard(user.Username, user.KarmaPoints, user.RegDate));
+            }
+        }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +64,7 @@ namespace Kinder
         public LeaderboardWindow()
         {
             InitializeComponent();
-
+            UpdateUserList();
             ShowData(UserList);
         }
 
@@ -72,18 +73,12 @@ namespace Kinder
             public int Place { get; set; }
             public string RegistrationDateString { get; set; }
 
-            public UserLeaderboard(string username, int karmaPoints, DateTime registrationDate)
+            public UserLeaderboard(string username, int karmaPoints, string registrationDate)
             {
                 Username = username;
                 KarmaPoints = karmaPoints;
-                RegistrationDateString = GetDateStringFormat(registrationDate);
+                RegistrationDateString = registrationDate;
             }
-
-            private string GetDateStringFormat(DateTime Date)
-            {
-                return Date.ToString("yyyy-MM-dd");
-            }
-
         }
     }
 }
