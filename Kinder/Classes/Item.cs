@@ -131,7 +131,7 @@ namespace Kinder.Classes
 
         public int UserID { get; set; }
 
-        //indexed property:
+        //standard property:
         private Dimensions size;
         public Dimensions Size
         {
