@@ -13,7 +13,6 @@ namespace Kinder.Classes
         static string Path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
         static string FileLocation = System.IO.Path.Combine(Path, "Data_files\\Users.txt");
         static string FileLocation_liked = System.IO.Path.Combine(Path, "Data_files\\Items_liked.txt");
-
         public static List<User> getUsers()
         {
             List<User> users = new List<User>();
