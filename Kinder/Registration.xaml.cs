@@ -80,9 +80,9 @@ namespace Kinder
                 ErrorEmail.Text = "User already exists!\nTry to log in!";
                 ErrorEmail.Visibility = Visibility.Visible;
                 Email.BorderBrush = Brushes.Red;
-            } else if (RegValidation.CheckIfEmailValid(Email.Text))
+            } else if (!RegValidation.CheckIfEmailValid(Email.Text))
             {
-                ErrorEmail.Text = "Name or surname is not valid!";
+                ErrorEmail.Text = "Email is not valid!";
                 ErrorEmail.Visibility = Visibility.Visible;
                 Email.BorderBrush = Brushes.Red;
             } else
@@ -102,7 +102,7 @@ namespace Kinder
                 ErrorPhoneNumber.Text = "User already exists!\nTry to log in!";
                 ErrorPhoneNumber.Visibility = Visibility.Visible;
                 PhoneNumber.BorderBrush = Brushes.Red;
-            } else if (RegValidation.CheckIfPhoneNumberValid(PhoneNumber.Text))     
+            } else if (!RegValidation.CheckIfPhoneNumberValid(PhoneNumber.Text))     
             {
                 ErrorPhoneNumber.Text = "PhoneNumber is not valid!";
                 ErrorPhoneNumber.Visibility = Visibility.Visible;

@@ -40,7 +40,7 @@ namespace Kinder
             Item Temp = new();
 
             string Line;
-            while((Line = FileAllItems.ReadLine()) != null)
+            while ((Line = FileAllItems.ReadLine()) != null)
             {
                 //extention method usage
                 ItemList.Add(Temp.ParseData(Line));
@@ -54,11 +54,11 @@ namespace Kinder
             //loading already liked items
             StreamReader FileLikedItems = new(FileLocation_liked);
 
-            while((Line = FileLikedItems.ReadLine()) != null)
+            while ((Line = FileLikedItems.ReadLine()) != null)
             {
                 int[] tempArr = Temp.ParsedLiked(Line);
                 List<int> tempList = new();
- 
+
                 for (int i = 1; i < tempArr.Length; i++)
                 {
                     tempList.Add(tempArr[i]);
@@ -72,58 +72,78 @@ namespace Kinder
             //filtering already liked items
             List<LikedItemsClass> ToDelete = new();
             ToDelete = LikedItems.Where(p => p.UserID == User.CurrentUserID).ToList();
-            
-            foreach(LikedItemsClass likedItem in ToDelete)
+
+            foreach (LikedItemsClass likedItem in ToDelete)
             {
-                ItemList = ItemList.Where(p => likedItem.ItemsIDs.Contains(p.ID)==false).ToList();
+                ItemList = ItemList.Where(p => likedItem.ItemsIDs.Contains(p.ID) == false).ToList();
             }
         }
 
         private void RenderItem()
         {
-            MessageBox.Show("count of items loaded:"+ItemList.Count.ToString());
-            TextBox_String.Text = ItemList.First().ToString().Replace(';', '\n');
-            
-        } 
+            if (ItemList.Count < 1)
+            {
+                MessageBox.Show("No more items left");
+            }
+            else
+            {
+                MessageBox.Show("Count of items loaded:" + ItemList.Count.ToString());
+                TextBox_String.Text = ItemList.First().ToString().Replace(';', '\n');
+            }
+        }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemList.RemoveAt(0);
-            RenderItem();
+            if (ItemList.Count < 1)
+            {
+                MessageBox.Show("No more items left");
+            }
+            else
+            {
+                ItemList.RemoveAt(0);
+                RenderItem();
+            }
         }
 
         private void LikeItemButton_Click(object sender, RoutedEventArgs e)
         {
             //save current item
-            int ViewedItemID = ItemList.First().ID;
-            LikedItemsClass Temp = new();
-
-            //update current liked item
-            foreach (LikedItemsClass liked in LikedItems)
+            if (ItemList.Count < 1)
             {
-                if (liked.UserID == User.CurrentUserID)
+                MessageBox.Show("You've literally liked all the items...");
+            }
+            else
+            {
+                int ViewedItemID = ItemList.First().ID;
+                LikedItemsClass Temp = new();
+
+                //update current liked item
+                foreach (LikedItemsClass liked in LikedItems)
                 {
-                    liked.ItemsIDs.Add(ViewedItemID);
-                    Temp = liked;
+                    if (liked.UserID == User.CurrentUserID)
+                    {
+                        liked.ItemsIDs.Add(ViewedItemID);
+                        Temp = liked;
+                    }
                 }
+
+                LikedItems = LikedItems.Where(p => p.UserID != User.CurrentUserID).ToList();
+                LikedItems.Add(Temp);
+
+                //rewrite current liked items list to file
+                StreamWriter file = new(FileLocation_liked);
+
+                foreach (LikedItemsClass like in LikedItems)
+                {
+                    file.WriteLine(like.ToString());
+                }
+
+                file.Close();
+
+                //rendering sequence
+                ItemList.RemoveAt(0);
+                RenderItem();
             }
-
-            LikedItems = LikedItems.Where(p => p.UserID != User.CurrentUserID).ToList();
-            LikedItems.Add(Temp);
-
-            //rewrite current liked items list to file
-            StreamWriter file = new(FileLocation_liked);
-
-            foreach(LikedItemsClass like in LikedItems)
-            {
-                file.WriteLine(like.ToString());
-            }
-
-            file.Close();
-
-            //rendering sequence
-            ItemList.RemoveAt(0);
-            RenderItem();
         }
 
         private void AccountPageButton_Click(object sender, RoutedEventArgs e)
@@ -192,7 +212,7 @@ namespace Kinder
 
             Result += UserID;
 
-            foreach(int i in ItemsIDs)
+            foreach (int i in ItemsIDs)
             {
                 Result += ';' + i.ToString();
             }

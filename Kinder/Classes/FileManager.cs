@@ -13,7 +13,6 @@ namespace Kinder.Classes
         static string Path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
         static string FileLocation = System.IO.Path.Combine(Path, "Data_files\\Users.txt");
         static string FileLocation_liked = System.IO.Path.Combine(Path, "Data_files\\Items_liked.txt");
-
         public static List<User> getUsers()
         {
             List<User> users = new List<User>();
@@ -63,10 +62,10 @@ namespace Kinder.Classes
             }
         }
         
-        public static void ChangeUserField(string Username, string Password, string Email, String PhoneNumber, string Name, string Surname, int ID, int KarmaPoints, string RegDate)
+        public static void ChangeUserField(User user)
         {
             string[] UsersText = File.ReadAllLines(FileLocation);
-            UsersText[ID] = ID.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + KarmaPoints.ToString() + ' ' + RegDate;
+            UsersText[user.ID] = user.ID.ToString() + ' ' + user.Username + ' ' + user.Password + ' ' + user.Email + ' ' + user.PhoneNumber + ' ' + user.Name + ' ' + user.Surname + ' ' + user.KarmaPoints.ToString() + ' ' + user.RegDate;
             File.WriteAllLines(FileLocation, UsersText);
         }
     

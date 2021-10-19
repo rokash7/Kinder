@@ -23,13 +23,13 @@ namespace Kinder.Classes
         
         public static Boolean CheckIfEmailValid(string Email)           ///Email validation
         {
-            if (Regex.IsMatch(Email, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+            if (Regex.IsMatch(Email, @"^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$"))
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
         
@@ -45,15 +45,15 @@ namespace Kinder.Classes
             }
         }
 
-        public static Boolean CheckIfPhoneNumberValid(string Phonenumber) /// TO DO WITH ALL PHONE NUMBS. CURRENTLY ONLY LTU WORKS...
+        public static Boolean CheckIfPhoneNumberValid(string Phonenumber) /// Phone Number validation.
         {
-            if(Regex.IsMatch(Phonenumber, @"^(\+370[0-9]{8})$"))
+            if(Regex.IsMatch(Phonenumber, @"^(\+\d{11})$"))
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
     }
