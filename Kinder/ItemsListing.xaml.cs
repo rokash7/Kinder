@@ -60,8 +60,6 @@ namespace Kinder
                 ItemsTable.Items.Add(item);
             }
         }
-
-        
         
         private void ReWriteFile()
         {

@@ -17,6 +17,7 @@ public class User
     public int KarmaPoints { get; set; }
     public int PlaceGive { get; set; }
     public int PlaceTake { get; set; }
+    public string RegDate { get; set; }
     public static int CurrentUserID { get; set; }
 
     public User() { }

@@ -12,6 +12,7 @@ namespace Kinder.Classes
     {
         static string Path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
         static string FileLocation = System.IO.Path.Combine(Path, "Data_files\\Users.txt");
+        static string FileLocation_liked = System.IO.Path.Combine(Path, "Data_files\\Items_liked.txt");
 
         public static List<User> getUsers()
         {
@@ -32,17 +33,18 @@ namespace Kinder.Classes
                     user.Name = userData[5];
                     user.Surname = userData[6];
                     user.KarmaPoints = Int32.Parse(userData[7]);
+                    user.RegDate = userData[8];
                     users.Add(user);
                 }
             }
             return users;
         }
         
-        public static void AddNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int ID)
+        public static void AddNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int ID, string RegDate)
         {
             using (StreamWriter sw = new StreamWriter(FileLocation, true))
             {
-                sw.WriteLine(ID.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0);
+                sw.WriteLine(ID.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0 + ' ' + RegDate);
             }
         }
         
@@ -51,6 +53,14 @@ namespace Kinder.Classes
             string[] UsersText = File.ReadAllLines(FileLocation);
             UsersText[user.ID] = user.ID.ToString() + ' ' + user.Username + ' ' + user.Password + ' ' + user.Email + ' ' + user.PhoneNumber + ' ' + user.Name + ' ' + user.Surname + ' ' + user.KarmaPoints.ToString();
             File.WriteAllLines(FileLocation, UsersText);
+        }
+    
+        public static void AddUserIDToLiked(int ID)
+        {
+            using (StreamWriter sw = new StreamWriter(FileLocation_liked, true))
+            {
+                sw.WriteLine(ID.ToString());
+            }
         }
     }
 }
