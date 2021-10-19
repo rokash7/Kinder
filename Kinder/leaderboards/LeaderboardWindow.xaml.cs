@@ -19,7 +19,7 @@ namespace Kinder
     public partial class LeaderboardWindow : Window
     {
         //testing data
-        private List<UserLeaderboard> UserList = new List<UserLeaderboard>();
+        private List<UserLeaderboard> UserList = new();
         
         private void UpdateUserList()
         {
