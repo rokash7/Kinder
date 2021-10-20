@@ -102,7 +102,6 @@ namespace Kinder.MVVM.ViewModel
             //        Time = DateTime.Now,
             //        IsNativeOrigin = false,
             //        FirstMessage = false
-
             //    });
             //}
 
