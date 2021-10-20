@@ -101,7 +101,6 @@ namespace Kinder.MVVM.ViewModel
             //        Message = "Test message1 \n Test message1",
             //        Time = DateTime.Now,
             //        IsNativeOrigin = false,
-            //        FirstMessage = false
             //    });
             //}
 
