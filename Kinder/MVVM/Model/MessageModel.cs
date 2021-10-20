@@ -14,6 +14,5 @@ namespace Kinder.MVVM.Model
         public string Message { get; set; }
         public DateTime Time { get; set; }
         public bool IsNativeOrigin{ get; set; }
-        public bool? FirstMessage { get; set; }
     }
 }
