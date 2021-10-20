@@ -105,7 +105,6 @@ namespace Kinder.MVVM.ViewModel
             //    });
             //}
 
-
             //Messages.Add(new MessageModel
             //{
             //    Username = "THE DUDE",
