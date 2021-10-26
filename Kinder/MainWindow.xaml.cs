@@ -28,17 +28,17 @@ namespace Kinder
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
-            var regPage = new RegistrationWindow();
+            var RegPage = new RegistrationWindow();
             this.Close();
-            regPage.Show();
+            RegPage.Show();
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
             if (User.CheckLogin(Username.Text, Password.Password))
             {
-                var mainPage = new Swiping();
-                mainPage.Show();
+                var MainPage = new Swiping();
+                MainPage.Show();
                 this.Close();
             }
             else
