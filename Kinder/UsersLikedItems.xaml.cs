@@ -119,7 +119,6 @@ namespace Kinder
             LoadData();
 
             //deleting item off liked items list
-
             using (StreamWriter writer = new StreamWriter(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\output.txt")))
             {
                 foreach (LikedItemsClass liked in LikedItems)
