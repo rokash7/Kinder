@@ -41,6 +41,7 @@
         <Button x:Name="ItemsPageButton" Grid.Column="1" Grid.Row="3" Content="Items" Width="150" Height="50" Margin="5" Click="ItemsPageButton_Click"/>
         <Button x:Name="CommunicationPageButton" Grid.Column="3" Grid.Row="5" Content="Chats" Width="150" Height="50" Margin="5" Click="CommunicationPageButton_Click"/>
         <Button x:Name="SettingsPageButton" Grid.Column="4" Grid.Row="5" Content="Settings" Width="150" Height="50" Margin="5" Click="SettingsPageButton_Click"/>
-        <Button x:Name="LikedItemsPageButton" Grid.Column="1" Grid.Row="2" Content="liked Items" Width="150" Height="50" Margin="5" Click="LikedItemsPageButton_Click"/>
+        <Button x:Name="LikedItemsPageButton" Grid.Column="2" Grid.Row="3" Content="liked Items" Width="150" Height="50" Margin="5" Click="LikedItemsPageButton_Click"/>
+        <Button x:Name="UsersLikedItemsPageButton" Grid.Column="1" Grid.Row="3" Content="yours liked Items" Width="150" Height="50" Margin="5" Click="UsersLikedItemsPageButton_Click"/>
     </Grid>
 </Window>
