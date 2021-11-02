@@ -60,11 +60,13 @@ namespace Kinder.Classes
             if(Password.Length < 8)
             {
                 return false;
-            } else if(!Regex.IsMatch(Password, @"[0-9]+")) {
+            } else if (!Regex.IsMatch(Password, @"[0-9]+")) {
                 return false;
-            } else if(!Regex.IsMatch(Password, @"[A-Z]+")) {
+            } else if (!Regex.IsMatch(Password, @"[A-Z]+")) {
                 return false;
             } else if (!Regex.IsMatch(Password, @"[a-z]+")) {
+                return false;
+            } else if (!Regex.IsMatch(Password, @"[^A-Za-z0-9]")) {
                 return false;
             } else {
                 return true;

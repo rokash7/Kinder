@@ -61,7 +61,7 @@
             <Image Grid.Column ="5" Grid.Row="11" Source="pack://application:,,,/Icons/ShowPassword.png" Margin="5"/>
         </Button>
 
-        <TextBlock ToolTip="Password should be :&#x0a;At least 8 symbols long&#x0a;Contain at least one uppercase and downcase letter&#x0a;Contain a number"
+        <TextBlock ToolTip="Password should be :&#x0a;At least 8 symbols long&#x0a;Contain at least one uppercase and downcase letter&#x0a;Contain a number&#x0a;Contain a special character (@#$.= and etc.)"
         Grid.Column="3" Grid.Row="10" Margin="0, 0, 20, 0" VerticalAlignment="Center" HorizontalAlignment="Right">
         <Image Source="pack://application:,,,/Icons/Question.png" Width="15" Height="15"/>
         </TextBlock>
