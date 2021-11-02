@@ -30,7 +30,7 @@
                                 
                             </StackPanel>
                             <Label Content="{Binding Message}"
-                                   Foreground="White"
+                                   Foreground="Black"
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Center"/>
                         </StackPanel>
@@ -44,7 +44,7 @@
             <ControlTemplate x:Key="CustomRow">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{Binding Message}"
-                           Foreground="White"
+                           Foreground="Gray"
                            Margin="40,-2,0,-2"/>
                 </StackPanel>
             </ControlTemplate>

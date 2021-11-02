@@ -1,0 +1,41 @@
+﻿<Window x:Class="Kinder.UsersLikedItems"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kinder"
+        mc:Ignorable="d"
+        Title="UsersLikedItems" Height="450" Width="800">
+
+    <Grid Height="700" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="239*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="ItemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="700" Height="300" Grid.ColumnSpan="2">
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Gray"></Setter>
+                    <Setter Property="FontWeight" Value="bold"></Setter>
+                    <Setter Property="BorderThickness" Value="0, 0, 1, 2"></Setter>
+                    <Setter Property="BorderBrush" Value="Black"></Setter>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="id" Binding="{Binding ID}" Width="25"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date of buying" Binding="{Binding DateStr}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Condition" Binding="{Binding Condition}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Category" Binding="{Binding Cathegory}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="size" Binding="{Binding SizeStr}" Width="50"></DataGridTextColumn>
+                <DataGridTextColumn Header="Points" Binding="{Binding KarmaPrice}" Width="50"></DataGridTextColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <Button x:Name="UnlikeButton" Click="UnlikeButton_Click" Margin="38,335,337,323" Content="unlike"/>
+    </Grid>
+</Window>

@@ -98,7 +98,6 @@ namespace Kinder
                     {
                         if (item.ID == id)
                         {
-                            //AllItemList[i].LikedBy = liked.UserID;
                             Item Temp = item;
                             Temp.LikedBy = liked.UserID;
 

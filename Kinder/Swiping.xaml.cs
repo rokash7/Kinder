@@ -110,7 +110,7 @@ namespace Kinder
             //save current item
             if (ItemList.Count < 1)
             {
-                MessageBox.Show("You've literally liked all the items...");
+                MessageBox.Show("No more items left");
             }
             else
             {
@@ -187,6 +187,12 @@ namespace Kinder
         {
             LikedItems LikedItems = new();
             LikedItems.Show();
+        }
+        
+        private void UsersLikedItemsPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            UsersLikedItems UsersLikedItems = new();
+            UsersLikedItems.Show();
         }
     }
 
