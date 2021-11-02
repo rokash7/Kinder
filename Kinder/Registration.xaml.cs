@@ -28,119 +28,155 @@ namespace Kinder
         private void SignUpButton_Click(object sender, RoutedEventArgs e)               ///Still need work, but basic functionality exists
         {
             int count = 0;
-            if(RegValidation.CheckTextBoxInput(Username.Text))
+
+            try                                                     ///Username try/catch block
             {
-                ErrorUsername.Text = "Enter Username!";
-                ErrorUsername.Visibility = Visibility.Visible;
-                Username.BorderBrush = Brushes.Red;
-            } else if(RegValidation.CheckIfFieldIsValid(Username.Text))
-            {
-                ErrorUsername.Text = "Username is not valid!";
-                ErrorUsername.Visibility = Visibility.Visible;
-                Username.BorderBrush = Brushes.Red;
-            } else if (User.CheckIfUsernameIsTaken(Username.Text))
-            {
-                ErrorUsername.Text = "Username is already taken!";
-                ErrorUsername.Visibility = Visibility.Visible;
-                Username.BorderBrush = Brushes.Red;
-            } else
-            {
+                RegValidation.CheckTextBoxInput(Username.Text);
+                RegValidation.CheckIfFieldIsValid(Username.Text);
+                User.CheckIfUsernameIsTaken(Username.Text);
                 ErrorUsername.Visibility = Visibility.Hidden;
                 Username.BorderBrush = Brushes.Green;
                 count++;
             }
+            catch (EmptyFieldException ex)
+            {
+                ErrorUsername.Text = ex.Message;
+                ErrorUsername.Visibility = Visibility.Visible;
+                Username.BorderBrush = Brushes.Red;
+            }
+            catch (WhiteSpaceDetectedException ex)
+            {
+                ErrorUsername.Text = ex.Message;
+                ErrorUsername.Visibility = Visibility.Visible;
+                Username.BorderBrush = Brushes.Red;
+            }
+            catch (UsernameIsTakenException ex)
+            {
+                ErrorUsername.Text = ex.Message;
+                ErrorUsername.Visibility = Visibility.Visible;
+                Username.BorderBrush = Brushes.Red;
+            }
 
-            if (RegValidation.CheckTextBoxInput(Name.Text) || RegValidation.CheckTextBoxInput(Surname.Text))    ///Name/Surname
+            try                                                     ///Name/surname try/catch block
             {
-                ErrorNameSurname.Text = "Enter Name and Surname!!";
-                ErrorNameSurname.Visibility = Visibility.Visible;
-                Name.BorderBrush = Brushes.Red;
-                Surname.BorderBrush = Brushes.Red;
-            } else if (RegValidation.CheckIfFieldIsValid(Name.Text) || RegValidation.CheckIfFieldIsValid(Surname.Text))
-            {
-                ErrorNameSurname.Text = "Name or Surname is not valid!";
-                ErrorNameSurname.Visibility = Visibility.Visible;
-                Name.BorderBrush = Brushes.Red;
-                Surname.BorderBrush = Brushes.Red;
-            } else
-            {
+                RegValidation.CheckTextBoxInput(Name.Text);
+                RegValidation.CheckIfFieldIsValid(Name.Text);
+                RegValidation.CheckTextBoxInput(Surname.Text);
+                RegValidation.CheckIfFieldIsValid(Surname.Text);
                 ErrorNameSurname.Visibility = Visibility.Hidden;
                 Name.BorderBrush = Brushes.Green;
                 Surname.BorderBrush = Brushes.Green;
                 count++;
             }
+            catch (EmptyFieldException ex)
+            {
+                ErrorNameSurname.Text = ex.Message;
+                ErrorNameSurname.Visibility = Visibility.Visible;
+                Name.BorderBrush = Brushes.Red;
+                Surname.BorderBrush = Brushes.Red;
+            }
+            catch (WhiteSpaceDetectedException ex)
+            {
+                ErrorNameSurname.Text = ex.Message;
+                ErrorNameSurname.Visibility = Visibility.Visible;
+                Name.BorderBrush = Brushes.Red;
+                Surname.BorderBrush = Brushes.Red;
+            }
 
-            if (RegValidation.CheckTextBoxInput(Email.Text))            ///Email
+            try                                                     ///Email try/catch block
             {
-                ErrorEmail.Text = "Enter Email!";
-                ErrorEmail.Visibility = Visibility.Visible;
-                Email.BorderBrush = Brushes.Red;
-            } else if(User.CheckIfUserAlreadyExists(Email.Text))
-            {
-                ErrorEmail.Text = "User already exists!\nTry to log in!";
-                ErrorEmail.Visibility = Visibility.Visible;
-                Email.BorderBrush = Brushes.Red;
-            } else if (!RegValidation.CheckIfEmailValid(Email.Text))
-            {
-                ErrorEmail.Text = "Email is not valid!";
-                ErrorEmail.Visibility = Visibility.Visible;
-                Email.BorderBrush = Brushes.Red;
-            } else
-            {
+                RegValidation.CheckTextBoxInput(Email.Text);
+                RegValidation.CheckIfEmailValid(Email.Text);
+                User.CheckIfUserAlreadyExists(Email.Text);
                 ErrorEmail.Visibility = Visibility.Hidden;
                 Email.BorderBrush = Brushes.Green;
                 count++;
             }
-
-            if (RegValidation.CheckTextBoxInput(PhoneNumber.Text))          ///PhoneNumber
+            catch (EmptyFieldException ex)
             {
-                ErrorPhoneNumber.Text = "Enter PhoneNumber!";
-                ErrorPhoneNumber.Visibility = Visibility.Visible;
-                PhoneNumber.BorderBrush = Brushes.Red;
-            } else if (User.CheckIfUserAlreadyExists(PhoneNumber.Text))
-            {
-                ErrorPhoneNumber.Text = "User already exists!\nTry to log in!";
-                ErrorPhoneNumber.Visibility = Visibility.Visible;
-                PhoneNumber.BorderBrush = Brushes.Red;
-            } else if (!RegValidation.CheckIfPhoneNumberValid(PhoneNumber.Text))     
-            {
-                ErrorPhoneNumber.Text = "PhoneNumber is not valid!";
-                ErrorPhoneNumber.Visibility = Visibility.Visible;
-                PhoneNumber.BorderBrush = Brushes.Red;
+                ErrorEmail.Text = ex.Message;
+                ErrorEmail.Visibility = Visibility.Visible;
+                Email.BorderBrush = Brushes.Red;
             }
-            else
+            catch (InvalidEmailException ex)
             {
+                ErrorEmail.Text = ex.Message;
+                ErrorEmail.Visibility = Visibility.Visible;
+                Email.BorderBrush = Brushes.Red;
+            }
+            catch (UserAlreadyExistsException ex)
+            {
+                ErrorEmail.Text = ex.Message;
+                ErrorEmail.Visibility = Visibility.Visible;
+                Email.BorderBrush = Brushes.Red;
+            }
+
+            try                                                     ///Phonenumber try/catch block
+            {
+                RegValidation.CheckTextBoxInput(PhoneNumber.Text);
+                RegValidation.CheckIfPhoneNumberValid(PhoneNumber.Text);
+                User.CheckIfUserAlreadyExists(PhoneNumber.Text);
                 ErrorPhoneNumber.Visibility = Visibility.Hidden;
                 PhoneNumber.BorderBrush = Brushes.Green;
                 count++;
             }
+            catch (EmptyFieldException ex)
+            {
+                ErrorPhoneNumber.Text = ex.Message;
+                ErrorPhoneNumber.Visibility = Visibility.Visible;
+                PhoneNumber.BorderBrush = Brushes.Red;
+            }
+            catch (InvalidPhonenumberException ex)
+            {
+                ErrorPhoneNumber.Text = ex.Message;
+                ErrorPhoneNumber.Visibility = Visibility.Visible;
+                PhoneNumber.BorderBrush = Brushes.Red;
+            }
+            catch (UserAlreadyExistsException ex)
+            {
+                ErrorPhoneNumber.Text = ex.Message;
+                ErrorPhoneNumber.Visibility = Visibility.Visible;
+                PhoneNumber.BorderBrush = Brushes.Red;
+            }
 
-            if(PasswordShow.Text!= Password.Password && PasswordShow.Visibility == Visibility.Visible)
+            if (PasswordShow.Text != Password.Password && PasswordShow.Visibility == Visibility.Visible)
             {
                 Password.Password = PasswordShow.Text;
             }
 
-            if (RegValidation.CheckTextBoxInput(Password.Password))        ///Password
+            try                                                     ///Password try/catch block
             {
-                ErrorPassword.Text = "Enter Password!";
-                ErrorPassword.Visibility = Visibility.Visible;
-                Password.BorderBrush = Brushes.Red;
-                PasswordShow.BorderBrush = Brushes.Red;
-            } else if (!RegValidation.CheckIfPasswordValid(Password.Password) || RegValidation.CheckIfFieldIsValid(Password.Password))
-            {
-                ErrorPassword.Text = "Password is not valid!";
-                ErrorPassword.Visibility = Visibility.Visible;
-                Password.BorderBrush = Brushes.Red;
-                PasswordShow.BorderBrush = Brushes.Red;
-            } else
-            {
+                RegValidation.CheckTextBoxInput(Password.Password);
+                RegValidation.CheckIfFieldIsValid(Password.Password);
+                RegValidation.CheckIfPasswordValid(Password.Password);
                 ErrorPassword.Visibility = Visibility.Hidden;
                 Password.BorderBrush = Brushes.Green;
                 PasswordShow.BorderBrush = Brushes.Green;
                 count++;
             }
+            catch (EmptyFieldException ex)
+            {
+                ErrorPassword.Text = ex.Message;
+                ErrorPassword.Visibility = Visibility.Visible;
+                Password.BorderBrush = Brushes.Red;
+                PasswordShow.BorderBrush = Brushes.Red;
+            }
+            catch (WhiteSpaceDetectedException ex)
+            {
+                ErrorPassword.Text = ex.Message;
+                ErrorPassword.Visibility = Visibility.Visible;
+                Password.BorderBrush = Brushes.Red;
+                PasswordShow.BorderBrush = Brushes.Red;
+            }
+            catch (InvalidPasswordException ex)
+            {
+                ErrorPassword.Text = ex.Message;
+                ErrorPassword.Visibility = Visibility.Visible;
+                Password.BorderBrush = Brushes.Red;
+                PasswordShow.BorderBrush = Brushes.Red;
+            }
 
-            if(count == 5)                          ////Simple thing that says if all boxes are filled correctly
+            if (count == 5)                          ////Simple thing that says if all boxes are filled correctly
             {
                 FileManager.AddUserIDToLiked(User.getUserCount());
                 FileManager.AddNewUser(Username.Text, Password.Password, Email.Text, PhoneNumber.Text, Name.Text, Surname.Text, User.getUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
@@ -153,12 +189,13 @@ namespace Kinder
 
         private void ShowPassword_Click(object sender, RoutedEventArgs e)
         {
-            if(PasswordShow.Visibility == Visibility.Hidden)
+            if (PasswordShow.Visibility == Visibility.Hidden)
             {
                 PasswordShow.Visibility = Visibility.Visible;
                 Password.Visibility = Visibility.Hidden;
                 PasswordShow.Text = Password.Password;
-            } else
+            }
+            else
             {
                 PasswordShow.Visibility = Visibility.Hidden;
                 Password.Visibility = Visibility.Visible;
