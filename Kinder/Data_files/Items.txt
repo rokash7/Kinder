@@ -1,9 +1,9 @@
 9;2020-01-05;Very_good;Education;1;10,20,5;157;Name;A fascinating description...
 7;1991-01-05;Fair;Transport;1;1,2,1;157;Audi a2;A fascinating description...
-6;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item
-5;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item
-4;2020-01-05;Near_mint;Furniture;1;4,5,1;157;4;Undescribed item
-3;2020-01-05;Near_mint;Furniture;3;1,2,1;157;Unnamed item;Undescribed item
-2;2020-01-05;Near_mint;Furniture;2;1,2,3;157;Unnamed item;Undescribed item
-1;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item;Undescribed item
-8;2020-01-05;Near_mint;Education;0;4,5,6;157;Name;A fascinating description...
+6;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item1;Undescribed item10
+5;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item2;Undescribed item100
+4;2020-01-05;Near_mint;Furniture;1;4,5,1;157;4;Undescribed item0
+3;2020-01-05;Near_mint;Furniture;3;1,2,1;157;Unnamed item3;Undescribed item00
+2;2020-01-05;Near_mint;Furniture;2;1,2,3;157;Unnamed item4;Undescribed item44
+1;2020-01-05;Near_mint;Furniture;5;1,2,1;157;Unnamed item5;Undescribed item5
+8;2020-01-05;Near_mint;Education;0;4,5,6;157;Name1;A fascinating description...
