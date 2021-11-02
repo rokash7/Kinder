@@ -38,7 +38,7 @@ namespace Kinder
         {
             Item Temp = new();
             List<LikedItemsClass> TempList = new();
-            
+
             //loading list of liked Items
             using (StreamReader reader = new StreamReader(FileLocation_liked))
             {
@@ -70,11 +70,13 @@ namespace Kinder
             }
 
             //filter other users, only current one stays
-            var FilteredLikedList = TempList.Where
+            //mazj
+            var filteredLikedList = TempList.Where
                                         (p => p.UserID == User.CurrentUserID);
 
             //gathering data
-            var Joined = FilteredLikedList.First().ItemsIDs.GroupJoin(AllItemList, //inner sequence
+            //mazoji
+            var Joined = filteredLikedList.First().ItemsIDs.GroupJoin(AllItemList, //inner sequence
                 id => id, //outter key
                 ite => ite.ID,  //inner key
                 (id, ite) => new { id, ite });
@@ -91,7 +93,7 @@ namespace Kinder
              * ....
              */
 
-            foreach(var joined in Joined)
+            foreach (var joined in Joined)
             {
                 Items.Add(joined.ite.First());
             }
@@ -99,7 +101,7 @@ namespace Kinder
 
         private void LoadData()
         {
-            foreach(Item item in Items)
+            foreach (Item item in Items)
             {
                 ItemsTable.Items.Add(item);
             }
@@ -131,9 +133,9 @@ namespace Kinder
             LikedItems[LikedItems.IndexOf(tempObj)].ItemsIDs.Remove(classObj.ID);
 
             //rewriting list to file
-            using(StreamWriter writer = new StreamWriter(FileLocation_liked))
+            using (StreamWriter writer = new StreamWriter(FileLocation_liked))
             {
-               foreach(LikedItemsClass liked in LikedItems)
+                foreach (LikedItemsClass liked in LikedItems)
                 {
                     writer.WriteLine(liked.ToString());
                 }

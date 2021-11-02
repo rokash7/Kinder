@@ -61,8 +61,8 @@ namespace Kinder
                 ItemsTable.Items.Add(item);
             }
         }
-        
-        private void ReWriteFile(int itemID=-1)
+
+        private void ReWriteFile(int itemID = -1)
         {
             //rewriting items file:
             using (StreamWriter file = new(FileLocation))
