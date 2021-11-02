@@ -115,20 +115,28 @@ namespace Kinder
                 count++;
             }
 
-            if (RegValidation.CheckTextBoxInput(Password.Password))         ///Maybe to do idk, NEED ADVICE!
+            if(PasswordShow.Text!= Password.Password && PasswordShow.Visibility == Visibility.Visible)
+            {
+                Password.Password = PasswordShow.Text;
+            }
+
+            if (RegValidation.CheckTextBoxInput(Password.Password))        ///Password
             {
                 ErrorPassword.Text = "Enter Password!";
                 ErrorPassword.Visibility = Visibility.Visible;
                 Password.BorderBrush = Brushes.Red;
-            } else if (RegValidation.CheckIfFieldIsValid(Password.Password))
+                PasswordShow.BorderBrush = Brushes.Red;
+            } else if (!RegValidation.CheckIfPasswordValid(Password.Password) || RegValidation.CheckIfFieldIsValid(Password.Password))
             {
                 ErrorPassword.Text = "Password is not valid!";
                 ErrorPassword.Visibility = Visibility.Visible;
                 Password.BorderBrush = Brushes.Red;
+                PasswordShow.BorderBrush = Brushes.Red;
             } else
             {
                 ErrorPassword.Visibility = Visibility.Hidden;
                 Password.BorderBrush = Brushes.Green;
+                PasswordShow.BorderBrush = Brushes.Green;
                 count++;
             }
 
@@ -137,9 +145,24 @@ namespace Kinder
                 FileManager.AddUserIDToLiked(User.getUserCount());
                 FileManager.AddNewUser(Username.Text, Password.Password, Email.Text, PhoneNumber.Text, Name.Text, Surname.Text, User.getUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
                 MessageBox.Show("User created successfully! Now  try to log in");
-                MainWindow loginPage = new MainWindow();
+                MainWindow LoginPage = new MainWindow();
                 this.Close();
-                loginPage.Show();
+                LoginPage.Show();
+            }
+        }
+
+        private void ShowPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if(PasswordShow.Visibility == Visibility.Hidden)
+            {
+                PasswordShow.Visibility = Visibility.Visible;
+                Password.Visibility = Visibility.Hidden;
+                PasswordShow.Text = Password.Password;
+            } else
+            {
+                PasswordShow.Visibility = Visibility.Hidden;
+                Password.Visibility = Visibility.Visible;
+                Password.Password = PasswordShow.Text;
             }
         }
     }

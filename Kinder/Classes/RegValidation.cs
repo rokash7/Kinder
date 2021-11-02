@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Kinder.Classes
 {
@@ -54,6 +52,24 @@ namespace Kinder.Classes
             else
             {
                 return false;
+            }
+        }
+    
+        public static Boolean CheckIfPasswordValid(string Password)
+        {
+            if(Password.Length < 8)
+            {
+                return false;
+            } else if (!Regex.IsMatch(Password, @"[0-9]+")) {
+                return false;
+            } else if (!Regex.IsMatch(Password, @"[A-Z]+")) {
+                return false;
+            } else if (!Regex.IsMatch(Password, @"[a-z]+")) {
+                return false;
+            } else if (!Regex.IsMatch(Password, @"[^A-Za-z0-9]")) {
+                return false;
+            } else {
+                return true;
             }
         }
     }

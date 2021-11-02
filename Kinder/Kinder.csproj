@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\Question.png" />
+    <None Remove="Icons\ShowPassword.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="MVVM\View\" />
-    <Folder Include="Icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\Question.png" />
+    <Resource Include="Icons\ShowPassword.png" />
   </ItemGroup>
 
 </Project>
