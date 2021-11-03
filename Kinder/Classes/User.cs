@@ -37,43 +37,40 @@ public class User
         return false;
     }
 
-    public static Boolean CheckIfUserAlreadyExists(string Text)
+    public static void CheckIfUserAlreadyExists(string Text)
     {
         foreach (User user in FileManager.getUsers())
         {
             if (Text == user.Email || Text == user.PhoneNumber)
             {
-                return true;
+                throw (new UserAlreadyExistsException("User already exists! Try lo in!"));
             }
         }
-        return false;
     }
 
-    public static Boolean CheckIfUsernameIsTaken(string Username)
+    public static void CheckIfUsernameIsTaken(string Username)
     {
         foreach (User user in FileManager.getUsers())
         {
             if (Username == user.Username)
             {
-                return true;
+                throw (new UsernameIsTakenException("Username is taken!"));
             }
         }
-        return false;
     }
 
-    public static Boolean CheckPassword(string Password)
+    public static void CheckPassword(string Password)
     {
         foreach (User user in FileManager.getUsers())
         {
             if (user.ID == CurrentUserID)
             {
-                if (user.Password == Password)
+                if (user.Password != Password)
                 {
-                    return true;
+                    throw (new IncorrectPasswordException("Incorrect password!"));
                 }
             }
         }
-        return false;
     }
 
     public static int getUserCount()

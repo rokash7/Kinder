@@ -27,47 +27,60 @@ namespace Kinder
 
         private void ChangeEmail_Click(object sender, RoutedEventArgs e)
         {
-            if (RegValidation.CheckIfEmailValid(NewEmail.Text))
+            try
             {
+                RegValidation.CheckIfEmailValid(NewEmail.Text);
                 User.ChangeUserEmail(NewEmail.Text);
                 MessageBox.Show("Email changed to " + NewEmail.Text + ".");
             }
-            else
+            catch (InvalidEmailException ex)
             {
-                MessageBox.Show("Invalid Email.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void ChangePhoneNumber_Click(object sender, RoutedEventArgs e)
         {
-            if (RegValidation.CheckIfPhoneNumberValid(NewPhoneNumber.Text))
+            try
             {
+                RegValidation.CheckIfPhoneNumberValid(NewPhoneNumber.Text);
                 User.ChangeUserPhoneNumber(NewPhoneNumber.Text);
                 MessageBox.Show("Phone Number changed to " + NewPhoneNumber.Text + ".");
             }
-            else
+            catch (InvalidPhonenumberException ex)
             {
-                MessageBox.Show("Invalid Phone Number.");
+                MessageBox.Show(ex.Message);
             }
+
         }
 
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(NewPassword.Password))
+            try
             {
-                if (User.CheckPassword(CurrentPassword.Password))
-                {
-                    User.ChangeUserPassword(NewPassword.Password);
-                    MessageBox.Show("Password changed.");
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect password!");
-                }
+                RegValidation.CheckTextBoxInput(NewPassword.Password);
+                RegValidation.CheckIfFieldIsValid(NewPassword.Password);
+                RegValidation.CheckIfPasswordValid(NewPassword.Password);
+                User.CheckPassword(CurrentPassword.Password);
+                
+                User.ChangeUserPassword(NewPassword.Password);
+                MessageBox.Show("Password changed");
             }
-            else
+            catch (EmptyFieldException ex)
             {
-                MessageBox.Show("Invalid Password.");
+                MessageBox.Show(ex.Message);
+            }
+            catch (WhiteSpaceDetectedException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (InvalidPasswordException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (IncorrectPasswordException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
