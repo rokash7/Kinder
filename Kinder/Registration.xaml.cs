@@ -29,13 +29,13 @@ namespace Kinder
         {
             int count = 0;
 
+            ErrorUsername.Visibility = Visibility.Hidden;
+            Username.BorderBrush = Brushes.Green;
             try                                                     ///Username try/catch block
             {
                 RegValidation.CheckTextBoxInput(Username.Text);
                 RegValidation.CheckIfFieldIsValid(Username.Text);
                 User.CheckIfUsernameIsTaken(Username.Text);
-                ErrorUsername.Visibility = Visibility.Hidden;
-                Username.BorderBrush = Brushes.Green;
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -56,16 +56,16 @@ namespace Kinder
                 ErrorUsername.Visibility = Visibility.Visible;
                 Username.BorderBrush = Brushes.Red;
             }
-
+            
+            ErrorNameSurname.Visibility = Visibility.Hidden;
+            Name.BorderBrush = Brushes.Green;
+            Surname.BorderBrush = Brushes.Green;
             try                                                     ///Name/surname try/catch block
             {
                 RegValidation.CheckTextBoxInput(Name.Text);
                 RegValidation.CheckIfFieldIsValid(Name.Text);
                 RegValidation.CheckTextBoxInput(Surname.Text);
                 RegValidation.CheckIfFieldIsValid(Surname.Text);
-                ErrorNameSurname.Visibility = Visibility.Hidden;
-                Name.BorderBrush = Brushes.Green;
-                Surname.BorderBrush = Brushes.Green;
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -82,14 +82,14 @@ namespace Kinder
                 Name.BorderBrush = Brushes.Red;
                 Surname.BorderBrush = Brushes.Red;
             }
-
+            
+            ErrorEmail.Visibility = Visibility.Hidden;
+            Email.BorderBrush = Brushes.Green;
             try                                                     ///Email try/catch block
             {
                 RegValidation.CheckTextBoxInput(Email.Text);
                 RegValidation.CheckIfEmailValid(Email.Text);
                 User.CheckIfUserAlreadyExists(Email.Text);
-                ErrorEmail.Visibility = Visibility.Hidden;
-                Email.BorderBrush = Brushes.Green;
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -110,14 +110,14 @@ namespace Kinder
                 ErrorEmail.Visibility = Visibility.Visible;
                 Email.BorderBrush = Brushes.Red;
             }
-
+            
+            ErrorPhoneNumber.Visibility = Visibility.Hidden;
+            PhoneNumber.BorderBrush = Brushes.Green;
             try                                                     ///Phonenumber try/catch block
             {
                 RegValidation.CheckTextBoxInput(PhoneNumber.Text);
                 RegValidation.CheckIfPhoneNumberValid(PhoneNumber.Text);
                 User.CheckIfUserAlreadyExists(PhoneNumber.Text);
-                ErrorPhoneNumber.Visibility = Visibility.Hidden;
-                PhoneNumber.BorderBrush = Brushes.Green;
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -143,15 +143,15 @@ namespace Kinder
             {
                 Password.Password = PasswordShow.Text;
             }
-
+            
+            ErrorPassword.Visibility = Visibility.Hidden;
+            Password.BorderBrush = Brushes.Green;
+            PasswordShow.BorderBrush = Brushes.Green;
             try                                                     ///Password try/catch block
             {
                 RegValidation.CheckTextBoxInput(Password.Password);
                 RegValidation.CheckIfFieldIsValid(Password.Password);
                 RegValidation.CheckIfPasswordValid(Password.Password);
-                ErrorPassword.Visibility = Visibility.Hidden;
-                Password.BorderBrush = Brushes.Green;
-                PasswordShow.BorderBrush = Brushes.Green;
                 count++;
             }
             catch (EmptyFieldException ex)
