@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MessageCore\Data\**" />
+    <EmbeddedResource Remove="MessageCore\Data\**" />
+    <None Remove="MessageCore\Data\**" />
+    <Page Remove="MessageCore\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Icons\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.2" />
+    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
 </Project>

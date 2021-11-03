@@ -1,4 +1,4 @@
-﻿namespace ChatServerCS
+﻿namespace ChatServer
 {
     public class User
     {

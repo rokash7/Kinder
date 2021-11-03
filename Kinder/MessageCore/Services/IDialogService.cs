@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kinder.MessageCore.Services
+﻿namespace Kinder.MessageCore.Services
 {
     public interface IDialogService
     {

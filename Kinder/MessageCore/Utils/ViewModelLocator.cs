@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kinder.MessageCore.Services;
+using Kinder.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +20,9 @@ namespace Kinder.MessageCore.Utils
             container.RegisterType<IDialogService, DialogService>();
         }
 
-        public MainWindowViewModel MainVM
+        public MainViewModel MainVM
         {
-            get { return container.Resolve<MainWindowViewModel>(); }
+            get { return container.Resolve<MainViewModel>(); }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace ChatServerCS
+namespace ChatServer
 {
     public interface IClient
     {

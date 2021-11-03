@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kinder.MVVM.Model
 {
-    class MessageModel
+    public class MessageModel
     {
         public string Username { get; set; }
         public string UsernameColor { get; set; }
