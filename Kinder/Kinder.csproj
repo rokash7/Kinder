@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MessageCore\Data\**" />
+    <EmbeddedResource Remove="MessageCore\Data\**" />
+    <None Remove="MessageCore\Data\**" />
+    <Page Remove="MessageCore\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Icons\" />
     <None Remove="Icons\Question.png" />
     <None Remove="Icons\ShowPassword.png" />
   </ItemGroup>
@@ -31,6 +39,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.2" />
+    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
 </Project>

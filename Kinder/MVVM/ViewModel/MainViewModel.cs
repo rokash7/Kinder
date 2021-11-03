@@ -1,16 +1,17 @@
 ﻿using Kinder.MessageCore;
+using Kinder.MessageCore.Services;
 using Kinder.MVVM.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Kinder.MVVM.ViewModel
 {
-    class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
+        private IChatService chatService;
+        private IDialogService dialogService;
+
         public ObservableCollection<MessageModel> Messages { get; set; }
         public ObservableCollection<ContactModel> Contacts { get; set; }
 
@@ -18,6 +19,29 @@ namespace Kinder.MVVM.ViewModel
         public RelayCommand SendCommand { get; set; }
 
         private ContactModel _selectedContact;
+
+        private string _userName;
+
+        public string UserName
+        {
+            get { return _userName; }
+            set 
+            {
+                _userName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _profilePic;
+        public string ProfilePic
+        {
+            get { return _profilePic; }
+            set
+            {
+                _profilePic = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ContactModel SelectedContact
         {
@@ -41,10 +65,13 @@ namespace Kinder.MVVM.ViewModel
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(IChatService chatSvc, IDialogService diagSvc)
         {
             Messages = new ObservableCollection<MessageModel>();
             Contacts = new ObservableCollection<ContactModel>();
+
+            chatService = chatSvc;
+            dialogService = diagSvc;
 
             SendCommand = new RelayCommand(o =>
             {
@@ -56,6 +83,8 @@ namespace Kinder.MVVM.ViewModel
                 Message = "";
 
             });
+
+
 
             //adding test messages
             Messages.Add(new MessageModel
@@ -125,5 +154,52 @@ namespace Kinder.MVVM.ViewModel
                 });
             }
         }
+
+        private byte[] Avatar()
+        {
+            byte[] pic = null;
+            if (!string.IsNullOrEmpty(_profilePic)) pic = File.ReadAllBytes(_profilePic);
+            return pic;
+        }
+
+        //#region Login Command
+        //private ICommand _loginCommand;
+        //public ICommand LoginCommand
+        //{
+        //    get
+        //    {
+        //        return _loginCommand ?? (_loginCommand =
+        //            new RelayCommandAsync(() => Login(), (o) => CanLogin()));
+        //    }
+        //}
+
+        //private async Task<bool> Login()
+        //{
+        //    try
+        //    {
+        //        List<User> users = new List<User>();
+        //        users = await chatService.LoginAsync(_userName, Avatar());
+        //        if (users != null)
+        //        {
+        //            users.ForEach(u => Participants.Add(new Participant { Name = u.Name, Photo = u.Photo }));
+        //            UserMode = UserModes.Chat;
+        //            IsLoggedIn = true;
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            dialogService.ShowNotification("Username is already in use");
+        //            return false;
+        //        }
+
+        //    }
+        //    catch (Exception) { return false; }
+        //}
+
+        //private bool CanLogin()
+        //{
+        //    return !string.IsNullOrEmpty(UserName) && UserName.Length >= 2 && IsConnected;
+        //}
+        //#endregion
     }
 }
