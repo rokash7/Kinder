@@ -53,7 +53,6 @@ namespace Kinder.Classes
             this.ID = ID;
         }
 
-
         public Item(int ID, DateTime DateOfPurchase, ConditionEnum Condition, CathegoryEnum Cathegory, int UserID, Dimensions size, int KarmaPrice)
         {
             this.ID = ID;
