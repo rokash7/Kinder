@@ -25,9 +25,11 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="username" Binding="{Binding Username}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="user email" Binding="{Binding Email}" Width="100"></DataGridTextColumn>
-             </DataGrid.Columns>
+            </DataGrid.Columns>
 
         </DataGrid>
+        
+        <Button Content="Give it" HorizontalAlignment="Left" Margin="55,348,0,0" VerticalAlignment="Top" Height="39" Width="66" Click="GiveButton_Click"/>
 
     </Grid>
 </Window>

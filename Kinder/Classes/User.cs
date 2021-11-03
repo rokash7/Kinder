@@ -94,6 +94,19 @@ public class User
         return CurrentUser;
     }
 
+    public static User GetUserByID(int id)
+    {
+        User result = new User();
+        foreach (User user in FileManager.getUsers())
+        {
+            if (user.ID == id)
+            {
+                result = user;
+            }
+        }
+        return result;
+    }
+
     public static void ChangeUserEmail(string Text)
     {
         foreach (User user in FileManager.getUsers())
