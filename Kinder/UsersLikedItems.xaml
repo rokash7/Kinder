@@ -37,5 +37,6 @@
         </DataGrid>
 
         <Button x:Name="UnlikeButton" Click="UnlikeButton_Click" Margin="38,335,337,323" Content="unlike"/>
+        <Button x:Name="ClaimButton" Click="ClaimButton_Click" Margin="170,335,205,323" Content="Claim it"/>
     </Grid>
 </Window>

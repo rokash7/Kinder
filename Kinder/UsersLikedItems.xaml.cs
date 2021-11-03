@@ -23,15 +23,20 @@ namespace Kinder
     {
         private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
         private string FileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
-
+        
+        private List<Item> ItemsList = new();
         private List<LikedItemsClass> LikedItems = new();
         private List<Item> Items = new();
+        private List<Data> GivenItems = new();
+        private static int deletedItemID;
 
         public UsersLikedItems()
         {
             InitializeComponent();
+            ReadDataFromFile();
             GetItems();
             LoadData();
+            ReadGiven();
         }
 
         private void GetItems()
@@ -106,6 +111,26 @@ namespace Kinder
                 ItemsTable.Items.Add(item);
             }
         }
+        private void ReadGiven()
+        {
+            using (StreamReader r = new(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))
+            {
+                while (!r.EndOfStream)
+                {
+                    string line = r.ReadLine();
+
+                    Data temp = new();
+
+                    string[] tempStr = line.Split(';');
+                    int[] tempInt = { int.Parse(tempStr[0]), int.Parse(tempStr[1]) };
+
+                    temp.ItemID = tempInt[0];
+                    temp.ID = tempInt[1];
+
+                    GivenItems.Add(temp);
+                }
+            }
+        }
 
         private void UnlikeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -139,6 +164,141 @@ namespace Kinder
                 {
                     writer.WriteLine(liked.ToString());
                 }
+            }
+        }
+        private void ReadDataFromFile()
+        {
+            ItemsList.Clear();
+
+            StreamReader file = new(FileLocation_items);
+            Item temp = new();
+
+            string line;
+            while ((line = file.ReadLine()) != null)
+            {
+                ItemsList.Add(temp.ParseData(line));
+            }
+
+            file.Close();
+        }
+
+        private void ReWriteFile(int itemID = -1)
+        {
+            //rewriting items file:
+            using (StreamWriter file = new(FileLocation_items))
+            {
+                foreach (Item item in ItemsList)
+                {
+                    file.WriteLine(item.ToString());
+                }
+            }
+
+            //rewrite liked items file:
+            if (itemID != -1)
+            {
+                Item Temp = new();
+                List<LikedItemsClass> TempList = new();
+
+                //read current liked
+                using (StreamReader reader = new StreamReader(FileLocation_liked))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        int[] tempArr = Temp.ParsedLiked(reader.ReadLine());
+                        List<int> tempList = new();
+
+                        for (int i = 1; i < tempArr.Length; i++)
+                        {
+                            tempList.Add(tempArr[i]);
+                        }
+
+                        TempList.Add(new LikedItemsClass(tempArr[0], tempList));
+                    }
+                }
+
+                //delete the absent ones
+                for (int i = 0; i < TempList.Count; i++)
+                {
+                    TempList[i].ItemsIDs.Remove(itemID);
+                }
+
+                //upload updated liked list to file
+                using (StreamWriter writer = new StreamWriter(FileLocation_liked))
+                {
+                    foreach (LikedItemsClass liked in TempList)
+                    {
+                        writer.WriteLine(liked.ToString());
+                    }
+                }
+
+                using (StreamWriter w = new(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))
+                {
+                    foreach (var item in GivenItems)
+                    {
+                        if(item.ItemID != itemID)
+                        {
+                            w.WriteLine(item.ItemID.ToString() + ';' + item.ID.ToString());
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ReleaseKarmaPoints(Item item)
+        {
+            User tempUser = User.GetUserByID(item.UserID);
+
+            tempUser.KarmaPoints += item.KarmaPrice;
+
+            FileManager.ChangeUserField(tempUser);
+        }
+
+        private void ClaimButton_Click(object sender, RoutedEventArgs e)
+        {
+            Item classObj = ItemsTable.SelectedItem as Item;
+            Data temp = new Data(classObj.ID, User.CurrentUserID);
+
+            if (GivenItems.Contains(temp))
+            {
+                Items.Remove(classObj);
+                ItemsTable.Items.Clear();
+                LoadData();
+
+                ItemsList.Remove(classObj);
+                GivenItems.Remove(temp);
+                ReWriteFile(classObj.ID);
+
+                ReleaseKarmaPoints(classObj);
+            }
+            else
+            {
+                MessageBox.Show("This item is not given to you");
+            }
+        }
+
+        private class Data : User, IEquatable<Data>
+        { 
+            public int ItemID { get; set; }
+
+            public Data(int ItemID, int UserID)
+            {
+                this.ID = UserID;
+                this.ItemID = ItemID;
+            }
+
+            public Data()
+            {
+
+            }
+
+            public bool Equals(Data other)
+            {
+                if (other == null)
+                {
+                    return false;
+                }
+
+                return (this.ID.Equals(other.ID) && this.ItemID.Equals(other.ItemID));
             }
         }
     }
