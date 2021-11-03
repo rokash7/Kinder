@@ -19,17 +19,17 @@ namespace Kinder
     public partial class LeaderboardWindow : Window
     {
         //testing data
-        private List<UserLeaderboard> UserList = new();
+        private List<UserLeaderboard> userList = new();
         
         private void UpdateUserList()
         {
-            if (UserList != null)
+            if (userList != null)
             {
-                UserList.Clear();
+                userList.Clear();
             }
-            foreach(User user in FileManager.getUsers())
+            foreach(User user in FileManager.GetUsers())
             {
-                UserList.Add(new UserLeaderboard(user.Username, user.KarmaPoints, user.RegDate));
+                userList.Add(new UserLeaderboard(user.Username, user.KarmaPoints, user.RegDate));
             }
         }
 
@@ -38,15 +38,15 @@ namespace Kinder
             leaderboard.Items.Clear();
 
             //LINQ query to filter
-            List<UserLeaderboard> NewUserList = UserList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
+            List<UserLeaderboard> newUserList = userList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
 
-            ShowData(NewUserList);
+            ShowData(newUserList);
         }
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
             leaderboard.Items.Clear();
-            ShowData(UserList);
+            ShowData(userList);
         }
 
         private void ShowData(List<UserLeaderboard> tempUserList)
@@ -66,7 +66,7 @@ namespace Kinder
         {
             InitializeComponent();
             UpdateUserList();
-            ShowData(UserList);
+            ShowData(userList);
         }
 
         private class UserLeaderboard : User

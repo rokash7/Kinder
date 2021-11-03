@@ -29,9 +29,9 @@ namespace Kinder
         {
             try
             {
-                RegValidation.CheckIfEmailValid(NewEmail.Text);
-                User.ChangeUserEmail(NewEmail.Text);
-                MessageBox.Show("Email changed to " + NewEmail.Text + ".");
+                RegValidation.CheckIfEmailValid(newEmail.Text);
+                User.ChangeUserEmail(newEmail.Text);
+                MessageBox.Show("Email changed to " + newEmail.Text + ".");
             }
             catch (InvalidEmailException ex)
             {
@@ -43,9 +43,9 @@ namespace Kinder
         {
             try
             {
-                RegValidation.CheckIfPhoneNumberValid(NewPhoneNumber.Text);
-                User.ChangeUserPhoneNumber(NewPhoneNumber.Text);
-                MessageBox.Show("Phone Number changed to " + NewPhoneNumber.Text + ".");
+                RegValidation.CheckIfPhoneNumberValid(newPhoneNumber.Text);
+                User.ChangeUserPhoneNumber(newPhoneNumber.Text);
+                MessageBox.Show("Phone Number changed to " + newPhoneNumber.Text + ".");
             }
             catch (InvalidPhonenumberException ex)
             {
@@ -58,12 +58,12 @@ namespace Kinder
         {
             try
             {
-                RegValidation.CheckTextBoxInput(NewPassword.Password);
-                RegValidation.CheckIfFieldIsValid(NewPassword.Password);
-                RegValidation.CheckIfPasswordValid(NewPassword.Password);
+                RegValidation.CheckTextBoxInput(newPassword.Password);
+                RegValidation.CheckIfFieldIsValid(newPassword.Password);
+                RegValidation.CheckIfPasswordValid(newPassword.Password);
                 User.CheckPassword(CurrentPassword.Password);
                 
-                User.ChangeUserPassword(NewPassword.Password);
+                User.ChangeUserPassword(newPassword.Password);
                 MessageBox.Show("Password changed");
             }
             catch (EmptyFieldException ex)

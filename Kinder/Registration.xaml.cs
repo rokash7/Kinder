@@ -29,177 +29,177 @@ namespace Kinder
         {
             int count = 0;
 
-            ErrorUsername.Visibility = Visibility.Hidden;
-            Username.BorderBrush = Brushes.Green;
+            errorUsername.Visibility = Visibility.Hidden;
+            username.BorderBrush = Brushes.Green;
             try                                                     ///Username try/catch block
             {
-                RegValidation.CheckTextBoxInput(Username.Text);
-                RegValidation.CheckIfFieldIsValid(Username.Text);
-                User.CheckIfUsernameIsTaken(Username.Text);
+                RegValidation.CheckTextBoxInput(username.Text);
+                RegValidation.CheckIfFieldIsValid(username.Text);
+                User.CheckIfUsernameIsTaken(username.Text);
                 count++;
             }
             catch (EmptyFieldException ex)
             {
-                ErrorUsername.Text = ex.Message;
-                ErrorUsername.Visibility = Visibility.Visible;
-                Username.BorderBrush = Brushes.Red;
+                errorUsername.Text = ex.Message;
+                errorUsername.Visibility = Visibility.Visible;
+                username.BorderBrush = Brushes.Red;
             }
             catch (WhiteSpaceDetectedException ex)
             {
-                ErrorUsername.Text = ex.Message;
-                ErrorUsername.Visibility = Visibility.Visible;
-                Username.BorderBrush = Brushes.Red;
+                errorUsername.Text = ex.Message;
+                errorUsername.Visibility = Visibility.Visible;
+                username.BorderBrush = Brushes.Red;
             }
             catch (UsernameIsTakenException ex)
             {
-                ErrorUsername.Text = ex.Message;
-                ErrorUsername.Visibility = Visibility.Visible;
-                Username.BorderBrush = Brushes.Red;
+                errorUsername.Text = ex.Message;
+                errorUsername.Visibility = Visibility.Visible;
+                username.BorderBrush = Brushes.Red;
             }
             
-            ErrorNameSurname.Visibility = Visibility.Hidden;
-            Name.BorderBrush = Brushes.Green;
-            Surname.BorderBrush = Brushes.Green;
+            errorNameSurname.Visibility = Visibility.Hidden;
+            name.BorderBrush = Brushes.Green;
+            surname.BorderBrush = Brushes.Green;
             try                                                     ///Name/surname try/catch block
             {
-                RegValidation.CheckTextBoxInput(Name.Text);
-                RegValidation.CheckIfFieldIsValid(Name.Text);
-                RegValidation.CheckTextBoxInput(Surname.Text);
-                RegValidation.CheckIfFieldIsValid(Surname.Text);
+                RegValidation.CheckTextBoxInput(name.Text);
+                RegValidation.CheckIfFieldIsValid(name.Text);
+                RegValidation.CheckTextBoxInput(surname.Text);
+                RegValidation.CheckIfFieldIsValid(surname.Text);
                 count++;
             }
             catch (EmptyFieldException ex)
             {
-                ErrorNameSurname.Text = ex.Message;
-                ErrorNameSurname.Visibility = Visibility.Visible;
-                Name.BorderBrush = Brushes.Red;
-                Surname.BorderBrush = Brushes.Red;
+                errorNameSurname.Text = ex.Message;
+                errorNameSurname.Visibility = Visibility.Visible;
+                name.BorderBrush = Brushes.Red;
+                surname.BorderBrush = Brushes.Red;
             }
             catch (WhiteSpaceDetectedException ex)
             {
-                ErrorNameSurname.Text = ex.Message;
-                ErrorNameSurname.Visibility = Visibility.Visible;
-                Name.BorderBrush = Brushes.Red;
-                Surname.BorderBrush = Brushes.Red;
+                errorNameSurname.Text = ex.Message;
+                errorNameSurname.Visibility = Visibility.Visible;
+                name.BorderBrush = Brushes.Red;
+                surname.BorderBrush = Brushes.Red;
             }
             
-            ErrorEmail.Visibility = Visibility.Hidden;
-            Email.BorderBrush = Brushes.Green;
+            errorEmail.Visibility = Visibility.Hidden;
+            email.BorderBrush = Brushes.Green;
             try                                                     ///Email try/catch block
             {
-                RegValidation.CheckTextBoxInput(Email.Text);
-                RegValidation.CheckIfEmailValid(Email.Text);
-                User.CheckIfUserAlreadyExists(Email.Text);
+                RegValidation.CheckTextBoxInput(email.Text);
+                RegValidation.CheckIfEmailValid(email.Text);
+                User.CheckIfUserAlreadyExists(email.Text);
                 count++;
             }
             catch (EmptyFieldException ex)
             {
-                ErrorEmail.Text = ex.Message;
-                ErrorEmail.Visibility = Visibility.Visible;
-                Email.BorderBrush = Brushes.Red;
+                errorEmail.Text = ex.Message;
+                errorEmail.Visibility = Visibility.Visible;
+                email.BorderBrush = Brushes.Red;
             }
             catch (InvalidEmailException ex)
             {
-                ErrorEmail.Text = ex.Message;
-                ErrorEmail.Visibility = Visibility.Visible;
-                Email.BorderBrush = Brushes.Red;
+                errorEmail.Text = ex.Message;
+                errorEmail.Visibility = Visibility.Visible;
+                email.BorderBrush = Brushes.Red;
             }
             catch (UserAlreadyExistsException ex)
             {
-                ErrorEmail.Text = ex.Message;
-                ErrorEmail.Visibility = Visibility.Visible;
-                Email.BorderBrush = Brushes.Red;
+                errorEmail.Text = ex.Message;
+                errorEmail.Visibility = Visibility.Visible;
+                email.BorderBrush = Brushes.Red;
             }
             
-            ErrorPhoneNumber.Visibility = Visibility.Hidden;
-            PhoneNumber.BorderBrush = Brushes.Green;
+            errorPhoneNumber.Visibility = Visibility.Hidden;
+            phoneNumber.BorderBrush = Brushes.Green;
             try                                                     ///Phonenumber try/catch block
             {
-                RegValidation.CheckTextBoxInput(PhoneNumber.Text);
-                RegValidation.CheckIfPhoneNumberValid(PhoneNumber.Text);
-                User.CheckIfUserAlreadyExists(PhoneNumber.Text);
+                RegValidation.CheckTextBoxInput(phoneNumber.Text);
+                RegValidation.CheckIfPhoneNumberValid(phoneNumber.Text);
+                User.CheckIfUserAlreadyExists(phoneNumber.Text);
                 count++;
             }
             catch (EmptyFieldException ex)
             {
-                ErrorPhoneNumber.Text = ex.Message;
-                ErrorPhoneNumber.Visibility = Visibility.Visible;
-                PhoneNumber.BorderBrush = Brushes.Red;
+                errorPhoneNumber.Text = ex.Message;
+                errorPhoneNumber.Visibility = Visibility.Visible;
+                phoneNumber.BorderBrush = Brushes.Red;
             }
             catch (InvalidPhonenumberException ex)
             {
-                ErrorPhoneNumber.Text = ex.Message;
-                ErrorPhoneNumber.Visibility = Visibility.Visible;
-                PhoneNumber.BorderBrush = Brushes.Red;
+                errorPhoneNumber.Text = ex.Message;
+                errorPhoneNumber.Visibility = Visibility.Visible;
+                phoneNumber.BorderBrush = Brushes.Red;
             }
             catch (UserAlreadyExistsException ex)
             {
-                ErrorPhoneNumber.Text = ex.Message;
-                ErrorPhoneNumber.Visibility = Visibility.Visible;
-                PhoneNumber.BorderBrush = Brushes.Red;
+                errorPhoneNumber.Text = ex.Message;
+                errorPhoneNumber.Visibility = Visibility.Visible;
+                phoneNumber.BorderBrush = Brushes.Red;
             }
 
-            if (PasswordShow.Text != Password.Password && PasswordShow.Visibility == Visibility.Visible)
+            if (passwordShow.Text != password.Password && passwordShow.Visibility == Visibility.Visible)
             {
-                Password.Password = PasswordShow.Text;
+                password.Password = passwordShow.Text;
             }
             
-            ErrorPassword.Visibility = Visibility.Hidden;
-            Password.BorderBrush = Brushes.Green;
-            PasswordShow.BorderBrush = Brushes.Green;
+            errorPassword.Visibility = Visibility.Hidden;
+            password.BorderBrush = Brushes.Green;
+            passwordShow.BorderBrush = Brushes.Green;
             try                                                     ///Password try/catch block
             {
-                RegValidation.CheckTextBoxInput(Password.Password);
-                RegValidation.CheckIfFieldIsValid(Password.Password);
-                RegValidation.CheckIfPasswordValid(Password.Password);
+                RegValidation.CheckTextBoxInput(password.Password);
+                RegValidation.CheckIfFieldIsValid(password.Password);
+                RegValidation.CheckIfPasswordValid(password.Password);
                 count++;
             }
             catch (EmptyFieldException ex)
             {
-                ErrorPassword.Text = ex.Message;
-                ErrorPassword.Visibility = Visibility.Visible;
-                Password.BorderBrush = Brushes.Red;
-                PasswordShow.BorderBrush = Brushes.Red;
+                errorPassword.Text = ex.Message;
+                errorPassword.Visibility = Visibility.Visible;
+                password.BorderBrush = Brushes.Red;
+                passwordShow.BorderBrush = Brushes.Red;
             }
             catch (WhiteSpaceDetectedException ex)
             {
-                ErrorPassword.Text = ex.Message;
-                ErrorPassword.Visibility = Visibility.Visible;
-                Password.BorderBrush = Brushes.Red;
-                PasswordShow.BorderBrush = Brushes.Red;
+                errorPassword.Text = ex.Message;
+                errorPassword.Visibility = Visibility.Visible;
+                password.BorderBrush = Brushes.Red;
+                passwordShow.BorderBrush = Brushes.Red;
             }
             catch (InvalidPasswordException ex)
             {
-                ErrorPassword.Text = ex.Message;
-                ErrorPassword.Visibility = Visibility.Visible;
-                Password.BorderBrush = Brushes.Red;
-                PasswordShow.BorderBrush = Brushes.Red;
+                errorPassword.Text = ex.Message;
+                errorPassword.Visibility = Visibility.Visible;
+                password.BorderBrush = Brushes.Red;
+                passwordShow.BorderBrush = Brushes.Red;
             }
 
             if (count == 5)                          ////Simple thing that says if all boxes are filled correctly
             {
-                FileManager.AddUserIDToLiked(User.getUserCount());
-                FileManager.AddNewUser(Username.Text, Password.Password, Email.Text, PhoneNumber.Text, Name.Text, Surname.Text, User.getUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
+                FileManager.AddUserIDToLiked(User.GetUserCount());
+                FileManager.AddNewUser(username.Text, password.Password, email.Text, phoneNumber.Text, name.Text, surname.Text, User.GetUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
                 MessageBox.Show("User created successfully! Now  try to log in");
-                MainWindow LoginPage = new MainWindow();
+                MainWindow loginPage = new MainWindow();
                 this.Close();
-                LoginPage.Show();
+                loginPage.Show();
             }
         }
 
         private void ShowPassword_Click(object sender, RoutedEventArgs e)
         {
-            if (PasswordShow.Visibility == Visibility.Hidden)
+            if (passwordShow.Visibility == Visibility.Hidden)
             {
-                PasswordShow.Visibility = Visibility.Visible;
-                Password.Visibility = Visibility.Hidden;
-                PasswordShow.Text = Password.Password;
+                passwordShow.Visibility = Visibility.Visible;
+                password.Visibility = Visibility.Hidden;
+                passwordShow.Text = password.Password;
             }
             else
             {
-                PasswordShow.Visibility = Visibility.Hidden;
-                Password.Visibility = Visibility.Visible;
-                Password.Password = PasswordShow.Text;
+                passwordShow.Visibility = Visibility.Hidden;
+                password.Visibility = Visibility.Visible;
+                password.Password = passwordShow.Text;
             }
         }
     }

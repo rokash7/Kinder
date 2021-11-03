@@ -23,20 +23,20 @@ namespace Kinder.Classes
 
     public struct Dimensions
     {
-        public int Length;
-        public int Height;
-        public int Width;
+        public int length;
+        public int height;
+        public int width;
 
-        public Dimensions(int Length, int Height, int Width)
+        public Dimensions(int length, int height, int width)
         {
-            this.Length = Length;
-            this.Height = Height;
-            this.Width = Width;
+            this.length = length;
+            this.height = height;
+            this.width = width;
         }
 
         public override string ToString()
         {
-            return Length.ToString() + ',' + Height.ToString() + ',' + Width.ToString();
+            return length.ToString() + ',' + height.ToString() + ',' + width.ToString();
         }
     }
 
@@ -48,20 +48,20 @@ namespace Kinder.Classes
            
         }
 
-        public Item(int ID)
+        public Item(int id)
         {
-            this.ID = ID;
+            this.ID = id;
         }
 
-        public Item(int ID, DateTime DateOfPurchase, ConditionEnum Condition, CathegoryEnum Cathegory, int UserID, Dimensions size, int KarmaPrice)
+        public Item(int id, DateTime dateOfPurchase, ConditionEnum condition, CathegoryEnum cathegory, int userID, Dimensions size, int karmaPrice)
         {
-            this.ID = ID;
-            this.dateOfPurchase = DateOfPurchase;
-            this.Condition = Condition;
-            this.Cathegory = Cathegory;
-            this.UserID = UserID;
+            this.ID = id;
+            this.dateOfPurchase = dateOfPurchase;
+            this.Condition = condition;
+            this.Cathegory = cathegory;
+            this.UserID = userID;
             this.size = size;
-            this.karmaPrice = KarmaPrice;
+            this.karmaPrice = karmaPrice;
         }
 
         public int CompareTo(Item other)
@@ -146,7 +146,7 @@ namespace Kinder.Classes
             }
             set
             {
-                if (value.Height < 0 || value.Width < 0 || value.Length < 0)
+                if (value.height < 0 || value.width < 0 || value.length < 0)
                     throw new ArgumentOutOfRangeException("The values of the item cannot be negative");
                 else
                     size = value;
@@ -156,10 +156,10 @@ namespace Kinder.Classes
 
         //optional arguments:
         public string Name { get; set; }
-        public void SetName(string NameArg = "Unnamed item") => Name = NameArg;
+        public void SetName(string nameArg = "Unnamed item") => Name = nameArg;
 
         public string Description { get; set; }
-        public void SetDescription(string DescArg = "Undescribed item") => Description = DescArg;
+        public void SetDescription(string descArg = "Undescribed item") => Description = descArg;
 
         private int karmaPrice;
         public int KarmaPrice

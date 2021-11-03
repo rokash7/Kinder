@@ -28,24 +28,24 @@ namespace Kinder
             DisplayData();
         }
 
-        private List<Item> ItemsList = new();
-        private int CurrentUserID = User.CurrentUserID;
-        private string FileLocation = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
-        private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
+        private List<Item> itemsList = new();
+        private int currentUserID = User.CurrentUserID;
+        private string fileLocation = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
+        private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         //reading file
         private void ReadDataFromFile()
         {
-            ItemsList.Clear();
+            itemsList.Clear();
 
-            StreamReader file = new(FileLocation);
+            StreamReader file = new(fileLocation);
             Item temp = new();
 
             string line;
             while ((line = file.ReadLine()) != null)
             {
                 
-                ItemsList.Add(temp.ParseData(line));
+                itemsList.Add(temp.ParseData(line));
             }
 
             file.Close();
@@ -53,21 +53,21 @@ namespace Kinder
 
         private void DisplayData()
         {
-            ItemsList.Sort();
-            ItemsTable.Items.Clear();
+            itemsList.Sort();
+            itemsTable.Items.Clear();
 
-            foreach(Item item in ItemsList.Where(p => p.UserID == CurrentUserID))
+            foreach(Item item in itemsList.Where(p => p.UserID == currentUserID))
             {
-                ItemsTable.Items.Add(item);
+                itemsTable.Items.Add(item);
             }
         }
 
         private void ReWriteFile(int itemID = -1)
         {
             //rewriting items file:
-            using (StreamWriter file = new(FileLocation))
+            using (StreamWriter file = new(fileLocation))
             {
-                foreach (Item item in ItemsList)
+                foreach (Item item in itemsList)
                 {
                     file.WriteLine(item.ToString());
                 }
@@ -76,36 +76,36 @@ namespace Kinder
             //rewrite liked items file:
             if (itemID != -1)
             {                
-                Item Temp = new();
-                List<LikedItemsClass> TempList = new();
+                Item temp = new();
+                List<LikedItemsClass> tempList = new();
 
                 //read current liked
-                using (StreamReader reader = new StreamReader(FileLocation_liked))
+                using (StreamReader reader = new StreamReader(fileLocation_liked))
                 {
                     while (!reader.EndOfStream)
                     {
-                        int[] tempArr = Temp.ParsedLiked(reader.ReadLine());
-                        List<int> tempList = new();
+                        int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                        List<int> newTempList = new();
 
                         for (int i = 1; i < tempArr.Length; i++)
                         {
-                        tempList.Add(tempArr[i]);
+                        newTempList.Add(tempArr[i]);
                         }
 
-                        TempList.Add(new LikedItemsClass(tempArr[0], tempList));
+                        tempList.Add(new LikedItemsClass(tempArr[0], newTempList));
                     }
                 }
 
                 //delete the absent ones
-                for (int i = 0; i < TempList.Count; i++)
+                for (int i = 0; i < tempList.Count; i++)
                 {
-                    TempList[i].ItemsIDs.Remove(itemID);
+                    tempList[i].ItemsIDs.Remove(itemID);
                 }
 
                 //upload updated liked list to file
-                using (StreamWriter writer = new StreamWriter(FileLocation_liked))
+                using (StreamWriter writer = new StreamWriter(fileLocation_liked))
                 {
-                    foreach (LikedItemsClass liked in TempList)
+                    foreach (LikedItemsClass liked in tempList)
                     {
                         writer.WriteLine(liked.ToString());
                     }
@@ -118,32 +118,32 @@ namespace Kinder
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             //Icomparable:
-            ItemsList.Sort();
-            Item NewItem = new();
+            itemsList.Sort();
+            Item newItem = new();
 
-            int nextID = ItemsList[0].ID + 1; //list is sorted by IDs, so it's the first element has highest ID
+            int nextID = itemsList[0].ID + 1; //list is sorted by IDs, so it's the first element has highest ID
 
-            NewItem.ID = nextID;
+            newItem.ID = nextID;
 
-            NewItem.DateOfPurchase = DateTime.Parse(DateTextBox.Text);
-            NewItem.DateStr = DateTextBox.Text;
+            newItem.DateOfPurchase = DateTime.Parse(dateTextBox.Text);
+            newItem.DateStr = dateTextBox.Text;
 
-            String condStr= ConditionComboBox.SelectedItem.ToString();
+            String condStr = conditionComboBox.SelectedItem.ToString();
             Enum.TryParse(condStr, out ConditionEnum condition);
-            NewItem.Condition = condition;
+            newItem.Condition = condition;
 
-            String catStr = CathegoryComboBox.SelectedItem.ToString();
+            String catStr = cathegoryComboBox.SelectedItem.ToString();
             Enum.TryParse(catStr, out CathegoryEnum cathegory);
-            NewItem.Cathegory = cathegory;
+            newItem.Cathegory = cathegory;
 
-            NewItem.UserID = CurrentUserID;
+            newItem.UserID = currentUserID;
 
             //narrowing convertion:
             long length_long, width_long, height_long;
 
-            length_long = long.Parse(DimsTextBoxL.Text);
-            width_long = long.Parse(DimsTextBoxW.Text);
-            height_long = long.Parse(DimsTextBoxH.Text);
+            length_long = long.Parse(dimsTextBoxL.Text);
+            width_long = long.Parse(dimsTextBoxW.Text);
+            height_long = long.Parse(dimsTextBoxH.Text);
 
             int length_int, width_int, height_int;
 
@@ -155,37 +155,37 @@ namespace Kinder
             }
 
             //named argument:
-            NewItem.Size = new Dimensions(Length: length_int, Height: height_int, Width: width_int);
-            NewItem.SizeStr = NewItem.Size.ToString();
+            newItem.Size = new Dimensions(length: length_int, height: height_int, width: width_int);
+            newItem.SizeStr = newItem.Size.ToString();
             
             //widening convertion:
-            NewItem.KarmaPrice = byte.Parse(PointsTextBox.Text);
+            newItem.KarmaPrice = byte.Parse(pointsTextBox.Text);
 
             /* such convertion allows us to keep points distribution in check. 
              * Users can't get more that 255 points per item.
              * with int they could get way way more */
 
             //optional arguments implementation:
-            if(NameTextBox.Text.Length > 0)
+            if(nameTextBox.Text.Length > 0)
             {
-                NewItem.SetName(NameTextBox.Text);
+                newItem.SetName(nameTextBox.Text);
             }
             else
             {
-                NewItem.SetName();
+                newItem.SetName();
             }
 
-            if (DescTextBox.Text.Length > 0)
+            if (descTextBox.Text.Length > 0)
             {
-                NewItem.SetDescription(DescTextBox.Text);
+                newItem.SetDescription(descTextBox.Text);
             }
             else
             {
-                NewItem.SetDescription();
+                newItem.SetDescription();
             }
 
-            StreamWriter write = File.AppendText(FileLocation);
-            write.WriteLine(NewItem.ToString());
+            StreamWriter write = File.AppendText(fileLocation);
+            write.WriteLine(newItem.ToString());
             write.Close();
 
             ReadDataFromFile();
@@ -195,9 +195,9 @@ namespace Kinder
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             //saving item
-            Item classObj = ItemsTable.SelectedItem as Item;
+            Item classObj = itemsTable.SelectedItem as Item;
 
-            ItemsList.RemoveAt(ItemsList.IndexOf(classObj));
+            itemsList.RemoveAt(itemsList.IndexOf(classObj));
 
             ReWriteFile(classObj.ID);
             DisplayData();
@@ -205,68 +205,68 @@ namespace Kinder
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            Item classObj = ItemsTable.SelectedItem as Item;
-            ItemsList.RemoveAt(ItemsList.IndexOf(classObj));
+            Item classObj = itemsTable.SelectedItem as Item;
+            itemsList.RemoveAt(itemsList.IndexOf(classObj));
 
             ReWriteFile();
 
-            if (DateTextBox.Text.Length > 0)
+            if (dateTextBox.Text.Length > 0)
             {
-                classObj.DateOfPurchase = DateTime.Parse(DateTextBox.Text);
-                classObj.DateStr = DateTextBox.Text;
+                classObj.DateOfPurchase = DateTime.Parse(dateTextBox.Text);
+                classObj.DateStr = dateTextBox.Text;
             }
 
-            if(ConditionComboBox.SelectedItem != null)
+            if(conditionComboBox.SelectedItem != null)
             { 
-                String condStr = ConditionComboBox.SelectedItem.ToString(); 
+                String condStr = conditionComboBox.SelectedItem.ToString(); 
                 Enum.TryParse(condStr, out ConditionEnum condition);
                 classObj.Condition = condition; 
             }
             
-            if(CathegoryComboBox.SelectedItem != null)
+            if(cathegoryComboBox.SelectedItem != null)
             {
-                String catStr = CathegoryComboBox.SelectedItem.ToString();
+                String catStr = cathegoryComboBox.SelectedItem.ToString();
                 Enum.TryParse(catStr, out CathegoryEnum cathegory);
                 classObj.Cathegory = cathegory;
             }
 
-            if(DimsTextBoxL.Text.Length > 0)
+            if(dimsTextBoxL.Text.Length > 0)
             {
                 string[] str = classObj.SizeStr.Split(',');
-                str[0] = DimsTextBoxL.Text;
+                str[0] = dimsTextBoxL.Text;
                 classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2]; 
             }
 
-            if (DimsTextBoxH.Text.Length > 0)
+            if (dimsTextBoxH.Text.Length > 0)
             {
                 string[] str = classObj.SizeStr.Split(',');
-                str[1] = DimsTextBoxH.Text;
+                str[1] = dimsTextBoxH.Text;
                 classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
             }
 
-            if (DimsTextBoxW.Text.Length > 0)
+            if (dimsTextBoxW.Text.Length > 0)
             {
                 string[] str = classObj.SizeStr.Split(',');
-                str[2] = DimsTextBoxW.Text;
+                str[2] = dimsTextBoxW.Text;
                 classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
             }
 
-            if (PointsTextBox.Text.Length > 0)
+            if (pointsTextBox.Text.Length > 0)
             {
-                classObj.KarmaPrice = byte.Parse(PointsTextBox.Text);
+                classObj.KarmaPrice = byte.Parse(pointsTextBox.Text);
             }
 
-            if (NameTextBox.Text.Length > 0)
+            if (nameTextBox.Text.Length > 0)
             {
-                classObj.Name = NameTextBox.Text;
+                classObj.Name = nameTextBox.Text;
             }
 
-            if (DescTextBox.Text.Length > 0)
+            if (descTextBox.Text.Length > 0)
             {
-                classObj.Description = DescTextBox.Text;
+                classObj.Description = descTextBox.Text;
             }
 
-            StreamWriter write = File.AppendText(FileLocation);
+            StreamWriter write = File.AppendText(fileLocation);
             write.WriteLine(classObj.ToString(classObj.SizeStr));
             write.Close();
 

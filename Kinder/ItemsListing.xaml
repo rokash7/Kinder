@@ -11,7 +11,7 @@
             <ColumnDefinition Width="239*"/>
             <ColumnDefinition Width="161*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="ItemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="700" Height="300" Grid.ColumnSpan="2">
+        <DataGrid x:Name="itemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="700" Height="300" Grid.ColumnSpan="2">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -43,16 +43,16 @@
         <Label Content="Category" HorizontalAlignment="Left" Margin="38,461,0,0" VerticalAlignment="Top"/>
         <Label Content="Dimensions" HorizontalAlignment="Left" Margin="38,487,0,0" VerticalAlignment="Top"/>
         <Label Content="Karma points" HorizontalAlignment="Left" Margin="38,510,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ConditionComboBox" HorizontalAlignment="Left" Margin="106,441,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{local:EnumBindingSourceExtension local:ConditionEnum}"/>
-        <ComboBox x:Name="CathegoryComboBox" HorizontalAlignment="Left" Margin="106,468,0,0" VerticalAlignment="Top" Width="120 " ItemsSource="{local:EnumBindingSourceExtension local:CathegoryEnum}"/>
-        <TextBox x:Name="DimsTextBoxL" HorizontalAlignment="Left" Margin="118,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
-        <TextBox x:Name="PointsTextBox" HorizontalAlignment="Left" Margin="118,518,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="DateTextBox" HorizontalAlignment="Left" Margin="143,418,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="DimsTextBoxH" HorizontalAlignment="Left" Margin="168,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
-        <TextBox x:Name="DimsTextBoxW" HorizontalAlignment="Left" Margin="218,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
-        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="354,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="conditionComboBox" HorizontalAlignment="Left" Margin="106,441,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{local:EnumBindingSourceExtension local:ConditionEnum}"/>
+        <ComboBox x:Name="cathegoryComboBox" HorizontalAlignment="Left" Margin="106,468,0,0" VerticalAlignment="Top" Width="120 " ItemsSource="{local:EnumBindingSourceExtension local:CathegoryEnum}"/>
+        <TextBox x:Name="dimsTextBoxL" HorizontalAlignment="Left" Margin="118,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="pointsTextBox" HorizontalAlignment="Left" Margin="118,518,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="dateTextBox" HorizontalAlignment="Left" Margin="143,418,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="dimsTextBoxH" HorizontalAlignment="Left" Margin="168,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="dimsTextBoxW" HorizontalAlignment="Left" Margin="218,495,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="354,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Grid.ColumnSpan="2"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="294,412,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="DescTextBox" HorizontalAlignment="Left" Margin="354,447,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="313" Height="106" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="descTextBox" HorizontalAlignment="Left" Margin="354,447,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="313" Height="106" Grid.ColumnSpan="2"/>
         <Label Content="Description:" HorizontalAlignment="Left" Margin="271,443,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

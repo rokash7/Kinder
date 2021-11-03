@@ -23,13 +23,13 @@ namespace Kinder
         public AccountPage()
         {
             InitializeComponent();
-            DataContext = User.getCurrentUser();
+            DataContext = User.GetCurrentUser();
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            var SettingsWindow = new Settings();
-            SettingsWindow.ShowDialog();
+            var settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
         }
 
         private void Give_Click(object sender, RoutedEventArgs e)
@@ -44,8 +44,8 @@ namespace Kinder
 
         private void Leaderboard_Click(object sender, RoutedEventArgs e)
         {
-            var LeaderboardWindow = new LeaderboardWindow();
-            LeaderboardWindow.ShowDialog();
+            var leaderboardWindow = new LeaderboardWindow();
+            leaderboardWindow.ShowDialog();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

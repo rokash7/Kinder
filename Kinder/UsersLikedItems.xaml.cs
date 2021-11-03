@@ -21,13 +21,13 @@ namespace Kinder
     /// </summary>
     public partial class UsersLikedItems : Window
     {
-        private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
-        private string FileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
+        private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
+        private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
         
-        private List<Item> ItemsList = new();
-        private List<LikedItemsClass> LikedItems = new();
-        private List<Item> Items = new();
-        private List<Data> GivenItems = new();
+        private List<Item> itemsList = new();
+        private List<LikedItemsClass> likedItems = new();
+        private List<Item> items = new();
+        private List<Data> givenItems = new();
         private static int deletedItemID;
 
         public UsersLikedItems()
@@ -41,47 +41,47 @@ namespace Kinder
 
         private void GetItems()
         {
-            Item Temp = new();
-            List<LikedItemsClass> TempList = new();
+            Item temp = new();
+            List<LikedItemsClass> tempList = new();
 
             //loading list of liked Items
-            using (StreamReader reader = new StreamReader(FileLocation_liked))
+            using (StreamReader reader = new StreamReader(fileLocation_liked))
             {
                 while (!reader.EndOfStream)
                 {
-                    int[] tempArr = Temp.ParsedLiked(reader.ReadLine());
-                    List<int> tempList = new();
+                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                    List<int> newTempList = new();
 
                     for (int i = 1; i < tempArr.Length; i++)
                     {
-                        tempList.Add(tempArr[i]);
+                        newTempList.Add(tempArr[i]);
                     }
 
-                    TempList.Add(new LikedItemsClass(tempArr[0], tempList));
-                    LikedItems.Add(new LikedItemsClass(tempArr[0], tempList));
+                    tempList.Add(new LikedItemsClass(tempArr[0], newTempList));
+                    likedItems.Add(new LikedItemsClass(tempArr[0], newTempList));
                 }
             }
 
             //loading list of all Items
-            List<Item> AllItemList = new();
+            List<Item> allItemList = new();
 
-            using (StreamReader reader = new StreamReader(FileLocation_items))
+            using (StreamReader reader = new StreamReader(fileLocation_items))
             {
                 while (!reader.EndOfStream)
                 {
-                    Temp = Temp.ParseData(reader.ReadLine());
-                    AllItemList.Add(Temp);
+                    temp = temp.ParseData(reader.ReadLine());
+                    allItemList.Add(temp);
                 }
             }
 
             //filter other users, only current one stays
             //mazj
-            var filteredLikedList = TempList.Where
+            var filteredLikedList = tempList.Where
                                         (p => p.UserID == User.CurrentUserID);
 
             //gathering data
             //mazoji
-            var Joined = filteredLikedList.First().ItemsIDs.GroupJoin(AllItemList, //inner sequence
+            var Joined = filteredLikedList.First().ItemsIDs.GroupJoin(allItemList, //inner sequence
                 id => id, //outter key
                 ite => ite.ID,  //inner key
                 (id, ite) => new { id, ite });
@@ -100,15 +100,15 @@ namespace Kinder
 
             foreach (var joined in Joined)
             {
-                Items.Add(joined.ite.First());
+                items.Add(joined.ite.First());
             }
         }
 
         private void LoadData()
         {
-            foreach (Item item in Items)
+            foreach (Item item in items)
             {
-                ItemsTable.Items.Add(item);
+                itemsTable.Items.Add(item);
             }
         }
         private void ReadGiven()
@@ -127,7 +127,7 @@ namespace Kinder
                     temp.ItemID = tempInt[0];
                     temp.ID = tempInt[1];
 
-                    GivenItems.Add(temp);
+                    givenItems.Add(temp);
                 }
             }
         }
@@ -135,32 +135,32 @@ namespace Kinder
         private void UnlikeButton_Click(object sender, RoutedEventArgs e)
         {
             //saving item:
-            Item classObj = ItemsTable.SelectedItem as Item;
+            Item classObj = itemsTable.SelectedItem as Item;
 
             //deleting item off items list
-            Items.Remove(classObj);
+            items.Remove(classObj);
             LoadData();
 
             //deleting item off table
-            ItemsTable.Items.Clear();
+            itemsTable.Items.Clear();
             LoadData();
 
             //deleting item off liked items list
             using (StreamWriter writer = new StreamWriter(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\output.txt")))
             {
-                foreach (LikedItemsClass liked in LikedItems)
+                foreach (LikedItemsClass liked in likedItems)
                 {
                     writer.WriteLine(liked.ToString());
                 }
             }
 
-            LikedItemsClass tempObj = LikedItems.First(p => p.UserID == User.CurrentUserID);
-            LikedItems[LikedItems.IndexOf(tempObj)].ItemsIDs.Remove(classObj.ID);
+            LikedItemsClass tempObj = likedItems.First(p => p.UserID == User.CurrentUserID);
+            likedItems[likedItems.IndexOf(tempObj)].ItemsIDs.Remove(classObj.ID);
 
             //rewriting list to file
-            using (StreamWriter writer = new StreamWriter(FileLocation_liked))
+            using (StreamWriter writer = new StreamWriter(fileLocation_liked))
             {
-                foreach (LikedItemsClass liked in LikedItems)
+                foreach (LikedItemsClass liked in likedItems)
                 {
                     writer.WriteLine(liked.ToString());
                 }
@@ -168,15 +168,15 @@ namespace Kinder
         }
         private void ReadDataFromFile()
         {
-            ItemsList.Clear();
+            itemsList.Clear();
 
-            StreamReader file = new(FileLocation_items);
+            StreamReader file = new(fileLocation_items);
             Item temp = new();
 
             string line;
             while ((line = file.ReadLine()) != null)
             {
-                ItemsList.Add(temp.ParseData(line));
+                itemsList.Add(temp.ParseData(line));
             }
 
             file.Close();
@@ -185,9 +185,9 @@ namespace Kinder
         private void ReWriteFile(int itemID = -1)
         {
             //rewriting items file:
-            using (StreamWriter file = new(FileLocation_items))
+            using (StreamWriter file = new(fileLocation_items))
             {
-                foreach (Item item in ItemsList)
+                foreach (Item item in itemsList)
                 {
                     file.WriteLine(item.ToString());
                 }
@@ -196,23 +196,23 @@ namespace Kinder
             //rewrite liked items file:
             if (itemID != -1)
             {
-                Item Temp = new();
+                Item temp = new();
                 List<LikedItemsClass> TempList = new();
 
                 //read current liked
-                using (StreamReader reader = new StreamReader(FileLocation_liked))
+                using (StreamReader reader = new StreamReader(fileLocation_liked))
                 {
                     while (!reader.EndOfStream)
                     {
-                        int[] tempArr = Temp.ParsedLiked(reader.ReadLine());
-                        List<int> tempList = new();
+                        int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                        List<int> newTempList = new();
 
                         for (int i = 1; i < tempArr.Length; i++)
                         {
-                            tempList.Add(tempArr[i]);
+                            newTempList.Add(tempArr[i]);
                         }
 
-                        TempList.Add(new LikedItemsClass(tempArr[0], tempList));
+                        TempList.Add(new LikedItemsClass(tempArr[0], newTempList));
                     }
                 }
 
@@ -223,7 +223,7 @@ namespace Kinder
                 }
 
                 //upload updated liked list to file
-                using (StreamWriter writer = new StreamWriter(FileLocation_liked))
+                using (StreamWriter writer = new StreamWriter(fileLocation_liked))
                 {
                     foreach (LikedItemsClass liked in TempList)
                     {
@@ -233,7 +233,7 @@ namespace Kinder
 
                 using (StreamWriter w = new(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))
                 {
-                    foreach (var item in GivenItems)
+                    foreach (var item in givenItems)
                     {
                         if(item.ItemID != itemID)
                         {
@@ -255,17 +255,17 @@ namespace Kinder
 
         private void ClaimButton_Click(object sender, RoutedEventArgs e)
         {
-            Item classObj = ItemsTable.SelectedItem as Item;
+            Item classObj = itemsTable.SelectedItem as Item;
             Data temp = new Data(classObj.ID, User.CurrentUserID);
 
-            if (GivenItems.Contains(temp))
+            if (givenItems.Contains(temp))
             {
-                Items.Remove(classObj);
-                ItemsTable.Items.Clear();
+                items.Remove(classObj);
+                itemsTable.Items.Clear();
                 LoadData();
 
-                ItemsList.Remove(classObj);
-                GivenItems.Remove(temp);
+                itemsList.Remove(classObj);
+                givenItems.Remove(temp);
                 ReWriteFile(classObj.ID);
 
                 ReleaseKarmaPoints(classObj);

@@ -28,7 +28,7 @@ namespace Kinder.Classes
             string[] dimsParsed = data[5].Split(',');
 
             //named argument usage:
-            result.Size = new Dimensions(Length: int.Parse(dimsParsed[0]), Height: int.Parse(dimsParsed[1]), Width: int.Parse(dimsParsed[2]));
+            result.Size = new Dimensions(length: int.Parse(dimsParsed[0]), height: int.Parse(dimsParsed[1]), width: int.Parse(dimsParsed[2]));
             result.SizeStr = result.Size.ToString();
 
             result.KarmaPrice = int.Parse(data[6]);
