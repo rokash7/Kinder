@@ -28,8 +28,8 @@ namespace Kinder
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new Settings();
-            settingsWindow.ShowDialog();
+            var SettingsWindow = new Settings();
+            SettingsWindow.ShowDialog();
         }
 
         private void Give_Click(object sender, RoutedEventArgs e)
@@ -44,8 +44,8 @@ namespace Kinder
 
         private void Leaderboard_Click(object sender, RoutedEventArgs e)
         {
-            var leaderboardWindow = new LeaderboardWindow();
-            leaderboardWindow.ShowDialog();
+            var LeaderboardWindow = new LeaderboardWindow();
+            LeaderboardWindow.ShowDialog();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

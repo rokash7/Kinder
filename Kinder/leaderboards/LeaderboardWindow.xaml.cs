@@ -51,7 +51,7 @@ namespace Kinder
 
         private void ShowData(List<UserLeaderboard> tempUserList)
         {
-            //linq query to sort data
+            //linq  to sort data
             tempUserList.Sort((x, y) => y.KarmaPoints.CompareTo(x.KarmaPoints));
 
             int i = 0;

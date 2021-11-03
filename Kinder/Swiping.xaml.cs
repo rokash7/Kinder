@@ -79,11 +79,22 @@ namespace Kinder
             }
         }
 
+        private bool ItemsListIsEmpty()
+        {
+            if (ItemList.First().ID == -1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void RenderItem()
         {
-            if (ItemList.Count < 1)
+            if (ItemList.Count == 0)
             {
-                MessageBox.Show("No more items left");
+                ItemList.Add(new Item(-1));
+                TextBox_String.Text = "no items left";
             }
             else
             {
@@ -94,23 +105,25 @@ namespace Kinder
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ItemList.Count < 1)
+            if (ItemsListIsEmpty())
             {
-                MessageBox.Show("No more items left");
+                MessageBox.Show("No more left");
             }
             else
             {
+                ItemList.Add(ItemList.First());
                 ItemList.RemoveAt(0);
-                RenderItem();
+
+                RenderItem(); 
             }
         }
 
         private void LikeItemButton_Click(object sender, RoutedEventArgs e)
         {
             //save current item
-            if (ItemList.Count < 1)
+            if (ItemsListIsEmpty())
             {
-                MessageBox.Show("You've literally liked all the items...");
+                MessageBox.Show("No more left");
             }
             else
             {
@@ -172,21 +185,27 @@ namespace Kinder
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            var logInPage = new MainWindow();
-            logInPage.Show();
+            var LogInPage = new MainWindow();
+            LogInPage.Show();
             this.Close();
         }
 
         private void ItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemsListing itemsListing = new();
-            itemsListing.Show();
+            ItemsListing ItemsListing = new();
+            ItemsListing.Show();
         }
 
         private void LikedItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            LikedItems likedItems = new();
-            likedItems.Show();
+            LikedItems LikedItems = new();
+            LikedItems.Show();
+        }
+        
+        private void UsersLikedItemsPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            UsersLikedItems UsersLikedItems = new();
+            UsersLikedItems.Show();
         }
     }
 

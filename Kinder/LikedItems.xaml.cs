@@ -32,12 +32,14 @@ namespace Kinder
         private List<Item> AllItemList = new();
         private List<LikedItemsClass> LikedItemList = new();
         private List<DataStore<int, string, string, string, string>> Data = new();
+        private List<DataStore<int, string, string, string, string>> GivenItems = new();
 
         public LikedItems()
         {
             InitializeComponent();
             LoadData();
             ProcessingLists();
+            ReadGiven();
             UploadData();
         }
 
@@ -98,7 +100,6 @@ namespace Kinder
                     {
                         if (item.ID == id)
                         {
-                            //AllItemList[i].LikedBy = liked.UserID;
                             Item Temp = item;
                             Temp.LikedBy = liked.UserID;
 
@@ -148,32 +149,84 @@ namespace Kinder
                 {
                     DataStore<int, string, string, string, string> Temp = new();
 
+                    Temp.UserID = user.ID;
                     Temp.ItemID = item.ite.ID;
                     Temp.ItemName = item.ite.Name;
                     Temp.ItemDesc = item.ite.Description;
                     Temp.Username = user.Username;
                     Temp.Email = user.Email;
+                    Temp.Line = DataLine(item.ite.ID, user.ID);
 
                     Data.Add(Temp);
                 }
-            }            
+            }
         }
+
+        private void ReadGiven()
+        {
+            using (StreamReader r = new(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))
+            {
+                while (!r.EndOfStream)
+                {
+                    string line = r.ReadLine();
+
+                    DataStore<int, string, string, string, string> temp = new();
+
+                    string[] tempStr = line.Split(';');
+                    int[] tempInt = { int.Parse(tempStr[0]), int.Parse(tempStr[1]) };
+
+                    temp.ItemID = tempInt[0];
+                    temp.UserID = tempInt[1];
+
+                    GivenItems.Add(temp);
+                }
+            }
+
+            foreach (var i in GivenItems)
+            {
+                Data = Data.Where(p => !(p.UserID == i.UserID && p.ItemID == i.ItemID)).ToList();
+            }
+        }
+
         private void UploadData()
         {
+            ItemsTable.Items.Clear();
+
             foreach(var item in Data)
             {
                 ItemsTable.Items.Add(item);
             }
         }
 
+        private static string DataLine(int itemID, int userID)
+        {
+            return itemID.ToString() + ';' + userID.ToString();
+        }
+
+        private void GiveButton_Click(object sender, RoutedEventArgs e)
+        {   
+            int selected = ItemsTable.SelectedIndex;
+
+            using (StreamWriter w = File.AppendText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))
+            {
+                w.WriteLine(Data[selected].Line);
+            }
+
+            Data.RemoveAt(selected);
+            
+            UploadData();
+        }
+
         //generic class:
-        private class DataStore<TItemID, TItemName, TItemDesc, TUsername, TEmail>
+        public class DataStore<TItemID, TItemName, TItemDesc, TUsername, TEmail>
         {
             public TItemID ItemID { get; set; }
             public TItemName ItemName { get; set; }
             public TItemDesc ItemDesc { get; set; }
             public TUsername Username { get; set; }
             public TEmail Email { get; set; }
+            public string Line { get; set; }
+            public int UserID { get; set; }
         }
 
         private Item CustomParser(string line)
