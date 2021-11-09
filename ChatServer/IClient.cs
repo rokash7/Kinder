@@ -11,6 +11,6 @@ namespace ChatServer
         void BroadcastPictureMessage(string sender, byte[] img);
         void UnicastTextMessage(string sender, string message);
         void UnicastPictureMessage(string sender, byte[] img);
-        void ParticipantTyping(string sender);
+        //void ParticipantTyping(string sender);
     }
 }

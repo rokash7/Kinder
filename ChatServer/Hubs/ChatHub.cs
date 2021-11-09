@@ -104,13 +104,13 @@ namespace ChatServer.Hubs
                 Clients.Client(client.ID).UnicastPictureMessage(Context.ConnectionId, img);
             }
         }
-        public void Typing(string recepient)
-        {
-            if (string.IsNullOrEmpty(recepient)) return;
-            //var sender = Clients.CallerState.UserName;
-            User client = new User();
-            ChatClients.TryGetValue(recepient, out client);
-            Clients.Client(client.ID).ParticipantTyping(Context.ConnectionId);
-        }
+        //public void Typing(string recepient)
+        //{
+        //    if (string.IsNullOrEmpty(recepient)) return;
+        //    //var sender = Clients.CallerState.UserName;
+        //    User client = new User();
+        //    ChatClients.TryGetValue(recepient, out client);
+        //    Clients.Client(client.ID).ParticipantTyping(Context.ConnectionId);
+        //}
     }
 }
