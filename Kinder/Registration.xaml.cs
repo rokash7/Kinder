@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -56,7 +57,7 @@ namespace Kinder
                 errorUsername.Visibility = Visibility.Visible;
                 username.BorderBrush = Brushes.Red;
             }
-            
+
             errorNameSurname.Visibility = Visibility.Hidden;
             name.BorderBrush = Brushes.Green;
             surname.BorderBrush = Brushes.Green;
@@ -82,7 +83,7 @@ namespace Kinder
                 name.BorderBrush = Brushes.Red;
                 surname.BorderBrush = Brushes.Red;
             }
-            
+
             errorEmail.Visibility = Visibility.Hidden;
             email.BorderBrush = Brushes.Green;
             try                                                     ///Email try/catch block
@@ -110,7 +111,7 @@ namespace Kinder
                 errorEmail.Visibility = Visibility.Visible;
                 email.BorderBrush = Brushes.Red;
             }
-            
+
             errorPhoneNumber.Visibility = Visibility.Hidden;
             phoneNumber.BorderBrush = Brushes.Green;
             try                                                     ///Phonenumber try/catch block
@@ -143,7 +144,7 @@ namespace Kinder
             {
                 password.Password = passwordShow.Text;
             }
-            
+
             errorPassword.Visibility = Visibility.Hidden;
             password.BorderBrush = Brushes.Green;
             passwordShow.BorderBrush = Brushes.Green;
@@ -179,9 +180,9 @@ namespace Kinder
             if (count == 5)                          ////Simple thing that says if all boxes are filled correctly
             {
                 FileManager.AddUserIDToLiked(User.GetUserCount());
-                FileManager.AddNewUser(username.Text, password.Password, email.Text, phoneNumber.Text, name.Text, surname.Text, User.GetUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
+                FileManager.AddNewUser(username.Text, User.HashPassword(password.Password), email.Text, phoneNumber.Text, name.Text, surname.Text, User.GetUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
                 MessageBox.Show("User created successfully! Now  try to log in");
-                MainWindow loginPage = new MainWindow();
+                var loginPage = new MainWindow();
                 this.Close();
                 loginPage.Show();
             }

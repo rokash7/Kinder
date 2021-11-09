@@ -21,20 +21,33 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="7" Fill="#FAEACB"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="10" Fill="#FAEACB"/>
         <Rectangle Grid.Column="1" Grid.Row="1" Height="60" Grid.ColumnSpan="2" Fill="Gray"/>
 
-        <TextBlock x:Name="ProfileNameSurname" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="50" Text="Vardenis Pavardenis" TextAlignment="Center" FontSize="32"/>
-        <Image x:Name="ProfileImage" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="ProfileUsername" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Text="Username: " Margin="0, 5"/>
-        <TextBlock x:Name="ProfileBio" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Text="Sample Text for Bio" Margin="0, 5"/>
-        <TextBlock x:Name="ProfileKarma" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Text="Karma: " Margin="0, 5"/>
-        <Button x:Name="ProfileBack" Grid.Column="1" Grid.Row="7" Content="Back" Width="150" Height="50" Margin="5"/>
-        <Button x:Name="ProfileItems" Grid.Column="2" Grid.Row="7" Content="Items" Width="150" Height="50" Margin="5"/>
+        <TextBlock x:Name="profileNameSurname" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Height="50" TextAlignment="Center" FontSize="32">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} {1}">
+                    <Binding Path="Name" />
+                    <Binding Path="Surname" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <Image x:Name="profileImage" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="profileUsername" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Text="Username" HorizontalAlignment="Center" FontWeight="Bold" Margin="0, 5"/>
+        <TextBlock x:Name="profileUsernameDesc" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding Username}" HorizontalAlignment="Center" Margin="0, 5"/>
+        <TextBlock x:Name="profileBio" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Text="Sample Text for Bio" HorizontalAlignment="Center" FontWeight="Bold" Margin="0, 5"/>
+        <TextBlock x:Name="profileBioDesc" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Text="Currently nothing" HorizontalAlignment="Center" Margin="0, 5"/>
+        <TextBlock x:Name="profileKarma" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Text="Karma" HorizontalAlignment="Center" FontWeight="Bold" Margin="0, 5"/>
+        <TextBlock x:Name="profileKarmaDesc" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Text="{Binding KarmaPoints}" HorizontalAlignment="Center" Margin="0, 5"/>
+        <Button x:Name="profileBack" Grid.Column="1" Grid.Row="10" Content="Back" Width="150" Height="50" Margin="5" Click="ProfileBack_Click"/>
+        <Button x:Name="profileItems" Grid.Column="2" Grid.Row="10" Content="Items" Width="150" Height="50" Margin="5" Click="ProfileItems_Click"/>
     </Grid>
 </Window>

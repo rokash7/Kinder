@@ -94,12 +94,12 @@ namespace Kinder
             if (itemList.Count == 0)
             {
                 itemList.Add(new Item(-1));
-                TextBox_String.Text = "no items left";
+                textBox_String.Text = "no items left";
             }
             else
             {
                 MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
-                TextBox_String.Text = itemList.First().ToString().Replace(';', '\n');
+                textBox_String.Text = itemList.First().ToString().Replace(';', '\n');
             }
         }
 
@@ -114,7 +114,7 @@ namespace Kinder
                 itemList.Add(itemList.First());
                 itemList.RemoveAt(0);
 
-                RenderItem(); 
+                RenderItem();
             }
         }
 
@@ -168,7 +168,7 @@ namespace Kinder
         private void LeaderboardsPageButton_Click(object sender, RoutedEventArgs e)
         {
             var leaderboardPageWindow = new LeaderboardWindow();
-            leaderboardPageWindow.ShowDialog();
+            leaderboardPageWindow.Show();
         }
 
         private void CommunicationPageButton_Click(object sender, RoutedEventArgs e)
@@ -192,19 +192,19 @@ namespace Kinder
 
         private void ItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemsListing itemsListing = new();
+            var itemsListing = new ItemsListing();
             itemsListing.Show();
         }
 
         private void LikedItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            LikedItems likedItems = new();
+            var likedItems = new LikedItems();
             likedItems.Show();
         }
-        
+
         private void UsersLikedItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            UsersLikedItems usersLikedItems = new();
+            var usersLikedItems = new UsersLikedItems();
             usersLikedItems.Show();
         }
     }

@@ -11,9 +11,8 @@
             <ColumnDefinition Width="239*"/>
             <ColumnDefinition Width="161*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="leaderboard" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="335" Height="300" Grid.ColumnSpan="2">
-
-            <DataGrid.Resources>
+        <DataGrid x:Name="leaderboard" MouseDoubleClick="Leaderboard_MouseDoubleClick" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="335" Height="300" Grid.ColumnSpan="2">
+            <DataGrid.Resources >
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="Gray"></Setter>
                     <Setter Property="FontWeight" Value="bold"></Setter>
@@ -22,11 +21,11 @@
                 </Style>
             </DataGrid.Resources>
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="place" Binding="{Binding Place}" Width="50"></DataGridTextColumn>
-                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="125"></DataGridTextColumn>
-                <DataGridTextColumn Header="registered at" Binding="{Binding RegistrationDateString}" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="Points" Binding="{Binding KarmaPoints}" Width="*"></DataGridTextColumn>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Place" Binding="{Binding Place}" Width="50" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="125" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Registered at" Binding="{Binding RegistrationDateString}" Width="100" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Points" Binding="{Binding KarmaPoints}" Width="*" IsReadOnly="True"></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>

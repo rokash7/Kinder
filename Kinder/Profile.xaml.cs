@@ -19,9 +19,21 @@ namespace Kinder
     /// </summary>
     public partial class Profile : Window
     {
-        public Profile()
+        public Profile(string username)
         {
             InitializeComponent();
+            DataContext = User.GetUserByUsername(username);
+        }
+
+        private void ProfileBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ProfileItems_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Currently this feature does not work");
+
         }
     }
 }

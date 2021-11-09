@@ -51,19 +51,22 @@ namespace Kinder
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                if (newVisiblePassword.Text != newPassword.Password && newVisiblePassword.Visibility == Visibility.Visible)
+                {
+                    newPassword.Password = newVisiblePassword.Text;
+                }
                 RegValidation.CheckTextBoxInput(newPassword.Password);
                 RegValidation.CheckIfFieldIsValid(newPassword.Password);
                 RegValidation.CheckIfPasswordValid(newPassword.Password);
                 User.CheckPassword(CurrentPassword.Password);
-                
-                User.ChangeUserPassword(newPassword.Password);
+
+                User.ChangeUserPassword(User.HashPassword(newPassword.Password));
                 MessageBox.Show("Password changed");
             }
             catch (EmptyFieldException ex)
@@ -81,6 +84,22 @@ namespace Kinder
             catch (IncorrectPasswordException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ShowPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (newVisiblePassword.Visibility == Visibility.Hidden)
+            {
+                newVisiblePassword.Visibility = Visibility.Visible;
+                newPassword.Visibility = Visibility.Hidden;
+                newVisiblePassword.Text = newPassword.Password;
+            }
+            else
+            {
+                newVisiblePassword.Visibility = Visibility.Hidden;
+                newPassword.Visibility = Visibility.Visible;
+                newPassword.Password = newVisiblePassword.Text;
             }
         }
     }
