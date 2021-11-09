@@ -28,7 +28,6 @@ namespace Kinder
         private List<LikedItemsClass> likedItems = new();
         private List<Item> items = new();
         private List<Data> givenItems = new();
-        private static int deletedItemID;
 
         public UsersLikedItems()
         {
