@@ -7,17 +7,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Kinder.Database
 {
-    class Items
+    public class Items
     {
         public int ID { get; set; }
+        [Required]
         [MaxLength(10)]
         public string DateOfPurchase { get; set; }
         public ConditionEnum Condition { get; set; }
         public CathegoryEnum Category { get; set; }
-        public int UserID { get; set; }
+        [Required]
         [MaxLength(20)]
         public string Size { get; set; }
         public int KarmaPrice { get; set; }
+        [Required]
         [MaxLength(50)]
         public string Name { get; set; }
         [MaxLength(250)]
