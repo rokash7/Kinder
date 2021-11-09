@@ -29,31 +29,31 @@ namespace Kinder
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
-            var RegPage = new RegistrationWindow();
+            var regPage = new RegistrationWindow();
             this.Close();
-            RegPage.Show();
+            regPage.Show();
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (User.CheckLogin(Username.Text, Password.Password))
+            if (User.CheckLogin(username.Text, password.Password))
             {
-                var MainPage = new Swiping();
-                MainPage.Show();
+                var mainPage = new Swiping();
+                mainPage.Show();
                 this.Close();
             }
             else
             {
-                Username.BorderBrush = Brushes.Red;
-                Password.BorderBrush = Brushes.Red;
+                username.BorderBrush = Brushes.Red;
+                password.BorderBrush = Brushes.Red;
                 MessageBox.Show("Incorrect password or username, try again");
             }
         }
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)          ///Testing button
         {
-            using UsersContext Context = new UsersContext();    // Adding test data for DB
-            Context.Users.Add(new Users()
+            using UsersContext context = new UsersContext();    // Adding test data for DB
+            context.Users.Add(new Users()
             {
                 Username = "admin",
                 Password = "admin",
@@ -64,7 +64,7 @@ namespace Kinder
                 KarmaPoints = 420,
                 RegDate = "2020-12-16"
             });
-            Context.Users.Add(new Users()
+            context.Users.Add(new Users()
             {
                 Username = "dude1",
                 Password = "password1",
@@ -75,7 +75,7 @@ namespace Kinder
                 KarmaPoints = 0,
                 RegDate = "2020-12-16"
             });
-            Context.Users.Add(new Users()
+            context.Users.Add(new Users()
             {
                 Username = "dude2",
                 Password = "password2",
@@ -86,7 +86,7 @@ namespace Kinder
                 KarmaPoints = 10,
                 RegDate = "2020-12-16"
             });
-            Context.Items.Add(new Items()
+            context.Items.Add(new Items()
             {
                 DateOfPurchase = "2020-01-05",
                 Condition = ConditionEnum.Fair,
@@ -97,7 +97,7 @@ namespace Kinder
                 Name = "Unnamed Item",
                 Description = "Undescribed Item",
             });
-            Context.Items.Add(new Items()
+            context.Items.Add(new Items()
             {
                 DateOfPurchase = "2020-01-05",
                 Condition = ConditionEnum.Near_mint,
@@ -108,7 +108,7 @@ namespace Kinder
                 Name = "Djungelskog",
                 Description = "A rather large bear plushie",
             });
-            Context.SaveChanges();
+            context.SaveChanges();
             //LikedItems a = new();
             //a.Show();
             //LeaderboardWindow page = new LeaderboardWindow();

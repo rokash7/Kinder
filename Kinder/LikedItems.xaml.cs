@@ -24,15 +24,15 @@ namespace Kinder
     public partial class LikedItems : Window
     {
         //files locations:
-        private string FileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
-        private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
+        private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
+        private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         //collection lists:
-        private List<User> UserList = new();
-        private List<Item> AllItemList = new();
-        private List<LikedItemsClass> LikedItemList = new();
-        private List<DataStore<int, string, string, string, string>> Data = new();
-        private List<DataStore<int, string, string, string, string>> GivenItems = new();
+        private List<User> userList = new();
+        private List<Item> allItemList = new();
+        private List<LikedItemsClass> likedItemList = new();
+        private List<DataStore<int, string, string, string, string>> data = new();
+        private List<DataStore<int, string, string, string, string>> givenItems = new();
 
         public LikedItems()
         {
@@ -45,24 +45,24 @@ namespace Kinder
 
         private void LoadData()
         {
-            Item Temp = new();
+            Item temp = new();
 
             //loading list of all items
-            using (StreamReader reader = new StreamReader(FileLocation_items))
+            using (StreamReader reader = new StreamReader(fileLocation_items))
             {
                 while (!reader.EndOfStream)
                 {
-                    Temp = Temp.ParseData(reader.ReadLine());
-                    AllItemList.Add(Temp);
+                    temp = temp.ParseData(reader.ReadLine());
+                    allItemList.Add(temp);
                 }
             }
 
             //loading list of liked items
-            using (StreamReader reader = new StreamReader(FileLocation_liked))
+            using (StreamReader reader = new StreamReader(fileLocation_liked))
             {
                 while (!reader.EndOfStream)
                 {
-                    int[] tempArr = Temp.ParsedLiked(reader.ReadLine());
+                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
                     List<int> tempList = new();
 
                     for (int i = 1; i < tempArr.Length; i++)
@@ -70,42 +70,42 @@ namespace Kinder
                         tempList.Add(tempArr[i]);
                     }
 
-                    LikedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
+                    likedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
                 }
             }
 
             //loading list of users
-            FileManager Temp2 = new();
+            FileManager temp2 = new();
 
-            for(int i = 0; i < User.getUserCount(); i++)
+            for(int i = 0; i < User.GetUserCount(); i++)
             {
                 //indexed property use:
-                UserList.Add(Temp2[i]);
+                userList.Add(temp2[i]);
             }
         }
 
         private void ProcessingLists()
         {
             //generating list of Item class for liked items
-            List<Item> LikedItemListSelected = new();
+            List<Item> likedItemListSelected = new();
 
             File.WriteAllText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Save.txt"), String.Empty);
 
             //iterating collections:
-            foreach (LikedItemsClass liked in LikedItemList)
+            foreach (LikedItemsClass liked in likedItemList)
             {
                 foreach(int id in liked.ItemsIDs)
                 {
-                    foreach(Item item in AllItemList)
+                    foreach(Item item in allItemList)
                     {
                         if (item.ID == id)
                         {
-                            Item Temp = item;
-                            Temp.LikedBy = liked.UserID;
+                            Item temp = item;
+                            temp.LikedBy = liked.UserID;
 
                             using (StreamWriter w = File.AppendText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Save.txt")))
                             {
-                                w.WriteLine(CustomToString(Temp));
+                                w.WriteLine(CustomToString(temp));
                             }
                         }
                     }
@@ -116,16 +116,16 @@ namespace Kinder
             {
                 while (!r.EndOfStream)
                 {
-                    LikedItemListSelected.Add(CustomParser(r.ReadLine()));
+                    likedItemListSelected.Add(CustomParser(r.ReadLine()));
                 }
             }
             
             //filtering list, so that we see items only uploaded by current user
-            var FilteredLikedList = LikedItemListSelected.Where
+            var filteredLikedList = likedItemListSelected.Where
                                         (p => p.UserID == User.CurrentUserID);
 
             //gathering data in linq GroupJoin method
-            var Joined = FilteredLikedList.GroupJoin(UserList, //inner sequence
+            var Joined = filteredLikedList.GroupJoin(userList, //inner sequence
                 ite => ite.LikedBy, //outter key
                 usr => usr.ID,  //inner key
                 (ite, usr) => new { ite, usr });
@@ -147,17 +147,17 @@ namespace Kinder
             {
                 foreach(var user in item.usr)
                 {
-                    DataStore<int, string, string, string, string> Temp = new();
+                    DataStore<int, string, string, string, string> temp = new();
 
-                    Temp.UserID = user.ID;
-                    Temp.ItemID = item.ite.ID;
-                    Temp.ItemName = item.ite.Name;
-                    Temp.ItemDesc = item.ite.Description;
-                    Temp.Username = user.Username;
-                    Temp.Email = user.Email;
-                    Temp.Line = DataLine(item.ite.ID, user.ID);
+                    temp.UserID = user.ID;
+                    temp.ItemID = item.ite.ID;
+                    temp.ItemName = item.ite.Name;
+                    temp.ItemDesc = item.ite.Description;
+                    temp.Username = user.Username;
+                    temp.Email = user.Email;
+                    temp.Line = DataLine(item.ite.ID, user.ID);
 
-                    Data.Add(Temp);
+                    data.Add(temp);
                 }
             }
         }
@@ -178,23 +178,23 @@ namespace Kinder
                     temp.ItemID = tempInt[0];
                     temp.UserID = tempInt[1];
 
-                    GivenItems.Add(temp);
+                    givenItems.Add(temp);
                 }
             }
 
-            foreach (var i in GivenItems)
+            foreach (var i in givenItems)
             {
-                Data = Data.Where(p => !(p.UserID == i.UserID && p.ItemID == i.ItemID)).ToList();
+                data = data.Where(p => !(p.UserID == i.UserID && p.ItemID == i.ItemID)).ToList();
             }
         }
 
         private void UploadData()
         {
-            ItemsTable.Items.Clear();
+            itemsTable.Items.Clear();
 
-            foreach(var item in Data)
+            foreach(var item in data)
             {
-                ItemsTable.Items.Add(item);
+                itemsTable.Items.Add(item);
             }
         }
 
@@ -205,14 +205,14 @@ namespace Kinder
 
         private void GiveButton_Click(object sender, RoutedEventArgs e)
         {   
-            int selected = ItemsTable.SelectedIndex;
+            int selected = itemsTable.SelectedIndex;
 
             using (StreamWriter w = File.AppendText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))
             {
-                w.WriteLine(Data[selected].Line);
+                w.WriteLine(data[selected].Line);
             }
 
-            Data.RemoveAt(selected);
+            data.RemoveAt(selected);
             
             UploadData();
         }
@@ -247,7 +247,7 @@ namespace Kinder
             string[] dimsParsed = data[5].Split(',');
 
             //named argument usage:
-            result.Size = new Dimensions(Length: int.Parse(dimsParsed[0]), Height: int.Parse(dimsParsed[1]), Width: int.Parse(dimsParsed[2]));
+            result.Size = new Dimensions(length: int.Parse(dimsParsed[0]), height: int.Parse(dimsParsed[1]), width: int.Parse(dimsParsed[2]));
             result.SizeStr = result.Size.ToString();
 
             result.KarmaPrice = int.Parse(data[6]);
@@ -260,9 +260,9 @@ namespace Kinder
             return result;
         }
 
-        private String CustomToString(Item ItemObj)
+        private String CustomToString(Item itemObj)
         {
-            return ItemObj.ToString() + ';' + ItemObj.LikedBy.ToString();
+            return itemObj.ToString() + ';' + itemObj.LikedBy.ToString();
         }
     }
 }

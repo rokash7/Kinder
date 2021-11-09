@@ -10,14 +10,14 @@ namespace Kinder.Classes
 {
     class FileManager
     {
-        static string Path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
-        static string FileLocation = System.IO.Path.Combine(Path, "Data_files\\Users.txt");
-        static string FileLocation_liked = System.IO.Path.Combine(Path, "Data_files\\Items_liked.txt");
-        public static List<User> getUsers()
+        static string path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
+        static string fileLocation = System.IO.Path.Combine(path, "Data_files\\Users.txt");
+        static string fileLocation_liked = System.IO.Path.Combine(path, "Data_files\\Items_liked.txt");
+        public static List<User> GetUsers()
         {
             List<User> users = new List<User>();
             users.Clear();
-            using (StreamReader reader = new StreamReader(FileLocation))
+            using (StreamReader reader = new StreamReader(fileLocation))
             {
                 string[] userData;
                 while (!reader.EndOfStream)
@@ -40,40 +40,40 @@ namespace Kinder.Classes
         }
 
         //indexed property:
-        private User[] Users = getUsers().ToArray();
+        private User[] users = GetUsers().ToArray();
 
         public User this[int index] 
         {
             get
             {
-                return Users[index];
+                return users[index];
             }
             set
             {
-                Users[index] = value;
+                users[index] = value;
             }
         }
 
-        public static void AddNewUser(string Username, string Password, string Email, string PhoneNumber, string Name, string Surname, int ID, string RegDate)
+        public static void AddNewUser(string username, string password, string email, string phoneNumber, string name, string surname, int id, string regDate)
         {
-            using (StreamWriter sw = new StreamWriter(FileLocation, true))
+            using (StreamWriter sw = new StreamWriter(fileLocation, true))
             {
-                sw.WriteLine(ID.ToString() + ' ' + Username + ' ' + Password + ' ' + Email + ' ' + PhoneNumber + ' ' + Name + ' ' + Surname + ' ' + 0 + ' ' + RegDate);
+                sw.WriteLine(id.ToString() + ' ' + username + ' ' + password + ' ' + email + ' ' + phoneNumber + ' ' + name + ' ' + surname + ' ' + 0 + ' ' + regDate);
             }
         }
         
         public static void ChangeUserField(User user)
         {
-            string[] UsersText = File.ReadAllLines(FileLocation);
-            UsersText[user.ID] = user.ID.ToString() + ' ' + user.Username + ' ' + user.Password + ' ' + user.Email + ' ' + user.PhoneNumber + ' ' + user.Name + ' ' + user.Surname + ' ' + user.KarmaPoints.ToString() + ' ' + user.RegDate;
-            File.WriteAllLines(FileLocation, UsersText);
+            string[] usersText = File.ReadAllLines(fileLocation);
+            usersText[user.ID] = user.ID.ToString() + ' ' + user.Username + ' ' + user.Password + ' ' + user.Email + ' ' + user.PhoneNumber + ' ' + user.Name + ' ' + user.Surname + ' ' + user.KarmaPoints.ToString() + ' ' + user.RegDate;
+            File.WriteAllLines(fileLocation, usersText);
         }
     
-        public static void AddUserIDToLiked(int ID)
+        public static void AddUserIDToLiked(int id)
         {
-            using (StreamWriter sw = new StreamWriter(FileLocation_liked, true))
+            using (StreamWriter sw = new StreamWriter(fileLocation_liked, true))
             {
-                sw.WriteLine(ID.ToString());
+                sw.WriteLine(id.ToString());
             }
         }
     }

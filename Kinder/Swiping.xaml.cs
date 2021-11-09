@@ -21,10 +21,10 @@ namespace Kinder
     /// </summary>
     public partial class Swiping : Window
     {
-        private List<Item> ItemList = new();
-        private List<LikedItemsClass> LikedItems = new();
-        private string FileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
-        private string FileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
+        private List<Item> itemList = new();
+        private List<LikedItemsClass> likedItems = new();
+        private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
+        private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         public Swiping()
         {
@@ -36,27 +36,27 @@ namespace Kinder
         private void LoadItems()
         {
             //loading all items:
-            StreamReader FileAllItems = new(FileLocation_items);
-            Item Temp = new();
+            StreamReader fileAllItems = new(fileLocation_items);
+            Item temp = new();
 
-            string Line;
-            while ((Line = FileAllItems.ReadLine()) != null)
+            string line;
+            while ((line = fileAllItems.ReadLine()) != null)
             {
                 //extention method usage
-                ItemList.Add(Temp.ParseData(Line));
+                itemList.Add(temp.ParseData(line));
             }
 
-            FileAllItems.Close();
+            fileAllItems.Close();
 
             //linq query to filter
-            ItemList = ItemList.Where(p => p.UserID != User.CurrentUserID).ToList();
+            itemList = itemList.Where(p => p.UserID != User.CurrentUserID).ToList();
 
             //loading already liked items
-            StreamReader FileLikedItems = new(FileLocation_liked);
+            StreamReader fileLikedItems = new(fileLocation_liked);
 
-            while ((Line = FileLikedItems.ReadLine()) != null)
+            while ((line = fileLikedItems.ReadLine()) != null)
             {
-                int[] tempArr = Temp.ParsedLiked(Line);
+                int[] tempArr = temp.ParsedLiked(line);
                 List<int> tempList = new();
 
                 for (int i = 1; i < tempArr.Length; i++)
@@ -64,24 +64,24 @@ namespace Kinder
                     tempList.Add(tempArr[i]);
                 }
 
-                LikedItems.Add(new LikedItemsClass(tempArr[0], tempList));
+                likedItems.Add(new LikedItemsClass(tempArr[0], tempList));
             }
 
-            FileLikedItems.Close();
+            fileLikedItems.Close();
 
             //filtering already liked items
-            List<LikedItemsClass> ToDelete = new();
-            ToDelete = LikedItems.Where(p => p.UserID == User.CurrentUserID).ToList();
+            List<LikedItemsClass> toDelete = new();
+            toDelete = likedItems.Where(p => p.UserID == User.CurrentUserID).ToList();
 
-            foreach (LikedItemsClass likedItem in ToDelete)
+            foreach (LikedItemsClass likedItem in toDelete)
             {
-                ItemList = ItemList.Where(p => likedItem.ItemsIDs.Contains(p.ID) == false).ToList();
+                itemList = itemList.Where(p => likedItem.ItemsIDs.Contains(p.ID) == false).ToList();
             }
         }
 
         private bool ItemsListIsEmpty()
         {
-            if (ItemList.First().ID == -1)
+            if (itemList.First().ID == -1)
             {
                 return true;
             }
@@ -91,15 +91,15 @@ namespace Kinder
 
         private void RenderItem()
         {
-            if (ItemList.Count == 0)
+            if (itemList.Count == 0)
             {
-                ItemList.Add(new Item(-1));
+                itemList.Add(new Item(-1));
                 TextBox_String.Text = "no items left";
             }
             else
             {
-                MessageBox.Show("Count of items loaded:" + ItemList.Count.ToString());
-                TextBox_String.Text = ItemList.First().ToString().Replace(';', '\n');
+                MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
+                TextBox_String.Text = itemList.First().ToString().Replace(';', '\n');
             }
         }
 
@@ -111,8 +111,8 @@ namespace Kinder
             }
             else
             {
-                ItemList.Add(ItemList.First());
-                ItemList.RemoveAt(0);
+                itemList.Add(itemList.First());
+                itemList.RemoveAt(0);
 
                 RenderItem(); 
             }
@@ -127,26 +127,26 @@ namespace Kinder
             }
             else
             {
-                int ViewedItemID = ItemList.First().ID;
-                LikedItemsClass Temp = new();
+                int viewedItemID = itemList.First().ID;
+                LikedItemsClass temp = new();
 
                 //update current liked item
-                foreach (LikedItemsClass liked in LikedItems)
+                foreach (LikedItemsClass liked in likedItems)
                 {
                     if (liked.UserID == User.CurrentUserID)
                     {
-                        liked.ItemsIDs.Add(ViewedItemID);
-                        Temp = liked;
+                        liked.ItemsIDs.Add(viewedItemID);
+                        temp = liked;
                     }
                 }
 
-                LikedItems = LikedItems.Where(p => p.UserID != User.CurrentUserID).ToList();
-                LikedItems.Add(Temp);
+                likedItems = likedItems.Where(p => p.UserID != User.CurrentUserID).ToList();
+                likedItems.Add(temp);
 
                 //rewrite current liked items list to file
-                StreamWriter file = new(FileLocation_liked);
+                StreamWriter file = new(fileLocation_liked);
 
-                foreach (LikedItemsClass like in LikedItems)
+                foreach (LikedItemsClass like in likedItems)
                 {
                     file.WriteLine(like.ToString());
                 }
@@ -154,58 +154,58 @@ namespace Kinder
                 file.Close();
 
                 //rendering sequence
-                ItemList.RemoveAt(0);
+                itemList.RemoveAt(0);
                 RenderItem();
             }
         }
 
         private void AccountPageButton_Click(object sender, RoutedEventArgs e)
         {
-            AccountPage AccountPageWindow = new AccountPage();
-            AccountPageWindow.ShowDialog();
+            var accountPageWindow = new AccountPage();
+            accountPageWindow.ShowDialog();
         }
 
         private void LeaderboardsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            LeaderboardWindow LeaderboardPageWindow = new LeaderboardWindow();
-            LeaderboardPageWindow.ShowDialog();
+            var leaderboardPageWindow = new LeaderboardWindow();
+            leaderboardPageWindow.ShowDialog();
         }
 
         private void CommunicationPageButton_Click(object sender, RoutedEventArgs e)
         {
-            ChatWindow CommunicationPageWindow = new ChatWindow();
-            CommunicationPageWindow.ShowDialog();
+            var communicationPageWindow = new ChatWindow();
+            communicationPageWindow.ShowDialog();
         }
 
         private void SettingsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            Settings SettingsPageWindow = new Settings();
-            SettingsPageWindow.ShowDialog();
+            var settingsPageWindow = new Settings();
+            settingsPageWindow.ShowDialog();
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            var LogInPage = new MainWindow();
-            LogInPage.Show();
+            var logInPage = new MainWindow();
+            logInPage.Show();
             this.Close();
         }
 
         private void ItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            ItemsListing ItemsListing = new();
-            ItemsListing.Show();
+            ItemsListing itemsListing = new();
+            itemsListing.Show();
         }
 
         private void LikedItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            LikedItems LikedItems = new();
-            LikedItems.Show();
+            LikedItems likedItems = new();
+            likedItems.Show();
         }
         
         private void UsersLikedItemsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            UsersLikedItems UsersLikedItems = new();
-            UsersLikedItems.Show();
+            UsersLikedItems usersLikedItems = new();
+            usersLikedItems.Show();
         }
     }
 
@@ -227,16 +227,16 @@ namespace Kinder
 
         public override string ToString()
         {
-            string Result = "";
+            string result = "";
 
-            Result += UserID;
+            result += UserID;
 
             foreach (int i in ItemsIDs)
             {
-                Result += ';' + i.ToString();
+                result += ';' + i.ToString();
             }
 
-            return Result;
+            return result;
         }
     }
 }

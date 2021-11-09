@@ -24,11 +24,11 @@ public class User
         set { _currentUserID = value; }
     }
     public User() { }
-    public static Boolean CheckLogin(string Username, string Password)
+    public static Boolean CheckLogin(string username, string password)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
-            if (Username == user.Username && Password == user.Password)
+            if (username == user.Username && password == user.Password)
             {
                 CurrentUserID = user.ID;
                 return true;
@@ -37,35 +37,35 @@ public class User
         return false;
     }
 
-    public static void CheckIfUserAlreadyExists(string Text)
+    public static void CheckIfUserAlreadyExists(string text)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
-            if (Text == user.Email || Text == user.PhoneNumber)
+            if (text == user.Email || text == user.PhoneNumber)
             {
                 throw (new UserAlreadyExistsException("User already exists! Try lo in!"));
             }
         }
     }
 
-    public static void CheckIfUsernameIsTaken(string Username)
+    public static void CheckIfUsernameIsTaken(string username)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
-            if (Username == user.Username)
+            if (username == user.Username)
             {
                 throw (new UsernameIsTakenException("Username is taken!"));
             }
         }
     }
 
-    public static void CheckPassword(string Password)
+    public static void CheckPassword(string password)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == CurrentUserID)
             {
-                if (user.Password != Password)
+                if (user.Password != password)
                 {
                     throw (new IncorrectPasswordException("Incorrect password!"));
                 }
@@ -73,28 +73,28 @@ public class User
         }
     }
 
-    public static int getUserCount()
+    public static int GetUserCount()
     {
-        return FileManager.getUsers().Count;
+        return FileManager.GetUsers().Count;
     }
 
-    public static User getCurrentUser()
+    public static User GetCurrentUser()
     {
-        User CurrentUser = new User(); 
-        foreach(User user in FileManager.getUsers())
+        User currentUser = new User(); 
+        foreach(User user in FileManager.GetUsers())
         {
             if(user.ID == CurrentUserID)
             {
-                CurrentUser = user;
+                currentUser = user;
             }
         }
-        return CurrentUser;
+        return currentUser;
     }
 
     public static User GetUserByID(int id)
     {
         User result = new User();
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == id)
             {
@@ -104,37 +104,37 @@ public class User
         return result;
     }
 
-    public static void ChangeUserEmail(string Text)
+    public static void ChangeUserEmail(string text)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == CurrentUserID)
             {
-                user.Email = Text;
+                user.Email = text;
                 FileManager.ChangeUserField(user);
             }
         }
     }
 
-    public static void ChangeUserPhoneNumber(string Text)
+    public static void ChangeUserPhoneNumber(string text)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == CurrentUserID)
             {
-                user.PhoneNumber = Text;
+                user.PhoneNumber = text;
                 FileManager.ChangeUserField(user);
             }
         }
     }
 
-    public static void ChangeUserPassword(string Text)
+    public static void ChangeUserPassword(string text)
     {
-        foreach (User user in FileManager.getUsers())
+        foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == CurrentUserID)
             {
-                user.Password = Text;
+                user.Password = text;
                 FileManager.ChangeUserField(user);
             }
         }

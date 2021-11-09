@@ -8,7 +8,7 @@
         Title="LikedItems" Height="450" Width="800">
     <Grid>
 
-        <DataGrid x:Name="ItemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="700" Height="300" Grid.ColumnSpan="2">
+        <DataGrid x:Name="itemsTable" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="700" Height="300" Grid.ColumnSpan="2">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -20,11 +20,11 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="item id" Binding="{Binding ItemID}" Width="50"></DataGridTextColumn>
-                <DataGridTextColumn Header="item name" Binding="{Binding ItemName}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Item id" Binding="{Binding ItemID}" Width="50"></DataGridTextColumn>
+                <DataGridTextColumn Header="Item name" Binding="{Binding ItemName}" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="username" Binding="{Binding Username}" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="user email" Binding="{Binding Email}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="User email" Binding="{Binding Email}" Width="100"></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>
