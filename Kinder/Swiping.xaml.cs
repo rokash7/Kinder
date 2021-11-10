@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +31,56 @@ namespace Kinder
             InitializeComponent();
             LoadItems();
             RenderItem();
+            
+            //anonymous methods as event handlers for page openings
+            AccountPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                AccountPage accountPageWindow = new AccountPage();
+                accountPageWindow.ShowDialog();
+            };
+
+            LeaderboardsPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                LeaderboardWindow leaderboardPageWindow = new LeaderboardWindow();
+                leaderboardPageWindow.ShowDialog();
+            };
+
+            CommunicationPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                ChatWindow communicationPageWindow = new ChatWindow();
+                communicationPageWindow.ShowDialog();
+            };
+
+            SettingsPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                Settings settingsPageWindow = new Settings();
+                settingsPageWindow.ShowDialog();
+            };
+
+            LikedItemsPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                LikedItems likedItems = new();
+                likedItems.Show();
+            };
+
+            UsersLikedItemsPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                UsersLikedItems usersLikedItems = new();
+                usersLikedItems.Show();
+            };
+
+            ItemsPageButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                ItemsListing itemsListing = new();
+                itemsListing.Show();
+            };
+
+            LogOutButton.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                var logInPage = new MainWindow();
+                logInPage.Show();
+                this.Close();
+            };
         }
 
         private void LoadItems()
@@ -79,6 +129,20 @@ namespace Kinder
             }
         }
 
+        private void RenderItem()
+        {
+            if (itemList.Count == 0)
+            {
+                itemList.Add(new Item(-1));
+                textBox_String.Text = "no items left";
+            }
+            else
+            {
+                MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
+                textBox_String.Text = itemList.First().ToString().Replace(';', '\n');
+            }
+        }
+
         private bool ItemsListIsEmpty()
         {
             if (itemList.First().ID == -1)
@@ -87,20 +151,6 @@ namespace Kinder
             }
 
             return false;
-        }
-
-        private void RenderItem()
-        {
-            if (itemList.Count == 0)
-            {
-                itemList.Add(new Item(-1));
-                TextBox_String.Text = "no items left";
-            }
-            else
-            {
-                MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
-                TextBox_String.Text = itemList.First().ToString().Replace(';', '\n');
-            }
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
@@ -114,7 +164,7 @@ namespace Kinder
                 itemList.Add(itemList.First());
                 itemList.RemoveAt(0);
 
-                RenderItem(); 
+                RenderItem();
             }
         }
 
@@ -157,55 +207,6 @@ namespace Kinder
                 itemList.RemoveAt(0);
                 RenderItem();
             }
-        }
-
-        private void AccountPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            var accountPageWindow = new AccountPage();
-            accountPageWindow.ShowDialog();
-        }
-
-        private void LeaderboardsPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            var leaderboardPageWindow = new LeaderboardWindow();
-            leaderboardPageWindow.ShowDialog();
-        }
-
-        private void CommunicationPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            var communicationPageWindow = new ChatWindow();
-            communicationPageWindow.ShowDialog();
-        }
-
-        private void SettingsPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            var settingsPageWindow = new Settings();
-            settingsPageWindow.ShowDialog();
-        }
-
-        private void LogOutButton_Click(object sender, RoutedEventArgs e)
-        {
-            var logInPage = new MainWindow();
-            logInPage.Show();
-            this.Close();
-        }
-
-        private void ItemsPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            ItemsListing itemsListing = new();
-            itemsListing.Show();
-        }
-
-        private void LikedItemsPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            LikedItems likedItems = new();
-            likedItems.Show();
-        }
-        
-        private void UsersLikedItemsPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            UsersLikedItems usersLikedItems = new();
-            usersLikedItems.Show();
         }
     }
 

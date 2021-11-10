@@ -38,14 +38,17 @@
         <Rectangle Grid.Column="3" Grid.Row="2" Grid.RowSpan="11" Fill="#FAEACB"/>
 
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Welcome to Kinder!" VerticalAlignment="Center" FontSize="36" FontWeight="DemiBold"/>
-        
+
         <TextBlock Grid.Column="3" Grid.Row="1" Text="Log In" HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="30" Margin="20, 0, 0, 0"/>
         <TextBlock Grid.Column="3" Grid.Row="2" Text="Username:" VerticalAlignment="Bottom" FontSize="20" Margin="20, 0, 0, 3"/>
-        <TextBlock Grid.Column="3" Grid.Row="5" Text="Password:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Margin="20, 0, 0, 3"/> 
+        <TextBlock Grid.Column="3" Grid.Row="5" Text="Password:" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20" Margin="20, 0, 0, 3"/>
         <TextBlock Grid.Column="3" Grid.Row="10" Text="Dont have an account?" HorizontalAlignment="Center" VerticalAlignment="Bottom"  FontSize="18" Margin="0, 0, 0, 5"/>
 
         <TextBox x:Name="username" Grid.Column="3" Grid.Row="3" FontSize="24" Background="#F6EEEA" Margin="20, 5, 20,5"/>
         <PasswordBox x:Name="password" Grid.Column="3" Grid.Row="6" FontSize="24"  Background="#F6EEEA" Margin="20, 5, 20,5"/>
+
+        <TextBlock x:Name="errorUsername" Grid.Column="1" Grid.Row="3" Text="" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"  Visibility="Hidden"/>
+        <TextBlock x:Name="errorPassword" Grid.Column="1" Grid.Row="6" Text="" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"  Visibility="Hidden"/>
 
         <Button Content="Log In" Grid.Column="3" Grid.Row="8" Background="#D1C3B7" FontSize="24" Margin="20, 5, 20,5" Click="LogIn_Click"/>
 

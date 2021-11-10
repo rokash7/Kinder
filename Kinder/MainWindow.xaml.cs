@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Kinder.Classes;
 using Kinder.Database;
 
 namespace Kinder
@@ -24,29 +25,45 @@ namespace Kinder
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();                               //abC1#321A
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
             var regPage = new RegistrationWindow();
-            this.Close();
-            regPage.Show();
+            regPage.ShowDialog();
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (User.CheckLogin(username.Text, password.Password))
+            try
             {
-                var mainPage = new Swiping();
-                mainPage.Show();
+                RegValidation.CheckTextBoxInput(username.Text);
+                User.CheckUsername(username.Text);
+                errorUsername.Visibility = Visibility.Hidden;
+                username.BorderBrush = Brushes.Green;
+                User.CheckPassword(password.Password);
+                var newPage = new Swiping();
+                newPage.Show();
                 this.Close();
             }
-            else
+            catch (UserDoesNotExistsException ex)
             {
                 username.BorderBrush = Brushes.Red;
+                errorUsername.Text = ex.Message;
+                errorUsername.Visibility = Visibility.Visible;
+            }
+            catch (IncorrectPasswordException ex)
+            {
                 password.BorderBrush = Brushes.Red;
-                MessageBox.Show("Incorrect password or username, try again");
+                errorPassword.Text = ex.Message;
+                errorPassword.Visibility = Visibility.Visible;
+            }
+            catch (EmptyFieldException ex)
+            {
+                errorUsername.Text = ex.Message;
+                errorUsername.Visibility = Visibility.Visible;
+                username.BorderBrush = Brushes.Red;
             }
         }
 

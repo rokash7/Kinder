@@ -45,19 +45,20 @@ namespace Kinder
             string line;
             while ((line = file.ReadLine()) != null)
             {
-                
+
                 itemsList.Add(temp.ParseData(line));
             }
 
             file.Close();
         }
 
+        //Lambda Expression on line 60
         private void DisplayData()
         {
             itemsList.Sort();
             itemsTable.Items.Clear();
 
-            foreach(Item item in itemsList.Where(p => p.UserID == currentUserID))
+            foreach (Item item in itemsList.Where(p => p.UserID == currentUserID))
             {
                 itemsTable.Items.Add(item);
             }
@@ -76,7 +77,7 @@ namespace Kinder
 
             //rewrite liked items file:
             if (itemID != -1)
-            {                
+            {
                 Item temp = new();
                 List<LikedItemsClass> tempList = new();
 
@@ -90,7 +91,7 @@ namespace Kinder
 
                         for (int i = 1; i < tempArr.Length; i++)
                         {
-                        newTempList.Add(tempArr[i]);
+                            newTempList.Add(tempArr[i]);
                         }
 
                         tempList.Add(new LikedItemsClass(tempArr[0], newTempList));
@@ -113,7 +114,7 @@ namespace Kinder
                 }
 
             }
-            
+
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -209,7 +210,7 @@ namespace Kinder
             ReadDataFromFile();
             DisplayData();
         }
-
+                
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             //saving item

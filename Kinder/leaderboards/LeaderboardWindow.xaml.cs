@@ -1,6 +1,7 @@
 ﻿using Kinder.Classes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +21,14 @@ namespace Kinder
     {
         //testing data
         private List<UserLeaderboard> userList = new();
-        
+
         private void UpdateUserList()
         {
             if (userList != null)
             {
                 userList.Clear();
             }
-            foreach(User user in FileManager.GetUsers())
+            foreach (User user in FileManager.GetUsers())
             {
                 userList.Add(new UserLeaderboard(user.Username, user.KarmaPoints, user.RegDate));
             }
@@ -79,6 +80,35 @@ namespace Kinder
                 Username = username;
                 KarmaPoints = karmaPoints;
                 RegistrationDateString = registrationDate;
+            }
+        }
+
+        private void Leaderboard_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            UserLeaderboard currUser = null;
+            try
+            {
+                int selIndex = leaderboard.SelectedIndex + 1;
+                foreach (UserLeaderboard user in userList)
+                {
+                    if (user.Place == selIndex)
+                    {
+                        currUser = user;
+                    }
+                }
+                if (currUser != null)
+                {
+                    var profilePage = new Profile(currUser.Username);
+                    profilePage.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong :/");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
     }

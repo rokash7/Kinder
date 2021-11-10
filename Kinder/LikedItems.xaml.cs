@@ -27,8 +27,12 @@ namespace Kinder
         private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
+        //fileManager
+        FileManager temp2 = new();
+
         //collection lists:
-        private List<User> userList = new();
+        private Lazy<List<User>> userList;
+
         private List<Item> allItemList = new();
         private List<LikedItemsClass> likedItemList = new();
         private List<DataStore<int, string, string, string, string>> data = new();
@@ -36,6 +40,18 @@ namespace Kinder
 
         public LikedItems()
         {
+            userList = new Lazy<List<User>>(delegate
+            {
+                List<User> temp = new();
+
+                for (int i = 0; i < User.GetUserCount(); i++)
+                {
+                    //indexed property use:
+                    temp.Add(temp2[i]);
+                }
+                return temp;
+            }, true);
+
             InitializeComponent();
             LoadData();
             ProcessingLists();
@@ -75,13 +91,8 @@ namespace Kinder
             }
 
             //loading list of users
-            FileManager temp2 = new();
 
-            for(int i = 0; i < User.GetUserCount(); i++)
-            {
-                //indexed property use:
-                userList.Add(temp2[i]);
-            }
+
         }
 
         private void ProcessingLists()
@@ -125,7 +136,7 @@ namespace Kinder
                                         (p => p.UserID == User.CurrentUserID);
 
             //gathering data in linq GroupJoin method
-            var Joined = filteredLikedList.GroupJoin(userList, //inner sequence
+            var Joined = filteredLikedList.GroupJoin(userList.Value, //inner sequence
                 ite => ite.LikedBy, //outter key
                 usr => usr.ID,  //inner key
                 (ite, usr) => new { ite, usr });
