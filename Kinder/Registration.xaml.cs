@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kinder.Classes;
+using Kinder.Database;
 
 namespace Kinder
 {
@@ -181,6 +182,21 @@ namespace Kinder
             {
                 FileManager.AddUserIDToLiked(User.GetUserCount());
                 FileManager.AddNewUser(username.Text, password.Password, email.Text, phoneNumber.Text, name.Text, surname.Text, User.GetUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
+                
+                /*using UsersContext context = new UsersContext();
+                context.Users.Add(new Users()
+                {
+                    Username = username.Text,
+                    Password = password.Password,
+                    Email = email.Text,
+                    PhoneNumber = phoneNumber.Text,
+                    Name = name.Text,
+                    Surname = surname.Text,
+                    KarmaPoints = 0,
+                    RegDate = DateTime.Now.ToString("yyyy-MM-dd")
+                });
+                context.SaveChanges();*/
+
                 MessageBox.Show("User created successfully! Now  try to log in");
                 MainWindow loginPage = new MainWindow();
                 this.Close();
