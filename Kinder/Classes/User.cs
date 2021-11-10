@@ -24,17 +24,13 @@ public class User
         set { _currentUserID = value; }
     }
     public User() { }
-    public static Boolean CheckLogin(string username, string password)
+    public static void CheckLogin(string username, string password)
     {
-        foreach (User user in FileManager.GetUsers())
-        {
-            if (username == user.Username && password == user.Password)
-            {
-                CurrentUserID = user.ID;
-                return true;
-            }
-        }
-        return false;
+        CheckUsername(username);
+
+
+
+
     }
 
     public static void CheckIfUserAlreadyExists(string text)
@@ -65,12 +61,25 @@ public class User
         {
             if (user.ID == CurrentUserID)
             {
-                if (user.Password != password)
+                if (!VerifyPassword(password, user.Password))
                 {
                     throw (new IncorrectPasswordException("Incorrect password!"));
                 }
             }
         }
+    }
+
+    public static Boolean CheckUsername(string username)
+    {
+        foreach (User user in FileManager.GetUsers())
+        {
+            if (username == user.Username)
+            {
+                CurrentUserID = user.ID;
+                return true;
+            }
+        }
+        throw (new UserDoesNotExistsException("User with this username does not exists!"));
     }
 
     public static int GetUserCount()
@@ -80,10 +89,23 @@ public class User
 
     public static User GetCurrentUser()
     {
-        User currentUser = new User(); 
-        foreach(User user in FileManager.GetUsers())
+        User currentUser = new();
+        foreach (User user in FileManager.GetUsers())
         {
-            if(user.ID == CurrentUserID)
+            if (user.ID == CurrentUserID)
+            {
+                currentUser = user;
+            }
+        }
+        return currentUser;
+    }
+
+    public static User GetUserByUsername(string username)
+    {
+        User currentUser = new();
+        foreach (User user in FileManager.GetUsers())
+        {
+            if (user.Username == username)
             {
                 currentUser = user;
             }
@@ -93,7 +115,7 @@ public class User
 
     public static User GetUserByID(int id)
     {
-        User result = new User();
+        User result = new();
         foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == id)
@@ -138,5 +160,15 @@ public class User
                 FileManager.ChangeUserField(user);
             }
         }
+    }
+
+    public static string HashPassword(string password)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(password);
+    }
+
+    public static bool VerifyPassword(string password, string passwordHash)
+    {
+        return BCrypt.Net.BCrypt.Verify(password, passwordHash);
     }
 }

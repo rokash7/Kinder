@@ -23,7 +23,7 @@ namespace Kinder
     {
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
         private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
-        
+
         private List<Item> itemsList = new();
         private List<LikedItemsClass> likedItems = new();
         private List<Item> items = new();
@@ -234,7 +234,7 @@ namespace Kinder
                 {
                     foreach (var item in givenItems)
                     {
-                        if(item.ItemID != itemID)
+                        if (item.ItemID != itemID)
                         {
                             w.WriteLine(item.ItemID.ToString() + ';' + item.ID.ToString());
                         }
@@ -276,13 +276,13 @@ namespace Kinder
         }
 
         private class Data : User, IEquatable<Data>
-        { 
+        {
             public int ItemID { get; set; }
 
-            public Data(int ItemID, int UserID)
+            public Data(int itemID, int userID)
             {
-                this.ID = UserID;
-                this.ItemID = ItemID;
+                this.ID = userID;
+                this.ItemID = itemID;
             }
 
             public Data()

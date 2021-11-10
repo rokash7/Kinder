@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -134,12 +134,12 @@ namespace Kinder
             if (itemList.Count == 0)
             {
                 itemList.Add(new Item(-1));
-                TextBox_String.Text = "no items left";
+                textBox_String.Text = "no items left";
             }
             else
             {
                 MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
-                TextBox_String.Text = itemList.First().ToString().Replace(';', '\n');
+                textBox_String.Text = itemList.First().ToString().Replace(';', '\n');
             }
         }
 
@@ -164,7 +164,7 @@ namespace Kinder
                 itemList.Add(itemList.First());
                 itemList.RemoveAt(0);
 
-                RenderItem(); 
+                RenderItem();
             }
         }
 

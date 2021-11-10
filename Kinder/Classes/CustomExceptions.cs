@@ -38,4 +38,8 @@ namespace Kinder.Classes
     {
         public IncorrectPasswordException(string message) : base(message) { }
     }
+    public class UserDoesNotExistsException : Exception
+    {
+        public UserDoesNotExistsException(string message) : base(message) { }
+    }
 }

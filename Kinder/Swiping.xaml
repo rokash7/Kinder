@@ -33,6 +33,7 @@
         <Button x:Name="LogOutButton" Grid.Column="1" Grid.Row="1" Content="Log Out" Width="150" Height="50" Margin="5"/>
 
         <Image x:Name="DonatorView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4"/>
+
         <TextBlock x:Name="TextBox_String" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Text="Item properties" TextAlignment="Left" Margin="10,5,0,82"/>
         <Button x:Name="NextButton" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Content="Next" Width="200" Height="50" Margin="5"/>
         <Button x:Name="LikeItemButton" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Content="Like it" Width="200" Height="50" Margin="5"/>
@@ -43,5 +44,6 @@
         <Button x:Name="SettingsPageButton" Grid.Column="4" Grid.Row="5" Content="Settings" Width="150" Height="50" Margin="5"/>
         <Button x:Name="LikedItemsPageButton" Grid.Column="2" Grid.Row="3" Content="liked by others Items" Width="150" Height="50" Margin="5"/>
         <Button x:Name="UsersLikedItemsPageButton" Grid.Column="3" Grid.Row="3" Content="yours liked Items" Width="150" Height="50" Margin="5"/>
+
     </Grid>
 </Window>
