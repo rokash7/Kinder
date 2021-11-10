@@ -134,12 +134,12 @@ namespace Kinder
             if (itemList.Count == 0)
             {
                 itemList.Add(new Item(-1));
-                textBox_String.Text = "no items left";
+                TextBox_String.Text = "no items left";
             }
             else
             {
                 MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
-                textBox_String.Text = itemList.First().ToString().Replace(';', '\n');
+                TextBox_String.Text = itemList.First().ToString().Replace(';', '\n');
             }
         }
 
