@@ -39,7 +39,7 @@ public class User
         {
             if (text == user.Email || text == user.PhoneNumber)
             {
-                throw (new UserAlreadyExistsException("User already exists! Try lo in!"));
+                throw (new UserAlreadyExistsException("User already exists! Try logging in!"));
             }
         }
     }

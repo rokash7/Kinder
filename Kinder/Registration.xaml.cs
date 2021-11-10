@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kinder.Classes;
+using Kinder.Database;
 
 namespace Kinder
 {
@@ -26,6 +27,15 @@ namespace Kinder
             InitializeComponent();
         }
 
+        public delegate void CheckDelegate(string Text);
+        
+        static void Checks (string text, CheckDelegate input, CheckDelegate field, CheckDelegate exists)
+        {
+            input(text);
+            field(text);
+            exists(text);
+        }
+
         private void SignUpButton_Click(object sender, RoutedEventArgs e)               ///Still need work, but basic functionality exists
         {
             int count = 0;
@@ -34,9 +44,7 @@ namespace Kinder
             username.BorderBrush = Brushes.Green;
             try                                                     ///Username try/catch block
             {
-                RegValidation.CheckTextBoxInput(username.Text);
-                RegValidation.CheckIfFieldIsValid(username.Text);
-                User.CheckIfUsernameIsTaken(username.Text);
+                Checks(username.Text, RegValidation.CheckTextBoxInput, RegValidation.CheckIfFieldIsValid, User.CheckIfUsernameIsTaken);
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -88,9 +96,7 @@ namespace Kinder
             email.BorderBrush = Brushes.Green;
             try                                                     ///Email try/catch block
             {
-                RegValidation.CheckTextBoxInput(email.Text);
-                RegValidation.CheckIfEmailValid(email.Text);
-                User.CheckIfUserAlreadyExists(email.Text);
+                Checks(email.Text, RegValidation.CheckTextBoxInput, RegValidation.CheckIfEmailValid, User.CheckIfUserAlreadyExists);
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -116,9 +122,7 @@ namespace Kinder
             phoneNumber.BorderBrush = Brushes.Green;
             try                                                     ///Phonenumber try/catch block
             {
-                RegValidation.CheckTextBoxInput(phoneNumber.Text);
-                RegValidation.CheckIfPhoneNumberValid(phoneNumber.Text);
-                User.CheckIfUserAlreadyExists(phoneNumber.Text);
+                Checks(phoneNumber.Text, RegValidation.CheckTextBoxInput, RegValidation.CheckIfPhoneNumberValid, User.CheckIfUserAlreadyExists);
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -150,9 +154,7 @@ namespace Kinder
             passwordShow.BorderBrush = Brushes.Green;
             try                                                     ///Password try/catch block
             {
-                RegValidation.CheckTextBoxInput(password.Password);
-                RegValidation.CheckIfFieldIsValid(password.Password);
-                RegValidation.CheckIfPasswordValid(password.Password);
+                Checks(password.Password, RegValidation.CheckTextBoxInput, RegValidation.CheckIfFieldIsValid, RegValidation.CheckIfPasswordValid);
                 count++;
             }
             catch (EmptyFieldException ex)
@@ -180,6 +182,21 @@ namespace Kinder
             if (count == 5)                          ////Simple thing that says if all boxes are filled correctly
             {
                 FileManager.AddUserIDToLiked(User.GetUserCount());
+                
+                /*using UsersContext context = new UsersContext();
+                context.Users.Add(new Users()
+                {
+                    Username = username.Text,
+                    Password = password.Password,
+                    Email = email.Text,
+                    PhoneNumber = phoneNumber.Text,
+                    Name = name.Text,
+                    Surname = surname.Text,
+                    KarmaPoints = 0,
+                    RegDate = DateTime.Now.ToString("yyyy-MM-dd")
+                });
+                context.SaveChanges();*/
+
                 FileManager.AddNewUser(username.Text, User.HashPassword(password.Password), email.Text, phoneNumber.Text, name.Text, surname.Text, User.GetUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
                 MessageBox.Show("User created successfully! Now  try to log in");
                 var loginPage = new MainWindow();

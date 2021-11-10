@@ -11,6 +11,7 @@ namespace Kinder.Database
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Items> Items { get; set; }
+        public DbSet<LikedBy> LikedBy { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=Kinder; Trusted_Connection=True;");

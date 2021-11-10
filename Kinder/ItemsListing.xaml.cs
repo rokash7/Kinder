@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kinder.Classes;
+using Kinder.Database;
 
 namespace Kinder
 {
@@ -188,6 +189,23 @@ namespace Kinder
             StreamWriter write = File.AppendText(fileLocation);
             write.WriteLine(newItem.ToString());
             write.Close();
+
+            /*using UsersContext context = new UsersContext();
+            var CurrentUser = context
+                .Users
+                .Where(u => u.ID == User.CurrentUserID);
+            new Items();
+            context.Items.Add(new Items()
+            {
+                DateOfPurchase = newItem.DateStr,
+                Condition = newItem.Condition,
+                Category = newItem.Cathegory,
+                Size = newItem.SizeStr,
+                KarmaPrice = newItem.KarmaPrice,
+                Name = newItem.Name,
+                Description = newItem.Description,
+            });
+            context.SaveChanges();*/
 
             ReadDataFromFile();
             DisplayData();

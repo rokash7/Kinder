@@ -90,7 +90,30 @@ namespace Kinder
                 Name = "dudee",
                 Surname = "dud",
                 KarmaPoints = 0,
-                RegDate = "2020-12-16"
+                RegDate = "2020-12-16",
+                UserItems = new List<Items>()
+                {
+                    new Items()
+                    {
+                        DateOfPurchase = "2020-01-05",
+                        Condition = ConditionEnum.Fair,
+                        Category = CathegoryEnum.Education,
+                        Size = "1,2,1",
+                        KarmaPrice = 157,
+                        Name = "Unnamed Item",
+                        Description = "Undescribed Item",
+                    },
+                    new Items()
+                    {
+                        DateOfPurchase = "2021-11-09",
+                        Condition = ConditionEnum.Mint,
+                        Category = CathegoryEnum.Technology,
+                        Size = "15,20,2",
+                        KarmaPrice = 157,
+                        Name = "Brandname Laptop",
+                        Description = "Brand new laptop from brandname.",
+                    }
+                }
             });
             context.Users.Add(new Users()
             {
@@ -101,29 +124,20 @@ namespace Kinder
                 Name = "dud",
                 Surname = "dudee",
                 KarmaPoints = 10,
-                RegDate = "2020-12-16"
-            });
-            context.Items.Add(new Items()
-            {
-                DateOfPurchase = "2020-01-05",
-                Condition = ConditionEnum.Fair,
-                Category = CathegoryEnum.Education,
-                UserID = 1,
-                Size = "1,2,1",
-                KarmaPrice = 157,
-                Name = "Unnamed Item",
-                Description = "Undescribed Item",
-            });
-            context.Items.Add(new Items()
-            {
-                DateOfPurchase = "2020-01-05",
-                Condition = ConditionEnum.Near_mint,
-                Category = CathegoryEnum.Furniture,
-                UserID = 2,
-                Size = "10,5,1",
-                KarmaPrice = 126,
-                Name = "Djungelskog",
-                Description = "A rather large bear plushie",
+                RegDate = "2020-12-16",
+                UserItems = new List<Items>()
+                {
+                    new Items()
+                    {
+                        DateOfPurchase = "2020-01-05",
+                        Condition = ConditionEnum.Near_mint,
+                        Category = CathegoryEnum.Furniture,
+                        Size = "10,5,1",
+                        KarmaPrice = 126,
+                        Name = "Djungelskog",
+                        Description = "A rather large bear plushie.",
+                    }
+                }
             });
             context.SaveChanges();
             //LikedItems a = new();
