@@ -15,5 +15,7 @@ each donation is worth some amount of Karma points, betermined by "taker".
 
 ## Test users passwords:
 Admin1: abC1#321A
+
 test_user1: Srekas1!
+
 test_user2: Srekas1!
