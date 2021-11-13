@@ -1,0 +1,3 @@
+2;2020-01-05;Very_good;Education;0;10,20,5;157;Name8;A fascinating description...77;2
+7;2018-07-25;Very_good;Education;3;10,20,5;157;Name3;A fascinating description...6;2
+6;2017-01-05;Very_good;Education;0;10,20,5;157;Name4;A fascinating description...8;2

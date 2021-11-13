@@ -13,45 +13,22 @@ namespace Kinder.Classes
         static string path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
         static string fileLocation = System.IO.Path.Combine(path, "Data_files\\Users.txt");
         static string fileLocation_liked = System.IO.Path.Combine(path, "Data_files\\Items_liked.txt");
-        public static List<User> GetUsers()
+
+        //Dependency injection B
+        public IGetItems parsingOperationItems;
+
+        public List<Item> GetAllItems(IGetItems _parsingOperations)
         {
-            List<User> users = new List<User>();
-            users.Clear();
-            using (StreamReader reader = new StreamReader(fileLocation))
-            {
-                string[] userData;
-                while (!reader.EndOfStream)
-                {
-                    userData = reader.ReadLine().Split(' ');
-                    User user = new User();
-                    user.ID = Int32.Parse(userData[0]);
-                    user.Username = userData[1];
-                    user.Password = userData[2];
-                    user.Email = userData[3];
-                    user.PhoneNumber = userData[4];
-                    user.Name = userData[5];
-                    user.Surname = userData[6];
-                    user.KarmaPoints = Int32.Parse(userData[7]);
-                    user.RegDate = userData[8];
-                    users.Add(user);
-                }
-            }
-            return users;
+            parsingOperationItems = _parsingOperations;
+            return parsingOperationItems.GetItems();
         }
 
-        //indexed property:
-        private User[] users = GetUsers().ToArray();
+        public IParsedLiked parsingOperationLiked;
 
-        public User this[int index] 
+        public int[] GetAllLikedItems(IParsedLiked _parsingOperations, string line)
         {
-            get
-            {
-                return users[index];
-            }
-            set
-            {
-                users[index] = value;
-            }
+            parsingOperationLiked = _parsingOperations;
+            return parsingOperationLiked.ParsedLiked(line);
         }
 
         public static void AddNewUser(string username, string password, string email, string phoneNumber, string name, string surname, int id, string regDate)
@@ -75,6 +52,33 @@ namespace Kinder.Classes
             {
                 sw.WriteLine(id.ToString());
             }
+        }
+
+        public static List<User> GetUsers()
+        {
+            List<User> users = new List<User>();
+            users.Clear();
+            using (StreamReader reader = new StreamReader(fileLocation))
+            {
+                string[] userData;
+                while (!reader.EndOfStream)
+                {
+                    userData = reader.ReadLine().Split(' ');
+                    User user = new User();
+                    user.ID = Int32.Parse(userData[0]);
+                    user.Username = userData[1];
+                    user.Password = userData[2];
+                    user.Email = userData[3];
+                    user.PhoneNumber = userData[4];
+                    user.Name = userData[5];
+                    user.Surname = userData[6];
+                    user.KarmaPoints = Int32.Parse(userData[7]);
+                    user.RegDate = userData[8];
+                    users.Add(user);
+                }
+            }
+
+            return users;
         }
     }
 }
