@@ -52,7 +52,6 @@ namespace Kinder
             file.Close();
         }
 
-        //Lambda Expression on line 60
         private void DisplayData()
         {
             itemsList.Sort();
