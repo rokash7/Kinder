@@ -97,11 +97,9 @@ namespace Kinder
 
         private void LoadData()
         {
-            foreach (Item item in items)
-            {
-                itemsTable.Items.Add(item);
-            }
+            TableManagment.FillTable<Item>(ref itemsTable, items);
         }
+
         private void ReadGiven()
         {
             using (StreamReader r = new(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Claimed.txt")))

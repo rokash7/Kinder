@@ -46,13 +46,13 @@ namespace Kinder
 
         private void DisplayData()
         {
+            //generic method implementation
             itemsList.Sort();
-            itemsTable.Items.Clear();
 
-            foreach (Item item in itemsList.Where(p => p.UserID == currentUserID))
-            {
-                itemsTable.Items.Add(item);
-            }
+            TableManagment.FillTable<Item>(
+                ref itemsTable,
+                itemsList.Where(p => p.UserID == User.CurrentUserID).ToList()
+                );
         }
 
         private void ReWriteFile(int itemID = -1)
