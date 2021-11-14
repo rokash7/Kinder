@@ -34,14 +34,22 @@ namespace Kinder
         private string fileLocation = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
-        //Dependency injection C1
-        FileManager fileManager = new();
-
+        //reading file
         private void ReadDataFromFile()
         {
-            //Dependency injection C2
             itemsList.Clear();
-            itemsList = fileManager.GetAllItems(new ParsingOperations());
+
+            StreamReader file = new(fileLocation);
+            Item temp = new();
+
+            string line;
+            while ((line = file.ReadLine()) != null)
+            {
+
+                itemsList.Add(temp.ParseData(line));
+            }
+
+            file.Close();
         }
 
         private void DisplayData()
@@ -77,7 +85,7 @@ namespace Kinder
                 {
                     while (!reader.EndOfStream)
                     {
-                        int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), reader.ReadLine());
+                        int[] tempArr = temp.ParsedLiked(reader.ReadLine());
                         List<int> newTempList = new();
 
                         for (int i = 1; i < tempArr.Length; i++)
@@ -103,7 +111,9 @@ namespace Kinder
                         writer.WriteLine(liked.ToString());
                     }
                 }
+
             }
+
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
