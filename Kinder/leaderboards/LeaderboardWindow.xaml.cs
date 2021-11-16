@@ -47,6 +47,12 @@ namespace Kinder
         {
             UpdateUserList();
             ShowData(userList);
+            UpdateLatestUpdateTime();
+        }
+
+        private void UpdateLatestUpdateTime()
+        {
+            updatedTime.Text = "Last updated at: " + DateTime.Now;
         }
 
         private void ShowData(List<UserLeaderboard> tempUserList)
@@ -68,6 +74,7 @@ namespace Kinder
             InitializeComponent();
             UpdateUserList();
             ShowData(userList);
+            UpdateLatestUpdateTime();
         }
 
         private class UserLeaderboard : User

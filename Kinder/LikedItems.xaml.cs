@@ -28,7 +28,7 @@ namespace Kinder
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         //fileManager
-        FileManager fileManager = new();
+        FileManager temp2 = new();
 
         //collection lists:
         private Lazy<List<User>> userList;
@@ -49,7 +49,6 @@ namespace Kinder
                     //indexed property use:
                     temp.Add(fileManager[i]);
                 }*/
-
                 return temp;
             }, true);
 
@@ -62,14 +61,24 @@ namespace Kinder
 
         private void LoadData()
         {
-            allItemList = fileManager.GetAllItems(new ParsingOperations());
+            Item temp = new();
+
+            //loading list of all items
+            using (StreamReader reader = new StreamReader(fileLocation_items))
+            {
+                while (!reader.EndOfStream)
+                {
+                    temp = temp.ParseData(reader.ReadLine());
+                    allItemList.Add(temp);
+                }
+            }
 
             //loading list of liked items
             using (StreamReader reader = new StreamReader(fileLocation_liked))
             {
                 while (!reader.EndOfStream)
                 {
-                    int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), reader.ReadLine());
+                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
                     List<int> tempList = new();
 
                     for (int i = 1; i < tempArr.Length; i++)
@@ -80,6 +89,10 @@ namespace Kinder
                     likedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
                 }
             }
+
+            //loading list of users
+
+
         }
 
         private void ProcessingLists()
