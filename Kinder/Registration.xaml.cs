@@ -231,7 +231,7 @@ namespace Kinder
             {
                 possibleUsername1 = triedUsername + number;
             }
-            availableUsername.Text = "Available usernamee: " + possibleUsername1;
+            availableUsername.Text = "Available username: " + possibleUsername1;
         }
     }
 }
