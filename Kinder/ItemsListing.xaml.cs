@@ -53,14 +53,13 @@ namespace Kinder
         }
 
         private void DisplayData()
-        {
-            //generic method implementation
+        {   
             itemsList.Sort();
-
+            //generic method implementation
             TableManagment.FillTable<Item>(
                 ref itemsTable,
                 itemsList.Where(p => p.UserID == User.CurrentUserID).ToList()
-                );
+            );
         }
 
         private void ReWriteFile(int itemID = -1)
@@ -224,6 +223,8 @@ namespace Kinder
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             Item classObj = itemsTable.SelectedItem as Item;
+
+            List<Item> tempList = fileManager.GetAllItems(new ParsingOperations());
             itemsList.RemoveAt(itemsList.IndexOf(classObj));
 
             ReWriteFile();
@@ -248,25 +249,37 @@ namespace Kinder
                 classObj.Cathegory = cathegory;
             }
 
-            if(dimsTextBoxL.Text.Length > 0)
+            int inputCount = 0;
+            Dimensions tempDimensions = classObj.Size;
+
+            if (dimsTextBoxL.Text.Length > 0)
             {
                 string[] str = classObj.SizeStr.Split(',');
                 str[0] = dimsTextBoxL.Text;
-                classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2]; 
+                tempDimensions.length = int.Parse(dimsTextBoxL.Text);
+                classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
+
+                inputCount++;
             }
 
             if (dimsTextBoxH.Text.Length > 0)
             {
                 string[] str = classObj.SizeStr.Split(',');
                 str[1] = dimsTextBoxH.Text;
+                tempDimensions.height = int.Parse(dimsTextBoxH.Text);
                 classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
+
+                inputCount++;
             }
 
             if (dimsTextBoxW.Text.Length > 0)
             {
                 string[] str = classObj.SizeStr.Split(',');
                 str[2] = dimsTextBoxW.Text;
+                tempDimensions.width = int.Parse(dimsTextBoxW.Text);
                 classObj.SizeStr = str[0] + ',' + str[1] + ',' + str[2];
+
+                inputCount++;
             }
 
             if (pointsTextBox.Text.Length > 0)
@@ -284,12 +297,32 @@ namespace Kinder
                 classObj.Description = descTextBox.Text;
             }
 
-            StreamWriter write = File.AppendText(fileLocation);
-            write.WriteLine(classObj.ToString(classObj.SizeStr));
-            write.Close();
+            if (inputCount >= 2)
+            {
+                classObj.UselessChange += UselessChangeHandler;
+                classObj = classObj.ChangeItemDimentions(tempDimensions, tempList);
+
+                using (StreamWriter write = File.AppendText(fileLocation))
+                {
+                    write.WriteLine(classObj.ToString());
+                }
+            }
+            else
+            {
+                StreamWriter write = File.AppendText(fileLocation);
+                write.WriteLine(classObj.ToString(classObj.SizeStr));
+                write.Close();
+            }
 
             ReadDataFromFile();
             DisplayData();
+        }
+
+        private void UselessChangeHandler(object sender, InvalidEventArgs<Item, Dimensions> e)
+        {
+            MessageBox.Show(e.Obj.Size.ToString().Replace(',', 'x')
+                            + " is same as "
+                            + e.InvalidObj.ToString().Replace(',', 'x'));
         }
     }
 }

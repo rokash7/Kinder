@@ -223,7 +223,6 @@ namespace Kinder
             UploadData();
         }
 
-        //generic class:
         public class DataStore
         {
             public int ItemID { get; set; }

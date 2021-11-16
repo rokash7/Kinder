@@ -19,7 +19,6 @@ namespace Kinder
 {
     public partial class LeaderboardWindow : Window
     {
-        //testing data
         private List<UserLeaderboard> userList = new();
 
         private void UpdateUserList()
@@ -28,6 +27,7 @@ namespace Kinder
             {
                 userList.Clear();
             }
+
             foreach (User user in FileManager.GetUsers())
             {
                 userList.Add(new UserLeaderboard(user.Username, user.KarmaPoints, user.RegDate));
@@ -38,7 +38,6 @@ namespace Kinder
         {
             leaderboard.Items.Clear();
 
-            //LINQ query to filter
             List<UserLeaderboard> newUserList = userList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
 
             ShowData(newUserList);
@@ -46,7 +45,7 @@ namespace Kinder
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
-            leaderboard.Items.Clear();
+            UpdateUserList();
             ShowData(userList);
             UpdateLatestUpdateTime();
         }
@@ -58,15 +57,16 @@ namespace Kinder
 
         private void ShowData(List<UserLeaderboard> tempUserList)
         {
-            //linq  to sort data
+            //sort data
             tempUserList.Sort((x, y) => y.KarmaPoints.CompareTo(x.KarmaPoints));
 
             int i = 0;
             foreach (UserLeaderboard a in tempUserList)
             {
                 a.Place = ++i;
-                leaderboard.Items.Add(a);
             }
+
+            TableManagment.FillTable<UserLeaderboard>(ref leaderboard, tempUserList);
         }
 
         public LeaderboardWindow()
