@@ -189,7 +189,8 @@ namespace Kinder.Classes
                 return true;
             }
         }
-
+        
+        //custom event init 2
         public event EventHandler<InvalidEventArgs<Item, Dimensions>> UselessChange;
 
         public Item ChangeItemDimentions(Dimensions dimensions, List<Item> items)
@@ -207,7 +208,8 @@ namespace Kinder.Classes
                         i.size = dimensions;
                     }
                     else
-                    {
+                    {   
+                        //event
                         UselessChange(this, new InvalidEventArgs<Item, Dimensions>(i, dimensions));
                     }
 

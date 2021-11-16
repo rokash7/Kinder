@@ -118,6 +118,7 @@ public class User
         return result;
     }
 
+    //custom event init 1
     public event EventHandler<InvalidEventArgs<User, string>> SameEmail;
 
     public void ChangeUserEmail(string text)
@@ -141,6 +142,7 @@ public class User
             {
                 if (emailExists)
                 {
+                    //custom event
                     SameEmail(this, new InvalidEventArgs<User, string>(targetUser, text));
                 }
                 else
