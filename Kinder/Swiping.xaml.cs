@@ -33,7 +33,7 @@ namespace Kinder
             InitializeComponent();
             LoadItems();
             RenderItem();
-            
+
             //anonymous methods as event handlers for page openings
             AccountPageButton.Click += delegate (object sender, RoutedEventArgs e)
             {
@@ -146,8 +146,8 @@ namespace Kinder
                 AgeLabel.Visibility = Visibility.Visible;
 
                 //lambda expression
-                Action<DateTime> ShowAge = (date) => AgeLabel.Content = 
-                    (((DateTime.Now.Subtract(date)).TotalDays)/365.0).ToString("0.00")
+                Action<DateTime> ShowAge = (date) => AgeLabel.Content =
+                    (DateTime.Now.Subtract(date).TotalDays / 365.0).ToString("0.00")
                     + " years old";
 
                 ShowAge(itemList.First().DateOfPurchase);
@@ -178,7 +178,7 @@ namespace Kinder
                 RenderItem();
             }
         }
-
+                
         private void LikeItemButton_Click(object sender, RoutedEventArgs e)
         {
             //save current item

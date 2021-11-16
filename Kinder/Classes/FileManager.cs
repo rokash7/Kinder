@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Kinder.Classes
 {
-    class FileManager
+    public class FileManager
     {
         static string path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString()).ToString();
         static string fileLocation = System.IO.Path.Combine(path, "Data_files\\Users.txt");

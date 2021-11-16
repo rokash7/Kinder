@@ -47,12 +47,12 @@ namespace Kinder
         private void DisplayData()
         {
             //generic method implementation
-            itemsList.Sort();
-
             TableManagment.FillTable<Item>(
                 ref itemsTable,
                 itemsList.Where(p => p.UserID == User.CurrentUserID).ToList()
                 );
+
+            itemsList.Sort();
         }
 
         private void ReWriteFile(int itemID = -1)
