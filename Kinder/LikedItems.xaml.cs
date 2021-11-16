@@ -90,17 +90,7 @@ namespace Kinder
 
         private void LoadData()
         {
-            Item temp = new();
-
-            //loading list of all items
-            using (StreamReader reader = new StreamReader(fileLocation_items))
-            {
-                while (!reader.EndOfStream)
-                {
-                    temp = temp.ParseData(reader.ReadLine());
-                    allItemList.Add(temp);
-                }
-            }
+            allItemList = fileManager.GetAllItems(new ParsingOperations());
         }
 
         private void ProcessingLists()
