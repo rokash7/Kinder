@@ -24,14 +24,6 @@ public class User
         set { _currentUserID = value; }
     }
     public User() { }
-    public static void CheckLogin(string username, string password)
-    {
-        CheckUsername(username);
-
-
-
-
-    }
 
     public static void CheckIfUserAlreadyExists(string text)
     {
@@ -170,5 +162,17 @@ public class User
     public static bool VerifyPassword(string password, string passwordHash)
     {
         return BCrypt.Net.BCrypt.Verify(password, passwordHash);
+    }
+
+    public static Boolean CheckBoolIfUsernameIsTaken(string username)
+    {
+        foreach (User user in FileManager.GetUsers())
+        {
+            if (username == user.Username)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

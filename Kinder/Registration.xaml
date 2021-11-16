@@ -71,7 +71,8 @@
         <Image Source="pack://application:,,,/Icons/Question.png" Width="30" Height="30"/>
         </TextBlock>
 
-        <TextBlock x:Name="errorUsername" Grid.Column="7" Grid.Row="3" Text="" Foreground="Red" VerticalAlignment="Center" Visibility="Hidden"/>
+        <TextBlock x:Name="availableUsername" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="3" Width="300" Text="" Foreground="ForestGreen" VerticalAlignment="Center" Margin="130, 0, 0, 0" Visibility="Hidden"/>
+        <TextBlock x:Name="errorUsername" Grid.Column="7" Grid.Row="3" Text="sus" Foreground="Red" VerticalAlignment="Center" Visibility="Hidden"/>
         <TextBlock x:Name="errorNameSurname" Grid.Column="7" Grid.Row="5" Text="" Foreground="Red" VerticalAlignment="Center" Visibility="Hidden"/>
         <TextBlock x:Name="errorEmail" Grid.Column="7" Grid.Row="7" Text="" Foreground="Red" VerticalAlignment="Center" Visibility="Hidden"/>
         <TextBlock x:Name="errorPhoneNumber" Grid.Column="7" Grid.Row="9" Text="" Foreground="Red" VerticalAlignment="Center" Visibility="Hidden"/>
