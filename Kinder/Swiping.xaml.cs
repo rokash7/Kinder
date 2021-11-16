@@ -150,7 +150,7 @@ namespace Kinder
                 //lambda expression
                 Action<DateTime> ShowAge = (date) => AgeLabel.Content = 
                     (((DateTime.Now.Subtract(date)).TotalDays)/365.0).ToString("0.00")
-                    + " years";
+                    + " years old";
 
                 ShowAge(itemList.First().DateOfPurchase);
             }

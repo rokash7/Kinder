@@ -6,21 +6,6 @@ using System.Threading.Tasks;
 
 namespace Kinder.Classes
 {
-    internal interface ITechnology
-    {
-        bool CalcWarrantyValidation();
-    }
-
-    internal interface ITransport
-    {
-        int CalcTimeLeftForCheckUp();
-    }
-
-    internal interface IFurniture
-    {
-        double CalcArea();
-    }
-
     public struct Dimensions
     {
         public int length;

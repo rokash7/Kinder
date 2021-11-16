@@ -35,20 +35,20 @@ namespace Kinder
 
         private List<Item> allItemList = new();
         private List<LikedItemsClass> likedItemList = new();
-        private List<DataStore<int, string, string, string, string>> data = new();
-        private List<DataStore<int, string, string, string, string>> givenItems = new();
+        private List<DataStore> data = new();
+        private List<DataStore> givenItems = new();
 
         public LikedItems()
         {
             userList = new Lazy<List<User>>(delegate
             {
-                List<User> temp = new();
+                List<User> temp = FileManager.GetUsers();
 
-                for (int i = 0; i < User.GetUserCount(); i++)
+                /*for (int i = 0; i < User.GetUserCount(); i++)
                 {
                     //indexed property use:
-                    temp.Add(temp2[i]);
-                }
+                    temp.Add(fileManager[i]);
+                }*/
                 return temp;
             }, true);
 
@@ -158,7 +158,7 @@ namespace Kinder
             {
                 foreach(var user in item.usr)
                 {
-                    DataStore<int, string, string, string, string> temp = new();
+                    DataStore temp = new();
 
                     temp.UserID = user.ID;
                     temp.ItemID = item.ite.ID;
@@ -181,7 +181,7 @@ namespace Kinder
                 {
                     string line = r.ReadLine();
 
-                    DataStore<int, string, string, string, string> temp = new();
+                    DataStore temp = new();
 
                     string[] tempStr = line.Split(';');
                     int[] tempInt = { int.Parse(tempStr[0]), int.Parse(tempStr[1]) };
@@ -201,12 +201,7 @@ namespace Kinder
 
         private void UploadData()
         {
-            itemsTable.Items.Clear();
-
-            foreach(var item in data)
-            {
-                itemsTable.Items.Add(item);
-            }
+            TableManagment.FillTable<DataStore>(ref itemsTable, data);
         }
 
         private static string DataLine(int itemID, int userID)
@@ -229,13 +224,13 @@ namespace Kinder
         }
 
         //generic class:
-        public class DataStore<TItemID, TItemName, TItemDesc, TUsername, TEmail>
+        public class DataStore
         {
-            public TItemID ItemID { get; set; }
-            public TItemName ItemName { get; set; }
-            public TItemDesc ItemDesc { get; set; }
-            public TUsername Username { get; set; }
-            public TEmail Email { get; set; }
+            public int ItemID { get; set; }
+            public string ItemName { get; set; }
+            public string ItemDesc { get; set; }
+            public string Username { get; set; }
+            public string Email { get; set; }
             public string Line { get; set; }
             public int UserID { get; set; }
         }
