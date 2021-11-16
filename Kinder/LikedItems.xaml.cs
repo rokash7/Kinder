@@ -20,7 +20,6 @@ namespace Kinder
     /// Interaction logic for LikedItems.xaml
     /// </summary>
 
-
     public partial class LikedItems : Window
     {
         //files locations:
@@ -28,7 +27,7 @@ namespace Kinder
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         //fileManager
-        FileManager temp2 = new();
+        FileManager fileManager = new();
 
         //collection lists:
         private Lazy<List<User>> userList;
@@ -61,24 +60,14 @@ namespace Kinder
 
         private void LoadData()
         {
-            Item temp = new();
-
-            //loading list of all items
-            using (StreamReader reader = new StreamReader(fileLocation_items))
-            {
-                while (!reader.EndOfStream)
-                {
-                    temp = temp.ParseData(reader.ReadLine());
-                    allItemList.Add(temp);
-                }
-            }
+            allItemList = fileManager.GetAllItems(new ParsingOperations());
 
             //loading list of liked items
             using (StreamReader reader = new StreamReader(fileLocation_liked))
             {
                 while (!reader.EndOfStream)
                 {
-                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                    int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), reader.ReadLine());
                     List<int> tempList = new();
 
                     for (int i = 1; i < tempArr.Length; i++)
@@ -89,10 +78,6 @@ namespace Kinder
                     likedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
                 }
             }
-
-            //loading list of users
-
-
         }
 
         private void ProcessingLists()

@@ -23,6 +23,7 @@ namespace Kinder
     {
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
         private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
+        FileManager fileManager = new();
 
         private List<Item> itemsList = new();
         private List<LikedItemsClass> likedItems = new();
@@ -48,7 +49,7 @@ namespace Kinder
             {
                 while (!reader.EndOfStream)
                 {
-                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                    int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), reader.ReadLine());
                     List<int> newTempList = new();
 
                     for (int i = 1; i < tempArr.Length; i++)
@@ -62,19 +63,9 @@ namespace Kinder
             }
 
             //loading list of all Items
-            List<Item> allItemList = new();
-
-            using (StreamReader reader = new StreamReader(fileLocation_items))
-            {
-                while (!reader.EndOfStream)
-                {
-                    temp = temp.ParseData(reader.ReadLine());
-                    allItemList.Add(temp);
-                }
-            }
+            List<Item> allItemList = fileManager.GetAllItems(new ParsingOperations());
 
             //filter other users, only current one stays
-            //mazj
             var filteredLikedList = tempList.Where
                                         (p => p.UserID == User.CurrentUserID);
 
@@ -167,16 +158,7 @@ namespace Kinder
         {
             itemsList.Clear();
 
-            StreamReader file = new(fileLocation_items);
-            Item temp = new();
-
-            string line;
-            while ((line = file.ReadLine()) != null)
-            {
-                itemsList.Add(temp.ParseData(line));
-            }
-
-            file.Close();
+            itemsList = fileManager.GetAllItems(new ParsingOperations());
         }
 
         private void ReWriteFile(int itemID = -1)
@@ -201,7 +183,7 @@ namespace Kinder
                 {
                     while (!reader.EndOfStream)
                     {
-                        int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                        int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), reader.ReadLine());
                         List<int> newTempList = new();
 
                         for (int i = 1; i < tempArr.Length; i++)
