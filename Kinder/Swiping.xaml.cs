@@ -26,6 +26,8 @@ namespace Kinder
         private string fileLocation_items = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items.txt");
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
+        FileManager fileManager = new();
+
         public Swiping()
         {
             InitializeComponent();
@@ -90,11 +92,7 @@ namespace Kinder
             Item temp = new();
 
             string line;
-            while ((line = fileAllItems.ReadLine()) != null)
-            {
-                //extention method usage
-                itemList.Add(temp.ParseData(line));
-            }
+            itemList = fileManager.GetAllItems(new ParsingOperations());
 
             fileAllItems.Close();
 
@@ -106,7 +104,7 @@ namespace Kinder
 
             while ((line = fileLikedItems.ReadLine()) != null)
             {
-                int[] tempArr = temp.ParsedLiked(line);
+                int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), line);
                 List<int> tempList = new();
 
                 for (int i = 1; i < tempArr.Length; i++)
