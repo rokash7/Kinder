@@ -46,6 +46,8 @@
 
         <TextBox x:Name="username" Grid.Column="3" Grid.Row="3" FontSize="24" Background="#F6EEEA" Margin="20, 5, 20,5"/>
         <PasswordBox x:Name="password" Grid.Column="3" Grid.Row="6" FontSize="24"  Background="#F6EEEA" Margin="20, 5, 20,5"/>
+        <CheckBox x:Name="rememberMeCheckBox" Grid.Column="3" Grid.Row="9" Margin="20, 10, 0, 0"/>
+        <TextBlock Grid.Column="3" Grid.Row="9" Text="Remember me" Margin="40, 8, 0, 0"/>
 
         <TextBlock x:Name="errorUsername" Grid.Column="1" Grid.Row="3" Text="" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"  Visibility="Hidden"/>
         <TextBlock x:Name="errorPassword" Grid.Column="1" Grid.Row="6" Text="" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"  Visibility="Hidden"/>
