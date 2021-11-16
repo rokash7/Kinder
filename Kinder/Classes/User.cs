@@ -119,7 +119,8 @@ public class User
     }
 
     //custom event init 1
-    public event EventHandler<InvalidEventArgs<User, string>> SameEmail;
+    public delegate void SameEmailEventHandler(object sender, InvalidEventArgs<User, string> e);
+    public event SameEmailEventHandler SameEmail;
 
     public void ChangeUserEmail(string text)
     {
