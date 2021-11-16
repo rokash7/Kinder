@@ -32,9 +32,10 @@ namespace Kinder
 
         //collection lists:
         private Lazy<List<User>> userList;
+        private Lazy<List<LikedItemsClass>> likedItemList;
 
         private List<Item> allItemList = new();
-        private List<LikedItemsClass> likedItemList = new();
+        //private List<LikedItemsClass> likedItemList = new();
         private List<DataStore> data = new();
         private List<DataStore> givenItems = new();
 
@@ -52,11 +53,41 @@ namespace Kinder
                 return temp;
             }, true);
 
+            likedItemList = new Lazy<List<LikedItemsClass>>(delegate
+            {
+                return PopulateLikedItemList();
+            }, true);
+
             InitializeComponent();
             LoadData();
             ProcessingLists();
             ReadGiven();
             UploadData();
+        }
+
+        private List<LikedItemsClass> PopulateLikedItemList()
+        {
+            List<LikedItemsClass> result = new();
+            Item temp = new();
+
+            //loading list of liked items
+            using (StreamReader reader = new StreamReader(fileLocation_liked))
+            {
+                while (!reader.EndOfStream)
+                {
+                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                    List<int> tempList = new();
+
+                    for (int i = 1; i < tempArr.Length; i++)
+                    {
+                        tempList.Add(tempArr[i]);
+                    }
+
+                    result.Add(new LikedItemsClass(tempArr[0], tempList));
+                }
+            }
+
+            return result;
         }
 
         private void LoadData()
@@ -73,25 +104,7 @@ namespace Kinder
                 }
             }
 
-            //loading list of liked items
-            using (StreamReader reader = new StreamReader(fileLocation_liked))
-            {
-                while (!reader.EndOfStream)
-                {
-                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
-                    List<int> tempList = new();
-
-                    for (int i = 1; i < tempArr.Length; i++)
-                    {
-                        tempList.Add(tempArr[i]);
-                    }
-
-                    likedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
-                }
-            }
-
             //loading list of users
-
 
         }
 
@@ -103,7 +116,7 @@ namespace Kinder
             File.WriteAllText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Save.txt"), String.Empty);
 
             //iterating collections:
-            foreach (LikedItemsClass liked in likedItemList)
+            foreach (LikedItemsClass liked in likedItemList.Value)
             {
                 foreach(int id in liked.ItemsIDs)
                 {
