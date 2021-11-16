@@ -27,9 +27,9 @@ namespace Kinder
             InitializeComponent();
         }
 
-        public delegate void CheckDelegate(string Text);
+        public delegate void CheckDelegate<T> (T item);
         
-        static void Checks (string text, CheckDelegate input, CheckDelegate field, CheckDelegate exists)
+        static void Checks (string text, CheckDelegate<string> input, CheckDelegate<string> field, CheckDelegate<string> exists)
         {
             input(text);
             field(text);
