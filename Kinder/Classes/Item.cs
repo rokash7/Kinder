@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,8 @@ namespace Kinder.Classes
     //.NET interface usage:
     public class Item : IComparable<Item>, IEquatable<Item>
     {
+        FileManager file = new();
+
         public Item()
         {
 
@@ -160,6 +163,61 @@ namespace Kinder.Classes
                 else
                     karmaPrice = value;
             }
+        }
+
+        private bool IsUseful(Dimensions dimensions1, Dimensions dimensions2)
+        {
+            int[] arr1 =
+            {
+                dimensions1.length, dimensions1.height, dimensions1.width
+            };
+
+            int[] arr2 =
+            {
+                dimensions2.length, dimensions2.height, dimensions2.width
+            };
+
+            arr1 = arr1.OrderBy(x => x).ToArray();
+            arr2 = arr2.OrderBy(x => x).ToArray();
+
+
+
+            if (arr1[0] == arr2[0] && arr1[1] == arr2[1] && arr1[2] == arr2[2])
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public event EventHandler<InvalidEventArgs<Item, Dimensions>> UselessChange;
+
+        public Item ChangeItemDimentions(Dimensions dimensions, List<Item> items)
+        {
+            Item result = new();
+
+            //iterating thru every item, to find the one being changed
+            foreach (Item i in items)
+            {
+                if(i.ID == ID)
+                {
+                    //check if change is usefull
+                    if(IsUseful(i.Size, dimensions))
+                    {
+                        i.size = dimensions;
+                    }
+                    else
+                    {
+                        UselessChange(this, new InvalidEventArgs<Item, Dimensions>(i, dimensions));
+                    }
+
+                    result = i;
+                }
+            }
+
+            return result;
         }
     }
 }
