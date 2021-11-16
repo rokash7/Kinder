@@ -25,7 +25,9 @@ namespace Kinder
     {
         public MainWindow()
         {
-            InitializeComponent();                               //abC1#321A
+            InitializeComponent();
+            username.Text = Kinder.Properties.Settings.Default.Username;
+            password.Password = Kinder.Properties.Settings.Default.Password;
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
@@ -43,6 +45,12 @@ namespace Kinder
                 errorUsername.Visibility = Visibility.Hidden;
                 username.BorderBrush = Brushes.Green;
                 User.CheckPassword(password.Password);
+                if (rememberMeCheckBox.IsChecked == true)
+                {
+                    Kinder.Properties.Settings.Default.Username = username.Text;
+                    Kinder.Properties.Settings.Default.Password = password.Password;
+                    Kinder.Properties.Settings.Default.Save();
+                }
                 var newPage = new Swiping();
                 newPage.Show();
                 this.Close();

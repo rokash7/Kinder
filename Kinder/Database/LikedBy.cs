@@ -9,7 +9,6 @@ namespace Kinder.Database
     public class LikedBy
     {
         public int ID { get; set; }
-        public int ItemID { get; set; }
         public int UserID { get; set; }
     }
 }

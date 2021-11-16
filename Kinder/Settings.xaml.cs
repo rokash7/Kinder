@@ -20,6 +20,8 @@ namespace Kinder
     /// </summary>
     public partial class Settings : Window
     {
+        private User u = new();
+
         public Settings()
         {
             InitializeComponent();
@@ -30,13 +32,21 @@ namespace Kinder
             try
             {
                 RegValidation.CheckIfEmailValid(newEmail.Text);
-                User.ChangeUserEmail(newEmail.Text);
-                MessageBox.Show("Email changed to " + newEmail.Text + ".");
+
+                u = User.GetCurrentUser();
+                u.SameEmail += SameEmailHandler;
+                u.ChangeUserEmail(newEmail.Text);
             }
             catch (InvalidEmailException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+
+        private void SameEmailHandler(object sender, InvalidEventArgs<User, string> e)
+        {
+            MessageBox.Show("user number " + e.Obj.ToString() + " already has " + e.InvalidObj + " such email");
         }
 
         private void ChangePhoneNumber_Click(object sender, RoutedEventArgs e)

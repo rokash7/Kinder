@@ -27,9 +27,9 @@ namespace Kinder
             InitializeComponent();
         }
 
-        public delegate void CheckDelegate(string Text);
+        public delegate void CheckDelegate<T> (T item);
         
-        static void Checks (string text, CheckDelegate input, CheckDelegate field, CheckDelegate exists)
+        static void Checks (string text, CheckDelegate<string> input, CheckDelegate<string> field, CheckDelegate<string> exists)
         {
             input(text);
             field(text);
@@ -42,6 +42,7 @@ namespace Kinder
 
             errorUsername.Visibility = Visibility.Hidden;
             username.BorderBrush = Brushes.Green;
+            availableUsername.Visibility = Visibility.Hidden;
             try                                                     ///Username try/catch block
             {
                 Checks(username.Text, RegValidation.CheckTextBoxInput, RegValidation.CheckIfFieldIsValid, User.CheckIfUsernameIsTaken);
@@ -59,11 +60,13 @@ namespace Kinder
                 errorUsername.Visibility = Visibility.Visible;
                 username.BorderBrush = Brushes.Red;
             }
-            catch (UsernameIsTakenException ex)
+            catch (UsernameIsTakenException ex)                         ///DEALING WITH EXCEPTION EXAMPLE
             {
                 errorUsername.Text = ex.Message;
                 errorUsername.Visibility = Visibility.Visible;
                 username.BorderBrush = Brushes.Red;
+                GetUsernameHint(username.Text);
+                availableUsername.Visibility = Visibility.Visible;
             }
 
             errorNameSurname.Visibility = Visibility.Hidden;
@@ -219,6 +222,16 @@ namespace Kinder
                 password.Visibility = Visibility.Visible;
                 password.Password = passwordShow.Text;
             }
+        }
+
+        private void GetUsernameHint(string triedUsername)
+        {
+            string possibleUsername1 = triedUsername + 0;
+            for (int number = 1; User.CheckBoolIfUsernameIsTaken(possibleUsername1); number++)
+            {
+                possibleUsername1 = triedUsername + number;
+            }
+            availableUsername.Text = "Available username: " + possibleUsername1;
         }
     }
 }
