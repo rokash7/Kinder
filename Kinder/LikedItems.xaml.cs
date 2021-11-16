@@ -49,7 +49,6 @@ namespace Kinder
                     //indexed property use:
                     temp.Add(fileManager[i]);
                 }*/
-
                 return temp;
             }, true);
 
