@@ -51,7 +51,7 @@ namespace Kinder
             TableManagment.FillTable<Item>(
                 ref itemsTable,
                 itemsList.Where(p => p.UserID == User.CurrentUserID).ToList()
-                );            
+            );
         }
 
         private void ReWriteFile(int itemID = -1)

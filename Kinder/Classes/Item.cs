@@ -180,8 +180,6 @@ namespace Kinder.Classes
             arr1 = arr1.OrderBy(x => x).ToArray();
             arr2 = arr2.OrderBy(x => x).ToArray();
 
-
-
             if (arr1[0] == arr2[0] && arr1[1] == arr2[1] && arr1[2] == arr2[2])
             {
                 return false;
