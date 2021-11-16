@@ -35,7 +35,6 @@ namespace Kinder
         private Lazy<List<LikedItemsClass>> likedItemList;
 
         private List<Item> allItemList = new();
-        //private List<LikedItemsClass> likedItemList = new();
         private List<DataStore> data = new();
         private List<DataStore> givenItems = new();
 
