@@ -33,6 +33,7 @@ namespace Kinder
             {
                 RegValidation.CheckIfEmailValid(newEmail.Text);
 
+                //custom event use
                 u = User.GetCurrentUser();
                 u.SameEmail += SameEmailHandler;
                 u.ChangeUserEmail(newEmail.Text);

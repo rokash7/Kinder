@@ -291,6 +291,7 @@ namespace Kinder
                 classObj.Description = descTextBox.Text;
             }
 
+            //custom event use
             if (inputCount >= 2)
             {
                 classObj.UselessChange += UselessChangeHandler;

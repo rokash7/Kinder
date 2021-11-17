@@ -34,11 +34,21 @@ namespace Kinder
             }
         }
 
+        private void PrintMsg(string arg)
+        {
+            MessageBox.Show(arg + " not found, try again");
+        }
+
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             leaderboard.Items.Clear();
 
-            List<UserLeaderboard> newUserList = userList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
+            UserLeaderboard temp = new();
+            List<UserLeaderboard> newUserList = new();
+
+            //standard event use
+            temp.UserNotFound += PrintMsg;
+            temp.SearchUser(ref newUserList, userList, MainTextBox.Text);
 
             ShowData(newUserList);
         }
@@ -57,7 +67,6 @@ namespace Kinder
 
         private void ShowData(List<UserLeaderboard> tempUserList)
         {
-            //sort data
             tempUserList.Sort((x, y) => y.KarmaPoints.CompareTo(x.KarmaPoints));
 
             int i = 0;
@@ -87,6 +96,21 @@ namespace Kinder
                 Username = username;
                 KarmaPoints = karmaPoints;
                 RegistrationDateString = registrationDate;
+            }
+
+            public UserLeaderboard() { }
+
+            //standard event init
+            public event Action<string> UserNotFound;
+
+            public void SearchUser(ref List<UserLeaderboard> listOut, List<UserLeaderboard> listIn, string text)
+            {
+                listOut = listIn.Where(x => x.Username.Contains(text)).ToList();
+
+                if (listOut.Count == 0)
+                {
+                    UserNotFound(text);
+                }
             }
         }
 
