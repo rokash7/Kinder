@@ -2,6 +2,7 @@ using Kinder.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 
 public class User
@@ -118,14 +119,40 @@ public class User
         return result;
     }
 
-    public static void ChangeUserEmail(string text)
+    //custom event init 1
+    public delegate void SameEmailEventHandler(object sender, InvalidEventArgs<User, string> e);
+    public event SameEmailEventHandler SameEmail;
+
+    public void ChangeUserEmail(string text)
     {
+        bool emailExists = false;
+        User targetUser = new();
+
+        //check if any user has same email, that we want to change
+        foreach (User user in FileManager.GetUsers())
+        {
+            if (user.Email == text)
+            {
+                emailExists = true;
+                targetUser = user;
+            }
+        }
+
         foreach (User user in FileManager.GetUsers())
         {
             if (user.ID == CurrentUserID)
             {
-                user.Email = text;
-                FileManager.ChangeUserField(user);
+                if (emailExists)
+                {
+                    //custom event
+                    SameEmail(this, new InvalidEventArgs<User, string>(targetUser, text));
+                }
+                else
+                {
+                    user.Email = text;
+                    FileManager.ChangeUserField(user);
+                    MessageBox.Show("Email changed to " + text + ".");
+                }
             }
         }
     }
@@ -163,6 +190,8 @@ public class User
     {
         return BCrypt.Net.BCrypt.Verify(password, passwordHash);
     }
+  
+    public override string ToString() => ID.ToString();
 
     public static Boolean CheckBoolIfUsernameIsTaken(string username)
     {

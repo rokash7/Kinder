@@ -20,7 +20,6 @@ namespace Kinder
     /// Interaction logic for LikedItems.xaml
     /// </summary>
 
-
     public partial class LikedItems : Window
     {
         //files locations:
@@ -28,13 +27,13 @@ namespace Kinder
         private string fileLocation_liked = System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Items_liked.txt");
 
         //fileManager
-        FileManager temp2 = new();
+        FileManager fileManager = new();
 
         //collection lists:
         private Lazy<List<User>> userList;
+        private Lazy<List<LikedItemsClass>> likedItemList;
 
         private List<Item> allItemList = new();
-        private List<LikedItemsClass> likedItemList = new();
         private List<DataStore> data = new();
         private List<DataStore> givenItems = new();
 
@@ -52,6 +51,11 @@ namespace Kinder
                 return temp;
             }, true);
 
+            likedItemList = new Lazy<List<LikedItemsClass>>(delegate
+            {
+                return PopulateLikedItemList();
+            }, true);
+
             InitializeComponent();
             LoadData();
             ProcessingLists();
@@ -59,26 +63,17 @@ namespace Kinder
             UploadData();
         }
 
-        private void LoadData()
+        private List<LikedItemsClass> PopulateLikedItemList()
         {
+            List<LikedItemsClass> result = new();
             Item temp = new();
-
-            //loading list of all items
-            using (StreamReader reader = new StreamReader(fileLocation_items))
-            {
-                while (!reader.EndOfStream)
-                {
-                    temp = temp.ParseData(reader.ReadLine());
-                    allItemList.Add(temp);
-                }
-            }
 
             //loading list of liked items
             using (StreamReader reader = new StreamReader(fileLocation_liked))
             {
                 while (!reader.EndOfStream)
                 {
-                    int[] tempArr = temp.ParsedLiked(reader.ReadLine());
+                    int[] tempArr = fileManager.GetAllLikedItems(new ParsingOperations(), reader.ReadLine());
                     List<int> tempList = new();
 
                     for (int i = 1; i < tempArr.Length; i++)
@@ -86,13 +81,16 @@ namespace Kinder
                         tempList.Add(tempArr[i]);
                     }
 
-                    likedItemList.Add(new LikedItemsClass(tempArr[0], tempList));
+                    result.Add(new LikedItemsClass(tempArr[0], tempList));
                 }
             }
 
-            //loading list of users
+            return result;
+        }
 
-
+        private void LoadData()
+        {
+            allItemList = fileManager.GetAllItems(new ParsingOperations());
         }
 
         private void ProcessingLists()
@@ -103,7 +101,7 @@ namespace Kinder
             File.WriteAllText(System.IO.Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "Data_files\\Save.txt"), String.Empty);
 
             //iterating collections:
-            foreach (LikedItemsClass liked in likedItemList)
+            foreach (LikedItemsClass liked in likedItemList.Value)
             {
                 foreach(int id in liked.ItemsIDs)
                 {
@@ -223,7 +221,6 @@ namespace Kinder
             UploadData();
         }
 
-        //generic class:
         public class DataStore
         {
             public int ItemID { get; set; }

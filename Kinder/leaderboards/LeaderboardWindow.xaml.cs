@@ -19,7 +19,6 @@ namespace Kinder
 {
     public partial class LeaderboardWindow : Window
     {
-        //testing data
         private List<UserLeaderboard> userList = new();
 
         private void UpdateUserList()
@@ -28,25 +27,35 @@ namespace Kinder
             {
                 userList.Clear();
             }
+
             foreach (User user in FileManager.GetUsers())
             {
                 userList.Add(new UserLeaderboard(user.Username, user.KarmaPoints, user.RegDate));
             }
         }
 
+        private void PrintMsg(string arg)
+        {
+            MessageBox.Show(arg + " not found, try again");
+        }
+
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             leaderboard.Items.Clear();
+            
+            UserLeaderboard temp = new();
+            List<UserLeaderboard> newUserList = new();
 
-            //LINQ query to filter
-            List<UserLeaderboard> newUserList = userList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
+            //standard event use
+            temp.UserNotFound += PrintMsg;
+            temp.SearchUser(ref newUserList, userList, mainTextBox.Text);
 
             ShowData(newUserList);
         }
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
-            leaderboard.Items.Clear();
+            UpdateUserList();
             ShowData(userList);
             UpdateLatestUpdateTime();
         }
@@ -58,15 +67,15 @@ namespace Kinder
 
         private void ShowData(List<UserLeaderboard> tempUserList)
         {
-            //linq  to sort data
             tempUserList.Sort((x, y) => y.KarmaPoints.CompareTo(x.KarmaPoints));
 
             int i = 0;
             foreach (UserLeaderboard a in tempUserList)
             {
                 a.Place = ++i;
-                leaderboard.Items.Add(a);
             }
+
+            TableManagment.FillTable<UserLeaderboard>(ref leaderboard, tempUserList);
         }
 
         public LeaderboardWindow()
@@ -87,6 +96,21 @@ namespace Kinder
                 Username = username;
                 KarmaPoints = karmaPoints;
                 RegistrationDateString = registrationDate;
+            }
+
+            public UserLeaderboard() { }
+
+            //standard event init
+            public event Action<string> UserNotFound;
+
+            public void SearchUser(ref List<UserLeaderboard> listOut, List<UserLeaderboard> listIn, string text)
+            {
+                listOut = listIn.Where(x => x.Username.Contains(text)).ToList();
+
+                if (listOut.Count == 0)
+                {
+                    UserNotFound(text);
+                }
             }
         }
 

@@ -2,3 +2,6 @@
 1 admin2 $2a$11$jyUbGbbhsRAm7YIi9yZ4ceXclkjJt8XX4QwCm1mQXaBA3lSCdrgJm admin2@gmail.com +12345678911 admin2 admin2 0 2021-11-09
 2 test_user1 $2a$11$SgXbimfJznS21jnOCIwR8e8REcZDYk.rnL.w4tCeHpbLWQJhGYTHW a@a.lt +37063838790 a a 0 2021-11-13
 3 test_user2 $2a$11$jLnHHinybobV5BN21NcL8e1vs1HimonsrFROLSzi1Lsyg1zWktjnO b@b.lt +37063838792 b b 0 2021-11-13
+4 admin0 $2a$11$DXdCG3gTL7y8hOrpeb/En.ZPEqI2MTiBunXw3H8/puRU9wp3rbl6S a@b.lt +37012345678 a a 0 2021-11-17
+5 admin1 $2a$11$gBCHXZQOWXG.rNjvwOtWF.NDaT3gG0jrTvRBwWFNSTOD1s.Q.RPl. a@bc.com +37012345676 a a 0 2021-11-17
+6 admin3 $2a$11$ppKdTCwrelTLSIW4SkdfJOXcSSX1KhedHUEEjK3AYHa/OzgsDaV.u abc@da.da +37012345679 a a 0 2021-11-17

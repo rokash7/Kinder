@@ -28,8 +28,9 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        
-        <Button Content="Give it" HorizontalAlignment="Left" Margin="55,348,0,0" VerticalAlignment="Top" Height="39" Width="66" Click="GiveButton_Click"/>
+
+        <Button Content="Un-give it" HorizontalAlignment="Left" Margin="55,348,0,0" VerticalAlignment="Top" Height="39" Width="66"/>
+        <Button Content="Give it" HorizontalAlignment="Left" Margin="150,348,0,0" VerticalAlignment="Top" Height="39" Width="66" Click="GiveButton_Click"/>
 
     </Grid>
 </Window>
