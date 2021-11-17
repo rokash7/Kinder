@@ -111,7 +111,6 @@ namespace Kinder
                 {
                     UserNotFound(text);
                 }
-
             }
         }
 
