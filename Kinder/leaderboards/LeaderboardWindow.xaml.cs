@@ -38,7 +38,7 @@ namespace Kinder
         {
             leaderboard.Items.Clear();
 
-            List<UserLeaderboard> newUserList = userList.Where(x => x.Username.Contains(MainTextBox.Text)).ToList();
+            List<UserLeaderboard> newUserList = userList.Where(x => x.Username.Contains(mainTextBox.Text)).ToList();
 
             ShowData(newUserList);
         }

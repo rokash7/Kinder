@@ -54,7 +54,7 @@
         <TextBlock Grid.Column="3" Grid.Row="10" Grid.ColumnSpan="2" Height="20" Text="Password:" Width="300" Margin="0, 5"/>
         <PasswordBox x:Name="password" Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="2" Width="300" Height="40" PasswordChar="•"/>
         <TextBox x:Name="passwordShow" Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="2" Width="300" Height="40" Visibility="Hidden"/>
-        
+
         <Button x:Name="SignUpButton" Grid.Column="3" Grid.Row="12" Grid.ColumnSpan="2" Content="Sign Up" Width="150" Height="50" FontWeight="Bold" FontSize="24" Click="SignUpButton_Click"/>
 
         <Button x:Name="ShowPassword" Grid.Column ="5" Grid.Row="11" Margin="5" Click="ShowPassword_Click">

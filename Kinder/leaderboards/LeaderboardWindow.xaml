@@ -32,7 +32,7 @@
 
         <TextBlock x:Name="updatedTime" Text=" " Margin="30,315,-20,0" Width="210"/>
         <Label Content="Search for user:" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="43,331,0,0"  Width="102" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="25"/>
-        <TextBox x:Name="MainTextBox" Margin="45,360,55,75"/>
+        <TextBox x:Name="mainTextBox" Margin="45,360,55,75"/>
         <Button x:Name="SearchButton" Click="SearchButton_Click" Margin="189,362,0,77" Content="search"/>
 
         <Button x:Name="ReloadButton" Click="ReloadButton_Click" Margin="10,362,95,77" Content="reload" RenderTransformOrigin="2.281,0.712" Grid.Column="1"/>

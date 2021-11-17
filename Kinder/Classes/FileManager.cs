@@ -30,7 +30,7 @@ namespace Kinder.Classes
             return parsingOperationLiked.ParsedLiked(line);
         }
 
-            public static void AddNewUser(string username, string password, string email, string phoneNumber, string name, string surname, int id, string regDate)
+        public static void AddNewUser(string username, string password, string email, string phoneNumber, string name, string surname, int id, string regDate)
         {
             using (StreamWriter sw = new StreamWriter(fileLocation, true))
             {
@@ -78,6 +78,5 @@ namespace Kinder.Classes
             }
             return users;
         }
-
     }
 }

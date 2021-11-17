@@ -41,7 +41,6 @@ namespace Kinder
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void SameEmailHandler(object sender, InvalidEventArgs<User, string> e)
