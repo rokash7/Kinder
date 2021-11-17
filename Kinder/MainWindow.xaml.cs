@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Grpc.Net.Client;
+//using GrpcProvider;
 using Kinder.Classes;
 using Kinder.Database;
 
@@ -77,7 +79,14 @@ namespace Kinder
 
         private void ButtonMessageTest_Click(object sender, RoutedEventArgs e)          ///Testing button
         {
-            using UsersContext context = new UsersContext();    // Adding test data for DB
+            /*using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new Greeter.GreeterClient(channel);
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });*/
+            /*using var serviceProvider = new GrpcServiceProvider();
+            var client = serviceProvider.GetGreeterClient();
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = "GreeterClient" });*/
+            //MessageBox.Show("Greeting: " + reply.Message);
+            /*using UsersContext context = new UsersContext();    // Adding test data for DB
             context.Users.Add(new Users()
             {
                 Username = "admin",
@@ -147,7 +156,7 @@ namespace Kinder
                     }
                 }
             });
-            context.SaveChanges();
+            context.SaveChanges();*/
             //LikedItems a = new();
             //a.Show();
             //LeaderboardWindow page = new LeaderboardWindow();
