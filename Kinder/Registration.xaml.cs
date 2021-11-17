@@ -185,7 +185,7 @@ namespace Kinder
             if (count == 5)                          ////Simple thing that says if all boxes are filled correctly
             {
                 FileManager.AddUserIDToLiked(User.GetUserCount());
-                
+
                 /*using UsersContext context = new UsersContext();
                 context.Users.Add(new Users()
                 {
@@ -202,9 +202,7 @@ namespace Kinder
 
                 FileManager.AddNewUser(username.Text, User.HashPassword(password.Password), email.Text, phoneNumber.Text, name.Text, surname.Text, User.GetUserCount(), DateTime.Now.ToString("yyyy-MM-dd"));
                 MessageBox.Show("User created successfully! Now  try to log in");
-                var loginPage = new MainWindow();
                 this.Close();
-                loginPage.Show();
             }
         }
 

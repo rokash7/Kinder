@@ -42,7 +42,7 @@ namespace Kinder
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             leaderboard.Items.Clear();
-
+            
             UserLeaderboard temp = new();
             List<UserLeaderboard> newUserList = new();
 

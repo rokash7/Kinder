@@ -134,19 +134,19 @@ namespace Kinder
                 itemList.Add(new Item(-1));
                 TextBox_String.Text = "no items left";
 
-                AgeTextLabel.Visibility = Visibility.Hidden;
-                AgeLabel.Visibility = Visibility.Hidden;
+                ageTextLabel.Visibility = Visibility.Hidden;
+                ageLabel.Visibility = Visibility.Hidden;
             }
             else
             {
                 MessageBox.Show("Count of items loaded:" + itemList.Count.ToString());
                 TextBox_String.Text = itemList.First().ToString().Replace(';', '\n');
 
-                AgeTextLabel.Visibility = Visibility.Visible;
-                AgeLabel.Visibility = Visibility.Visible;
+                ageTextLabel.Visibility = Visibility.Visible;
+                ageLabel.Visibility = Visibility.Visible;
 
                 //lambda expression
-                Action<DateTime> ShowAge = (date) => AgeLabel.Content =
+                Action<DateTime> ShowAge = (date) => ageLabel.Content =
                     (DateTime.Now.Subtract(date).TotalDays / 365.0).ToString("0.00")
                     + " years old";
 

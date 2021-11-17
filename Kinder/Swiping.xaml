@@ -44,8 +44,8 @@
         <Button x:Name="SettingsPageButton" Grid.Column="4" Grid.Row="5" Content="Settings" Width="150" Height="50" Margin="5"/>
         <Button x:Name="LikedItemsPageButton" Grid.Column="2" Grid.Row="3" Content="liked by others Items" Width="150" Height="50" Margin="5"/>
         <Button x:Name="UsersLikedItemsPageButton" Grid.Column="3" Grid.Row="3" Content="yours liked Items" Width="150" Height="50" Margin="5"/>
-        <Label x:Name="AgeTextLabel" Visibility="Hidden" Content="This item is approx.:" Grid.Column="4" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name="AgeLabel" Grid.Column="4" HorizontalAlignment="Left" Margin="20,46,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="ageTextLabel" Visibility="Hidden" Content="This item is approx.:" Grid.Column="4" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name="ageLabel" Grid.Column="4" HorizontalAlignment="Left" Margin="20,46,0,0" Grid.Row="2" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
