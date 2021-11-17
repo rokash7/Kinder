@@ -1,4 +1,3 @@
-10;2020-12-16;Near_mint;Education;2;1,2,3;1;Numbers;Book of numbers
 9;2020-01-05;Very_good;Education;1;10,20,5;157;Name1;A fascinating description...4
 8;2019-01-05;Very_good;Education;2;1,11,1;157;Name2;A fascinating description...5
 7;2018-07-25;Very_good;Education;3;10,20,5;157;Name3;A fascinating description...6
@@ -9,3 +8,4 @@
 2;2020-01-05;Very_good;Education;0;10,20,5;157;Name8;A fascinating description...77
 1;2020-01-05;Very_good;Education;1;10,20,5;157;Name9;A fascinating description...7
 0;2020-01-05;Very_good;Education;2;1,1,1;157;Name10;A fascinating description...22
+10;2020-12-16;Near_mint;Education;2;1,2,3;1;Numbers;Book of numbers
