@@ -48,7 +48,7 @@ namespace Kinder
 
             //standard event use
             temp.UserNotFound += PrintMsg;
-            temp.SearchUser(ref newUserList, userList, MainTextBox.Text);
+            temp.SearchUser(ref newUserList, userList, mainTextBox.Text);
 
             ShowData(newUserList);
         }
